@@ -45,9 +45,9 @@ JOBS= [
 def home():
     return render_template('home.html',jobs=JOBS, company_name='Colltech')
 
-@app.route('/slideshow')
-def slideshow():
-    return render_template('slideshow.html')
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 
 @app.route('/post_job', methods=['GET', 'POST'])

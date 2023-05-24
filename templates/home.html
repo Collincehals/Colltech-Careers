@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+
+  <!-- Bootstrap JavaScript -->
+  <script src="{{ url_for('static', filename='bootstrap.bundle.min.js') }}"></script>
+</head>
+<body>
+  <!-- Your HTML content here -->
     <link rel="icon" type="image/png" href="/static/logo.png">
     <title>Colltech Careers</title>
     <meta charset="utf-8">
@@ -30,6 +38,7 @@
       }
 
     </style>
+    
   </head>
   <body>
     {% include 'nav.html' %}
@@ -38,13 +47,13 @@
       <img class="img-fluid" style ="height:auto;width:100%" src="/static/Banner1.jpg" alt="HTML Dog">
       <h2 class="text-center mb-4 mt-2">About Colltech</h2>
       <div class="row " style="margin-bottom:20px">
-        <div class="col-6">
+        <div class="col-md-6">
       <p>
         At Colltech Careers, we are dedicated to connecting talented individuals with exciting job opportunities. Our platform serves as a gateway for job seekers to explore a wide range of open positions and take the next step in their careers. We strive to create an engaging and user-friendly experience that simplifies the job search process for both candidates and employers.
 As a job seeker, you'll find a wealth of opportunities across various industries and sectors. Our extensive database features a diverse selection of job listings, ranging from entry-level positions to executive roles. Whether you're a recent graduate, a seasoned professional, or someone looking to make a career change, Colltech Careers provides a platform to discover your ideal job match.
       </p>
         </div>
-        <div class="col-6">
+        <div class="d-none d-md-block col-md-6">
        <img class="img-fluid" style="border-radius:6px" src="/static/Banner2.jpg" alt="HTML Dog">
         </div>
         </div>
@@ -56,7 +65,7 @@ As a job seeker, you'll find a wealth of opportunities across various industries
         {% endfor %}
       </div>
       
-      <div class="text-center mt-4 mb-4"><a href="mailto:odhiambocollince702@gmail.com?subject=Question%20about%20job%20opening&body=My%20Name%3A%3Cyour%20name%20here%3E%0D%0A%0D%0AMy%20question%3A%3CKindly%20leave%20your%20enquiry%20here%3E" class="btn btn-primary btn-sm">Contact Us</a>
+      <div class="text-center mt-4 mb-4"><a href="mailto:odhiambocollince702@gmail.com?subject=Question%20about%20job%20opening&body=My%20Name%3A%3Cyour%20name%20here%3E%0D%0A%0D%0AMy%20question%3A%3CKindly%20leave%20your%20enquiry%20here%3E" class="btn btn-primary btn-sm">Have Enquiries? Email Us</a>
       </div>
     </div>
     {% include 'footer.html' %}
