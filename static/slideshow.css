@@ -1,0 +1,30 @@
+.slideshow {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+}
+
+.slide {
+    animation: slide-animation 5s infinite;
+    flex: 0 0 100%;
+}
+
+.slide .slide-image {
+    width: 100%;
+    height: auto;
+}
+
+@keyframes slide-animation {
+    0% {
+        transform: translateX(0%);
+    }
+    33% {
+        transform: translateX(-100%);
+    }
+    66% {
+        transform: translateX(-200%);
+    }
+    100% {
+        transform: translateX(-300%);
+    }
+}
