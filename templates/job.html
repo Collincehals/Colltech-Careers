@@ -1,0 +1,14 @@
+<div class="border-bottom row" style="margin-bottom:12px; padding-bottom:8px">
+  <div class="col-9">
+          <h4 class="mb-1 mt-2" style="color:rgb(10,80,220); font-style">{{job['title']}}
+          </h4>
+          <div class="mb-auto mt-auto"><b>Location:</b>{{job['location']}}</div>
+          <div class="mb-auto mt-auto"><b>Qualification:</b>{{job['job requirements']}}</div>
+  {%if 'Salary' in job %}
+          <div class="mb-auto mt-auto"><b>Salary:</b>{{job['Salary']}}</div>
+  {% endif %}
+  </div>
+  <div class="col-3 padding-right:16px">
+  <a href="mailto:odhiambocollince702@gmail.com?subject=Application%20for%20{{job['title']}} position &body=My%20Name%3A%3Cyour%20name%20here%3E%0D%0A%0D%0AResume%20link%3A%3Cinsert%20resume%20link%20here%3E%0D%0A%0D%0AMy%20Likedin%20link%3A%3Cinsert%20your%20Linkedin%20link%20profile%20here%3E" type="button" class="btn btn-outline-primary">Apply</a>
+  </div>    
+</div>
