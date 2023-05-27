@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -52,45 +52,44 @@ def about():
 @app.route('/faqs')
 def faqs():
     return render_template('faqs.html')
-
-
-@app.route('/post_job', methods=['GET', 'POST'])
-def post_job():
-    if request.method == 'POST':
-        title = request.form['title']
-        description = request.form['description']
-        company = request.form['company']
-        location = request.form['location']
-
-        job = {
-            'title': title,
-            'description': description,
-            'company': company,
-            'location': location
-        }
-
-        job_openings.append(job)
-        return redirect('/')
-    else:
-        return render_template('post_job.html')
-
-@app.route('/apply_job/<int:job_id>', methods=['GET', 'POST'])
-def apply_job(job_id):
-    job = job_openings[job_id]
-
+  
+@app.route('/application form')
+def application_form():
+    return render_template('applicform.html')
+  
+@app.route('/apply_job', methods=['GET', 'POST'])
+def apply_job():
+    job = JOBS
     if request.method == 'POST':
         name = request.form['name']
-        email = request.form['email']
+        email =request.form['email address']
         resume = request.files['resume']
+        import os
+
+        # Create the 'resumes/' directory if it doesn't exist
+        if not os.path.exists('resumes/'):
+            os.makedirs('resumes/')
 
         # Save the uploaded resume to a specific location
         resume.save('resumes/' + resume.filename)
 
         # Perform additional processing or database operations here
 
-        return render_template('application_success.html', job=job, name=name)
+        return render_template('applicsuccess.html', job=job, name=name)
     else:
-        return render_template('apply_job.html', job=job)
+        return render_template('applicform.html', job=job)
+
+@app.route('/submitted', methods=['POST'])
+def submitted():
+    name = request.form['name']
+    email = request.form['email']
+    message = request.form['message']
+
+    # Perform further processing or store the data in a database
+
+    return render_template('submitted.html', name=name, email=email, message=message)
+
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Apply for Job</title>
+</head>
+<body>
+    <h1>Apply for Job: {{ job['title'] }}</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email address" required>
+        <br>
+
+        <label for="resume">Resume:</label>
+        <input type="file" id="resume" name="resume" required>
+        <br>
+    
+      <input type="submit" value="Submit">
+  </form>
+ 
+    <!-- Form input fields here -->
+
+</body>
+</html>
