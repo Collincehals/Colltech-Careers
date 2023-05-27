@@ -1,56 +1,63 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title>FAQs</title>
-    <style>
+    <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+
+  <!-- Bootstrap JavaScript -->
+  <script src="{{ url_for('static', filename='bootstrap.bundle.min.js') }}"></script>
+  <!-- Your HTML content here -->
+    <link rel="icon" type="image/png" href="/static/logo1.png" style="border-radius:2000px">
+    <title>FAQs</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <style>
       h1{
-        font-size: 30px;
-        font-family: Roboto;
-        text-align:center;
         font-weight:normal;
-        color: rgb(100,50,20)
+        color: rgb(100,50,20);
       }
-      p{
-        font-size: 15px;
-        font-family:Arial;
-        font-weight:normal;
-        text-align:left;
-        color:rgb(40,40,60);
-      }
-    </style>
-</head>
-<body>
+.multiline-paragraph {
+  white-space: pre-line;
+}   
+    </style>  
+  </head>
+  <body>
+    {% include 'nav.html' %}
+<div class="container">
   <h1>Frequntly Asked Questions(FAQs)</h1>
-  <p>
-    Q: How do I create an account on Colltech Careers?
-A: To create an account, click on the "Sign Up" button on the homepage and fill out the registration form with your details. Once submitted, you'll receive a confirmation email to activate your account.
+  <p class="lead multiline-paragraph border-bottom" style="padding-bottom:8px; margin-bottom:16px">
+<b>Q: How do I create an account on Colltech Careers?</b>
+A: <em>To create an account, click on the "Sign Up" button on the homepage and fill out the registration form with your details. Once submitted, you'll receive a confirmation email to activate your account.</em>
 
-Q: Can I upload my resume and apply for multiple jobs?
-A: Yes, you can upload your resume during the account creation process or later in your profile settings. Once your resume is uploaded, you can easily apply for multiple jobs by clicking on the "Apply Now" button on the job listings.
+<b>Q: Can I upload my resume and apply for multiple jobs?</b>
+A: <em>Yes, you can upload your resume during the account creation process or later in your profile settings. Once your resume is uploaded, you can easily apply for multiple jobs by clicking on the "Apply Now" button on the job listings.</em>
 
-Q: Are there any specific qualifications or experience required for the job postings?
-A: Each job posting specifies the required qualifications and experience. It's important to review the job description to ensure you meet the requirements before applying.
+<b>Q: Are there any specific qualifications or experience required for the job postings?</b>
+A:<em> Each job posting specifies the required qualifications and experience. It's important to review the job description to ensure you meet the requirements before applying.</em>
 
-Q: How can I contact the support team for assistance with my account or job applications?
-A: You can reach our support team by visiting the "Contact Us" page and filling out the contact form. Alternatively, you can email our support team directly at support@colltechcareers.com.
+<b>Q: How can I contact the support team for assistance with my account or job applications?</b>
+A: <em>You can reach our support team by visiting the "Contact Us" page and filling out the contact form. Alternatively, you can email our support team directly at support@colltechcareers.com.</em>
 
-Q: Can I search for jobs based on location or specific keywords?
-A: Yes, our website provides advanced search functionality where you can search for jobs based on location, keywords, job title, or specific criteria. Use the search bar on the homepage to refine your job search.
+<b>Q: Can I search for jobs based on location or specific keywords?</b>
+A: <em>Yes, our website provides advanced search functionality where you can search for jobs based on location, keywords, job title, or specific criteria. Use the search bar on the homepage to refine your job search.</em>
 
-Q: Are there any internships or entry-level positions available?
-A: Yes, we have a dedicated section for internships and entry-level positions. You can filter the job search results by selecting the "Internship" or "Entry-Level" category.
+<b>Q: Are there any internships or entry-level positions available?</b>
+A: <em>Yes, we have a dedicated section for internships and entry-level positions. You can filter the job search results by selecting the "Internship" or "Entry-Level" category.</em>
 
-Q: How often are new job listings added to the website?
-A: New job listings are added regularly as we receive them from our partner companies. We recommend visiting the website frequently or subscribing to our newsletter to stay updated on the latest job opportunities.
+<b>Q: How often are new job listings added to the website?</b>
+A: <em>New job listings are added regularly as we receive them from our partner companies. We recommend visiting the website frequently or subscribing to our newsletter to stay updated on the latest job opportunities.</em>
 
-Q: Is there a mobile app available for Colltech Careers?
-A: Currently, we do not have a dedicated mobile app. However, our website is optimized for mobile devices, allowing you to access and browse job listings conveniently from your smartphone or tablet.
+<b>Q: Is there a mobile app available for Colltech Careers?</b>
+A: <em>Currently, we do not have a dedicated mobile app. However, our website is optimized for mobile devices, allowing you to access and browse job listings conveniently from your smartphone or tablet.</em>
 
-Q: Can I save job listings to review later?
-A: Yes, you can save job listings by clicking on the "Save Job" button on the job details page. Saved jobs can be accessed later from your account dashboard under the "Saved Jobs" section.
+<b>Q: Can I save job listings to review later?</b>
+A:<em> Yes, you can save job listings by clicking on the "Save Job" button on the job details page. Saved jobs can be accessed later from your account dashboard under the "Saved Jobs" section.</em>
 
-Q: Are there any resources or guides available to help with interview preparation?
-A: Yes, we provide a comprehensive interview preparation section on our website. You can find tips, sample interview questions, and advice to help you prepare for interviews effectively.
+<b>Q: Are there any resources or guides available to help with interview preparation?</b>
+A:<em>Yes, we provide a comprehensive interview preparation section on our website. You can find tips, sample interview questions, and advice to help you prepare for interviews effectively.</em>
   </p>
-</body>
+</div>
+    {% include 'footer.html' %}
+  </body>
 </html>

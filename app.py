@@ -52,10 +52,11 @@ def about():
 @app.route('/faqs')
 def faqs():
     return render_template('faqs.html')
+
+@app.route('/portfolio')
+def portfolio():
+    return render_template('portfolio.html')
   
-@app.route('/application form')
-def application_form():
-    return render_template('applicform.html')
   
 @app.route('/apply_job', methods=['GET', 'POST'])
 def apply_job():
