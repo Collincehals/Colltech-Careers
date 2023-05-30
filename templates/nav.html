@@ -37,36 +37,11 @@
           </li>
         </ul>
         <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search Colltech" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <input class="form-control me-2" type="search" placeholder="Enter search word" aria-label="Search">
+        <button class="btn btn-primary" type="submit">Search</button>
       </form>
-        
         
       </div>
     </div>
   </nav>
   <div style="height:57px"></div>
-
-
-
-
-
-
-
-
-
-
-
-  <script>
-  function performSearch(event) {
-    event.preventDefault(); // Prevent the form from submitting and refreshing the page
-    var searchInput = document.getElementById('searchInput');
-    var searchTerm = searchInput.value;
-  
-    // Perform the search operation using the search term
-    // You can use AJAX to send a request to a server-side script and retrieve search results
-    
-    // Example: Display an alert with the search term
-    alert('Searching for: ' + searchTerm);
-  }
-</script>

@@ -1,12 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-     <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
-
-  <!-- Bootstrap JavaScript -->
-  <script src="{{ url_for('static', filename='bootstrap.bundle.min.js') }}"></script>
-  <!-- Your HTML content here -->
     <link rel="icon" type="image/png" href="/static/logo1.png" style="border-radius:2000px">
     <title>Job Application</title>
     <meta charset="utf-8">
@@ -19,6 +13,7 @@
 </style>
   </head>
   <body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     {% include 'nav.html' %}
 <div id=space class="container border-bottom " style="padding-bottom:8px; margin-bottom:200px">
   <h1 style="color: rgb(100,50,20)">Apply for Job: {{job['id']}}</h1>
