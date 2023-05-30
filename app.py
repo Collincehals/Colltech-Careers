@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,redirect
 
 app = Flask(__name__)
 
@@ -6,7 +6,7 @@ app = Flask(__name__)
 JOBS= [
 {
   'id':1,
-  'title':"Software Engineer",
+  'title':"Full-Stack Engineer",
   'location':'Nairobi, Kenya',
   'job requirements': 'Entry Level',
   'Salary':'KShs.59,000'
@@ -27,14 +27,14 @@ JOBS= [
 },
 {
   'id':4,
-  'title':"Senior HR Practioner",
+  'title':"Software Engineer",
   'location':'Nairobi, Kenya',
   'job requirements': 'Minimum 10 years Experience',
   'Salary':'KShs.130,000'
 },
 {
   'id':5,
-  'title':"Full-Stack Engineer",
+  'title':"Back-End Engineer",
   'location':'Remote',
   'job requirements': 'Entry Level',
   'Salary':'$59,000'

@@ -1,4 +1,5 @@
  <nav class="navbar navbar-expand-lg navbar-dark shadow-sm fixed-top" style="background-color:rgb(40,80,220);" aria-label="Fifth navbar example">
+   
     <div class="container-fluid">
       <img src="/static/logo1.png" alt="" width="40" height="40" style="border-radius:2000px">
       <a class="navbar-brand" href="https://colltech-careers--collincehals.repl.co">Colltech Careers</a>
@@ -15,7 +16,7 @@
             <a class="nav-link" href="https://colltech-careers--collincehals.repl.co/about/"  style="color: rgb(255,255,255)">Who We Are</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"  style="color: rgb(255,255,255)">Application Status</a>
+            <a class="nav-link" href="#"  style="color: rgb(255,255,255)">Job Listings</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="https://colltech-careers--collincehals.repl.co/portfolio"  style="color: rgb(255,255,255)">Portfolio</a>
@@ -24,8 +25,8 @@
   <a class="btn dropdown-toggle dropdown-toggle-split " role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: rgb(255,255,255)">Products & Services</a>
   <ul class="dropdown-menu" style="background-color:rgb(240, 192,0)">
     <li><a class="dropdown-item" href="#">All Products</a></li>
-    <li><a class="dropdown-item" href="#">Open Positions</a></li>
-    <li><a class="dropdown-item" href="#">Careers</a></li>
+    <li><a class="dropdown-item" href="#">Application Status</a></li>
+    <li><a class="dropdown-item" href="#">Careers at Colltech</a></li>
     <li><a class="dropdown-item" href="#">Application Status</a></li>
     <li><a class="dropdown-item" href="https://colltech-careers--collincehals.repl.co/faqs">FAQs</a></li>
   </ul>
@@ -35,10 +36,37 @@
 </li>
           </li>
         </ul>
-        <form role="search">
-          <input class="form-control" type="search" placeholder="Search Company" aria-label="Search">
-        </form>
+        <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search Colltech" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+        
+        
       </div>
     </div>
   </nav>
   <div style="height:57px"></div>
+
+
+
+
+
+
+
+
+
+
+
+  <script>
+  function performSearch(event) {
+    event.preventDefault(); // Prevent the form from submitting and refreshing the page
+    var searchInput = document.getElementById('searchInput');
+    var searchTerm = searchInput.value;
+  
+    // Perform the search operation using the search term
+    // You can use AJAX to send a request to a server-side script and retrieve search results
+    
+    // Example: Display an alert with the search term
+    alert('Searching for: ' + searchTerm);
+  }
+</script>
