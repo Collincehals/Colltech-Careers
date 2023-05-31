@@ -28,6 +28,9 @@
         text-align:left;
         color:rgb(40,40,60);
       }
+      body {
+      background-color:rgb(220,220,220);
+      }
 
     </style>
     
@@ -35,9 +38,9 @@
   <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     {% include 'nav.html' %}
-    <div class="container">
-      <h1 class="text-center mb-4 mt-2">{{company_name}} Careers</h1>
-      <img class="img-fluid" style ="height:auto;width:100%" src="/static/Photo5.jpg" alt="HTML Dog">
+    <div class="container wow fadeInUp" data-wow-delay="0.1s">
+      <h1 class="text-center mb-4 mt-2 animated zoomIn">{{company_name}} Careers</h1>
+      <img class="img-fluid" style ="height:auto;width:100%" src="/static/Photo1.jpg" alt="HTML Dog">
       <h2 class="text-center mb-4 mt-2">About Colltech</h2>
       <div class="row " style="margin-bottom:20px">
         <div class="col-md-6">
@@ -51,8 +54,8 @@ As a job seeker, you'll find a wealth of opportunities across various industries
         </div>
         </div>
       
-      <h2 class="text-center mb-1 mt-2">Open Positions</h2>
-      <div class="row">
+      <h2 class="text-center mb-1 mt-2 animated zoomIn">Open Positions</h2>
+      <div class="row bg-primary-subtle">
         {%for job in jobs%}
         {% include 'job.html' %}
         {% endfor %}
@@ -62,5 +65,27 @@ As a job seeker, you'll find a wealth of opportunities across various industries
       </div>
     </div>
     {% include 'footer.html' %}
+    <!-- JS here -->
+    <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/vendor/waypoints.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/meanmenu.js"></script>
+    <script src="assets/js/swiper-bundle.min.js"></script>
+    <script src="assets/js/magnific-popup.min.js"></script>
+    <script src="assets/js/parallax.min.js"></script>
+    <script src="assets/js/backToTop.js"></script>
+    <script src="assets/js/jquery-ui-slider-range.js"></script>
+    <script src="assets/js/nice-select.min.js"></script>
+    <script src="assets/js/counterup.min.js"></script>
+    <script src="assets/js/ajax-form.js"></script>
+    <script src="assets/js/wow.min.js"></script>
+    <script src="assets/js/beforeafter.jquery-1.0.0.js"></script>
+    <script src="assets/js/isotope.pkgd.min.js"></script>
+    <script src="assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="assets/js/jquery.ez-plus.js"></script>
+    <script src="assets/js/tilt.jquery.min.js"></script>
+    <script src="assets/js/hover-reveal.js"></script>
+    <script src="assets/js/tween-max.js"></script>
+    <script src="assets/js/main.js"></script>
   </body>
 </html>

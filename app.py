@@ -53,6 +53,10 @@ def about():
 def faqs():
     return render_template('faqs.html')
 
+@app.route('/new')
+def new():
+    return render_template('new.html')
+
 @app.route('/portfolio')
 def portfolio():
     return render_template('portfolio.html')
