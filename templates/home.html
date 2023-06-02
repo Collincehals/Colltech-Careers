@@ -34,8 +34,8 @@
         transition: width 5s, height 5s;
       }
       #jobs:hover {
-  width: 450px;
-  height:450px;
+  width: 300px;
+  height:300px;
   }
       body {
       background-color:rgb(220,220,220);
@@ -53,7 +53,11 @@
     {% include 'nav.html' %}
     <div class="container">
       <h1 class="text-center mb-4 mt-2 animated zoomIn">{{company_name}} Careers</h1>
-      <img class="img-fluid" style ="height:auto;width:100%" src="/static/Photo1.jpg" alt="HTML Dog">
+      
+      <!---Slideshow begins here --->
+{% include 'slideshow.html' %}
+      <!---Slideshow ends here --->
+      
       <h2 class="text-center mb-4 mt-2">About Colltech</h2>
       <div class="row " style="margin-bottom:20px">
         <div id="about" class="col-md-6 ">
@@ -77,40 +81,40 @@ Join us on this exciting journey and discover your ideal job match. Together, le
       </div>
         
         <!---Cards begin here--->
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-  <div class="col">
+        <div class="row row-cols-1 row-cols-md-3 g-8">
+  <div id="jobs"  class="col">
     <div class="card h-100">
       <img src="/static/Photo4.jpg" class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <h5 class="card-title">Industry Services </h5>
+        <p class="card-text">Get in touch with us for the latest industrial and technological developments. </p>
       </div>
       <div class="card-footer">
-        <small class="text-body-secondary">Last updated 3 mins ago</small>
+        <small class="text-body-secondary">Last updated 20 mins ago</small>
       </div>
     </div>
   </div>
-  <div class="col">
+  <div id="jobs"  class="col">
     <div class="card h-100">
       <img src="/static/Banner1.jpg" class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+        <h5 class="card-title">Professional Guidance </h5>
+        <p class="card-text">At Colltech, we connect you with professionals from various fields to ensure you are properly guided in your career path. </p>
       </div>
       <div class="card-footer">
         <small class="text-body-secondary">Last updated 3 mins ago</small>
       </div>
     </div>
   </div>
-  <div class="col">
+  <div id="jobs"  class="col">
     <div class="card h-100">
       <img src="/static/Photo2.jpg" class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+        <h5 class="card-title">International Programmes </h5>
+        <p class="card-text">We connect you with global professionals and industries to diverse your talents, skills and opportunities. </p>
       </div>
       <div class="card-footer">
-        <small class="text-body-secondary">Last updated 3 mins ago</small>
+        <small class="text-body-secondary">Last updated 15 mins ago</small>
       </div>
     </div>
   </div>
