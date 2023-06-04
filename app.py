@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-
+from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 
 # A list to store the job openings
@@ -66,9 +66,9 @@ def portfolio():
 def apply_job():
     job = JOBS
     if request.method == 'POST':
-        name = request.form['name']
-        email =request.form['email address']
-        resume = request.files['resume']
+        name = request.form ['name']
+        email =request.form ['email address']
+        resume = request.files ['resume']
         import os
 
         # Create the 'resumes/' directory if it doesn't exist
@@ -82,17 +82,18 @@ def apply_job():
 
         return render_template('applicsuccess.html', job=job, name=name)
     else:
-        return render_template('applicform.html', job=job)
+        return render_template('applicform.html', jobs=JOBS)
 
-@app.route('/submitted', methods=['POST'])
-def submitted():
-    name = request.form['name']
-    email = request.form['email']
-    message = request.form['message']
-
-    # Perform further processing or store the data in a database
-
-    return render_template('submitted.html', name=name, email=email, message=message)
+@app.route('/submit', methods=['POST'])
+def submit_form():
+    first_name = request.form.get('fname')
+    last_name = request.form.get('lastname')
+    country = request.form.get('country')
+    email = request.form.get('email')
+    resume = request.files.get('resume')
+    certificate = request.files.get('certificate')
+    
+    return 'Form submitted successfully'
 
 
 
