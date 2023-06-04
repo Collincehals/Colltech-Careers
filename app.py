@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from flask_sqlalchemy import SQLAlchemy
+
 app = Flask(__name__)
 
 # A list to store the job openings
@@ -94,8 +94,6 @@ def submit_form():
     certificate = request.files.get('certificate')
     
     return 'Form submitted successfully'
-
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
