@@ -48,6 +48,10 @@ def home():
 @app.route('/about/')
 def about():
     return render_template('about.html')
+  
+@app.route('/hover')
+def hover():
+    return render_template('hover.html')
 
 @app.route('/faqs')
 def faqs():

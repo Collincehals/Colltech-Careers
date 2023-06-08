@@ -30,35 +30,16 @@
         transform: rotate(0deg);
         
       }
-      #jobs{
+      #industry{
         transition: width 5s, height 5s;
       }
-      #jobs:hover {
-  width: 300px;
-  height:300px;
+      #industry:hover {
+  width: 500px;
+  height:500px;
   }
       body {
       background-color:rgb(220,220,220);
       }
-      .floating-contact-button {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color:rgb(220,220,230);
-  color: #fff;
-  border-radius: 15%;
-  padding: 12px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  font-size: 20px;
-  z-index: 9999;
-  text-decoration: none;
-  transition: background-color 0.3s ease-in-out;
-}
-
-.floating-contact-button:hover {
-  background-color:rgb(55,100,150);
-}
-
     </style>
     
     <!--css goes here-->
@@ -87,7 +68,7 @@ We believe in empowering individuals by providing them with the tools, resources
 Join us on this exciting journey and discover your ideal job match. Together, let's shape the future of careers.
       </p>
         </div>
-        <div id="jobs" class="d-none d-md-block col-md-6">
+        <div id="industry" class="d-none d-md-block col-md-6">
        <img class="img-fluid" style="border-radius:8px;" src="/static/Photo4.jpg" alt="HTML Dog">
         </div>
         </div>
@@ -101,7 +82,7 @@ Join us on this exciting journey and discover your ideal job match. Together, le
         
         <!---Cards begin here--->
         <div class="row row-cols-1 row-cols-md-3 g-8">
-  <div id="jobs"  class="col">
+  <div  class="col">
     <div class="card h-100">
       <img src="/static/Photo4.jpg" class="card-img-top" alt="...">
       <div class="card-body">
@@ -113,7 +94,7 @@ Join us on this exciting journey and discover your ideal job match. Together, le
       </div>
     </div>
   </div>
-  <div id="jobs"  class="col">
+  <div class="col">
     <div class="card h-100">
       <img src="/static/Banner1.jpg" class="card-img-top" alt="...">
       <div class="card-body">
@@ -125,7 +106,7 @@ Join us on this exciting journey and discover your ideal job match. Together, le
       </div>
     </div>
   </div>
-  <div id="jobs"  class="col">
+  <div class="col">
     <div class="card h-100">
       <img src="/static/Photo2.jpg" class="card-img-top" alt="...">
       <div class="card-body">
@@ -138,15 +119,12 @@ Join us on this exciting journey and discover your ideal job match. Together, le
     </div>
   </div>
 </div>
-      <a href="mailto:odhiambocollince702@gmail.com" class="floating-contact-button">
-  <i class="fas fa-envelope"></i>
-</a>
       <!---card ends here--->
       <div class="text-center mt-4 mb-4"><a href="mailto:odhiambocollince702@gmail.com?subject=Question%20about%20job%20opening&body=My%20Name%3A%3Cyour%20name%20here%3E%0D%0A%0D%0AMy%20question%3A%3CKindly%20leave%20your%20enquiry%20here%3E" class="btn btn-primary btn-sm">Have Enquiries? Email Us</a>
       </div>
      </div>
+     
     {% include 'footer.html' %}
-    
     <!-- JS here -->
     <script src="assets/js/backToTop.js"></script>
     <script src="assets/js/magnific-popup.min.js"></script>
