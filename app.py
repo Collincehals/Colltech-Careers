@@ -1,49 +1,12 @@
 from flask import Flask, render_template, request
-
+from database import load_jobs_from_db
 app = Flask(__name__)
 
-# A list to store the job openings
-JOBS= [
-{
-  'id':1,
-  'title':"Full-Stack Engineer",
-  'location':'Nairobi, Kenya',
-  'job requirements': 'Entry Level',
-  'Salary':'KShs.59,000'
-},
-{
-  'id':2,
-  'title':"Data Analyst",
-  'location':'Mombasa, Kenya',
-  'job requirements': '5 Years Experience',
-  'Salary':'KShs.200,000'
-},
-{
-  'id':3,
-  'title':"Structural Engineer",
-  'location':'Kisumu, Kenya',
-  'job requirements': 'Minimum 3 years experience',
-  'Salary':'KShs.158,000'
-},
-{
-  'id':4,
-  'title':"Software Engineer",
-  'location':'Nairobi, Kenya',
-  'job requirements': 'Minimum 10 years Experience',
-  'Salary':'KShs.130,000'
-},
-{
-  'id':5,
-  'title':"Back-End Engineer",
-  'location':'Remote',
-  'job requirements': 'Entry Level',
-  'Salary':'$59,000'
-}
-]
-
+#Routes here#
 @app.route('/')
 def home():
-    return render_template('home.html',jobs=JOBS, company_name='Colltech')
+    jobs= load_jobs_from_db()
+    return render_template('home.html',jobs=jobs, company_name='Colltech')
 
 @app.route('/about/')
 def about():
@@ -68,7 +31,7 @@ def portfolio():
   
 @app.route('/apply_job', methods=['GET', 'POST'])
 def apply_job():
-    job = JOBS
+    jobs =jobs
     if request.method == 'POST':
         name = request.form ['name']
         email =request.form ['email address']
@@ -84,9 +47,9 @@ def apply_job():
 
         # Perform additional processing or database operations here
 
-        return render_template('applicsuccess.html', job=job, name=name)
+        return render_template('applicsuccess.html', jobs=jobs, name=name)
     else:
-        return render_template('applicform.html', jobs=JOBS)
+        return render_template('applicform.html', jobs=jobs)
 
 @app.route('/submit', methods=['POST'])
 def submit_form():
