@@ -31,7 +31,7 @@ def portfolio():
   
 @app.route('/apply_job', methods=['GET', 'POST'])
 def apply_job():
-    jobs =jobs
+    jobs= load_jobs_from_db()
     if request.method == 'POST':
         name = request.form ['name']
         email =request.form ['email address']
