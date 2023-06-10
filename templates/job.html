@@ -3,9 +3,8 @@
           <h4 class="mb-1 mt-2" style="color:rgb(10,80,220); font-style">{{job['title']}}
           </h4>
           <div class="mb-auto mt-auto"><b>Location:</b>{{job['location']}}</div>
-          <div class="mb-auto mt-auto"><b>Qualification:</b>{{job['job requirements']}}</div>
-  {%if 'Salary' in job %}
-          <div class="mb-auto mt-auto"><b>Salary:</b>{{job['Salary']}}</div>
+  {%if 'salary' in job %}
+          <div class="mb-auto mt-auto"><b>salary:</b>{{job['salary']}}</div>
   {% endif %}
   </div>
   <div class="col-4 padding-right:16px">
