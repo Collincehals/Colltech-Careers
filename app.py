@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request
-from database import load_jobs_from_db
+from flask import Flask, render_template, request,jsonify
+from database import load_jobs_from_db, load_job_from_db
 app = Flask(__name__)
 
 #Routes here#
@@ -7,49 +7,41 @@ app = Flask(__name__)
 def home():
     jobs= load_jobs_from_db()
     return render_template('home.html',jobs=jobs, company_name='Colltech')
+  
+@app.route('/api/jobs')
+def list_jobs():
+  jobs = load_jobs_from_db()
+  return jsonify(jobs)
+
+
+@app.route("/job/<id>")
+def show_job(id):
+  job = load_job_from_db(id)
+  if not job:
+    return "Not Found", 404
+  return render_template('jobpage.html', 
+                         job=job)
+
 
 @app.route('/about/')
 def about():
     return render_template('about.html')
-  
-@app.route('/hover')
-def hover():
-    return render_template('hover.html')
+
 
 @app.route('/faqs')
 def faqs():
     return render_template('faqs.html')
 
+
 @app.route('/new')
 def new():
     return render_template('new.html')
 
+
 @app.route('/portfolio')
 def portfolio():
     return render_template('portfolio.html')
-  
-  
-@app.route('/apply_job', methods=['GET', 'POST'])
-def apply_job():
-    jobs= load_jobs_from_db()
-    if request.method == 'POST':
-        name = request.form ['name']
-        email =request.form ['email address']
-        resume = request.files ['resume']
-        import os
 
-        # Create the 'resumes/' directory if it doesn't exist
-        if not os.path.exists('resumes/'):
-            os.makedirs('resumes/')
-
-        # Save the uploaded resume to a specific location
-        resume.save('resumes/' + resume.filename)
-
-        # Perform additional processing or database operations here
-
-        return render_template('applicsuccess.html', jobs=jobs, name=name)
-    else:
-        return render_template('applicform.html', jobs=jobs)
 
 @app.route('/submit', methods=['POST'])
 def submit_form():
@@ -61,6 +53,8 @@ def submit_form():
     certificate = request.files.get('certificate')
     
     return 'Form submitted successfully'
+  
+
 
 @app.route('/login')
 def login():
@@ -69,8 +63,6 @@ def login():
 @app.route('/signup')
 def signup():
   return render_template('signup.html')
-
-
 
   
 if __name__ == '__main__':
