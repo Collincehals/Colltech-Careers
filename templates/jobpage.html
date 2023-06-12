@@ -12,26 +12,61 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     {% include 'nav.html' %}
     
-    <div class="container">
-      <h1 class="text-center mb-3 mt-1">Colltech Careers</h1>
-      <h4 mb-3 mt-1>Job Title </h4>
-      <p> {{job.title}}</p>
+    <div class="container" style="font-family:Arial">
+      
+      <h2 class="text-center mb-3 mt-1" style="color: rgb(100,50,20)">Colltech Careers</h2>
+      
+<div class="container border" style="background-color: rgb(240, 245, 250); border-radius: 10px; margin-bottom: 10px;">
+  <div style="display: flex; justify-content: flex-start; padding: 10px 20px;">
+    <div  style="color: darkblue; padding-bottom:4px; padding-top:8px;" >
+      <h1>{{ job.title }}</h1>
+    </div>
+    <div style="padding-left:100px;">
+      <h4 mb-3 mt-1 style="color: darkblue;">Location</h4>
+      <p>{{ job['location'] }}</p>
+    </div>
+  </div>
+</div>
 
-      <h4 mb-3 mt-1>Location </h4>
-      <p> {{job.location}}</p>
-
-      <h4 mb-3 mt-1>Responsibilities </h4>
-      <p> {{job.responsibilities}}</p>
-
-      <h4 mb-3 mt-1>Requirements</h4>
-      <p> {{job.requirements}}</p>
-
-      <h4 mb-3 mt-1>Salary </h4>
+<div class="container border" style="background-color:rgb(240, 245, 250);border-radius:10px; margin-bottom:10px;">
+      <h4 mb-3 mt-1 style="color: darkblue">Responsibilities </h4>
+      <ul>
+      {% for line in job.responsibilities.split("\n") %}
+      <li>{{line}}</li>
+      {% endfor %}
+      </ul>
+</div>
+<div class="container border" style="background-color:rgb(240, 245, 250);border-radius:10px; margin-bottom:10px;">
+      <h4 mb-3 mt-1 style="color: darkblue"> Job Requirements</h4>
+      <ol>
+        {%for line in job.requirements.split("\n") %}
+        <li>{{line}}</li>
+        {% endfor %}
+      </ol>
+</div>
+<div class="container border" style="background-color: rgb(240, 245, 250); border-radius: 10px; margin-bottom: 10px;">
+      <h4 mb-3 mt-1 style="color:darkblue">Salary </h4>
       <p> {{job.currency}}{{job.salary}}</p>
+</div>
 
-
+<p class="lead" style="color: darkblue"><b>Share this Post</b></p>
+      
+<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+  <div class="btn-group me-2" role="group" aria-label="First group">
+    <a type="button" class="btn btn-primary" href="https://web.facebook.com/login.php?">Facebook</a>
+  </div>
+  
+  <div class="btn-group me-2" role="group" aria-label="Second group">
+    <a href="/jobs" type="button" class="btn btn-warning">Linked In</a>
+  </div>
+  
+  <div class="btn-group" role="group" aria-label="Third group">
+    <a href="/jobs" type="button" class="btn btn-info">Twitter</a>
+  </div>
+</div>
+<div class="container border" style="background-color: rgb(240, 245, 250); border-radius: 10px; margin-bottom: 20px;margin-top:20px;">      
 {% include 'applicform.html' %}
-
+</div>
       
       <div class="text-center mt-4 mb-4"><a style="border-radius:50px"href="mailto:odhiambocollince702@gmail.com?subject=Question%20about%20job%20opening&body=My%20Name%3A%3Cyour%20name%20here%3E%0D%0A%0D%0AMy%20question%3A%3CKindly%20leave%20your%20enquiry%20here%3E" class="btn btn-primary btn-sm">Have Enquiries? Email Us</a>
       </div>

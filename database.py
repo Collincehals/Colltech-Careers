@@ -20,8 +20,6 @@ def load_jobs_from_db():
     return jobs
 
 
-from sqlalchemy import text
-
 def load_job_from_db(id):
     with engine.connect() as conn:
         query = text("SELECT * FROM jobs WHERE id = :val")
