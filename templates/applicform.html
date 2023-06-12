@@ -26,6 +26,18 @@
   border-radius: 4px;
   box-sizing: border-box;
 }
+
+  textarea {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  height: 200px;
+}
+  
   input[type=file] {
   width: 100%;
   padding: 12px 20px;
@@ -59,12 +71,12 @@ input[type=submit]:hover {
     <div class="container border" style="background-color: rgb(240, 245, 250); border-radius: 10px; margin-bottom: 20px;margin-top:20px;">  
   <h1  style="color:rgb(100,50,20); margin-top: 20px; margin-bottom:15px; font-size: 20px; text-align:center"><b>Apply for {{job['title']}} Position</b></h1>
   
-<form action="https://colltech-careers--collincehals.repl.co/submit" method="post">
+<form action="/form/{{job['id']}}/submit" method='post'>
     <label for="fname">First Name</label>
-    <input type="text" id="fname" name="firstname" placeholder="Your name.." required>
+    <input type="text" id="fname" name="firstname" placeholder="Bruce... " required>
 
     <label for="lname">Last Name</label>
-    <input type="text" id="lname" name="lastname" placeholder="Your last name.." required>
+    <input type="text" id="lname" name="lastname" placeholder="Smith..." required>
 
     <label for="country">Country</label>
     <select id="country" name="country">
@@ -75,14 +87,20 @@ input[type=submit]:hover {
       <option value="rwanda">Rwanda</option>
     </select>
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+        <input type="email" id="email" name="email" placeholder="e.g colltechcareers@hotmail.com" required>
+  
+        <label for="education"> Education Background: </label>
+        <textarea name="education"></textarea>
+  
+        <label for="experience">Work Experience: </label>
+        <textarea name="experience"></textarea>
   
         <label for="resume">Resume:</label>
         <input type="file" id="resume" name="resume" required>
   
         <label for="certificate">Certificate:</label>
         <input type="file" id="certificate" name="certificate" required> 
-  <div style="padding-bottom:20px;"><input  type="submit" value="Submit">
+  <div style="padding-bottom:20px;"><input  type="submit">
   </div>
       
   </form>
