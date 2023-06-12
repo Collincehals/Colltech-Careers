@@ -3,9 +3,13 @@
           <h5 class="mb-1 mt-2" style="color:rgb(10,80,220); font-style">{{job['title']}}
           </h5>
           <div class="mb-auto mt-auto"><b>Location: </b>{{job.location}}</div>
-  {%if 'salary' in job %}
-          <div class="pb-3 mb-auto mt-auto"><b>salary: </b>{{job['currency']}}{{job['salary']}}</div>
-  {% endif %}
+  
+{% if job['salary'] %}
+  <div class="pb-3 mb-auto mt-auto">
+    <b>Salary: </b>{{ job['currency'] }}{{ job['salary'] }}
+  </div>
+{% endif %}
+
   </div>
   <div class="col-4 padding-right:16px mt-4">
   <a href="/job/{{job['id']}}" type="button" class="btn btn-primary">Apply</a>

@@ -33,10 +33,11 @@ def about():
 def faqs():
     return render_template('faqs.html')
 
-
-@app.route('/new')
-def new():
-    return render_template('new.html')
+@app.route('/form/<id>')
+def fill_form(id):
+  job=load_job_from_db(id)
+  return render_template('applicform.html',
+                         job=job)
 
 
 @app.route('/portfolio')
