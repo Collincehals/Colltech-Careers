@@ -2,3 +2,4 @@ Flask
 gunicorn
 sqlalchemy
 pymysql
+mailjet_rest
