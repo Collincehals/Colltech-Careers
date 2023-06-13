@@ -34,7 +34,7 @@ def load_job_from_db(id):
 
 def add_application_to_db(job_id, data):
     with engine.connect() as conn:
-        query = text("INSERT INTO applications(job_id, first_name, last_name, country, education, experience, resume_cv, certificate) VALUES (:job_id, :first_name, :last_name, :country, :education, :experience, :resume_cv, :certificate)")
+        query = text("INSERT INTO applications(job_id, first_name, last_name, country, education, experience, resume_cv, certificate, email) VALUES (:job_id, :first_name, :last_name, :country, :education, :experience, :resume_cv, :certificate, :email)")
         conn.execute(query,
                      {"job_id": job_id,         
                      "first_name":data['firstname'], 
@@ -43,4 +43,5 @@ def add_application_to_db(job_id, data):
                      "education": data['education'], 
                      "experience": data['experience'], 
                      "resume_cv": data['resume'], 
-                    "certificate": data['certificate']})
+                    "certificate": data['certificate'],
+                     "email": data['email']})

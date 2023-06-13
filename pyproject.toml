@@ -8,6 +8,8 @@ authors = ["Your Name <you@example.com>"]
 python = "^3.10"
 Flask = "^2.3.2"
 Flask-SQLAlchemy = "^3.0.3"
+mailjet = "^1.4.1"
+mailjet-rest = "^1.3.4"
 
 [tool.poetry.dev-dependencies]
 
