@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!---JS hCaptcha script her --->
+    <script src="https://hcaptcha.com/1/api.js" async defer></script>
+<!--- end --->
+    
     <link rel="icon" type="image/png" href="/static/logo1.png" style="border-radius:2000px">
     <title>Open Positions -Colltech Careers </title>
     <meta charset="utf-8">
@@ -49,7 +53,7 @@
 }
 input[type=submit] {
   width: 50%;
-  background-color:#45a049;
+  background-color:#45a055;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -59,8 +63,13 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
-  background-color:#45a049;
+  background-color:#45a045;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
+  .h-captcha {
+    transform: scale(0.8);
+    transform-origin: 0 0;
+  }
 
 </style>
   </head>
@@ -101,7 +110,10 @@ input[type=submit]:hover {
         <input type="file" id="resume" name="resume">
   
         <label for="certificate">Certificate:</label>
-        <input type="file" id="certificate" name="certificate"> 
+        <input type="file" id="certificate" name="certificate">
+  <!---hCaptcha here --->
+  <div class="h-captcha" data-sitekey="1b0b1dc3-2a1a-4e49-9530-474f675e79b0"></div>
+  
   <div style="padding-bottom:20px;"><input  type="submit">
   </div>
       
@@ -109,6 +121,7 @@ input[type=submit]:hover {
     </div>
       <div class="text-center mt-4 mb-4"><a style="border-radius:50px"href="mailto:odhiambocollince702@gmail.com?subject=Question%20about%20job%20opening&body=My%20Name%3A%3Cyour%20name%20here%3E%0D%0A%0D%0AMy%20question%3A%3CKindly%20leave%20your%20enquiry%20here%3E" class="btn btn-primary btn-sm">Have Enquiries? Email Us</a>
       </div>
+    </div>
       {% include 'footer.html' %}
   </body>
 </html>

@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from database import load_jobs_from_db, load_job_from_db, add_application_to_db
 from email_sender import send_confirmation_email
-
+import os
 app = Flask(__name__)
 
 #Routes here#
@@ -52,20 +52,37 @@ def fill_form(id):
 
 
 # Form Submission here
+import requests
+
 @app.route("/form/<id>/submit", methods=["POST"])
 def submit_form(id):
     job = load_job_from_db(id)
     data = request.form
     add_application_to_db(job['id'], data)
-  
-    applicant_email = data['email']
-    applicant_name = data['firstname']
-    last_name = data['lastname']
-    country = data['country']
-    job_title = job['title']
-    send_confirmation_email(job_title, applicant_email, applicant_name,last_name, country)
-  
-    return render_template('submitted.html', application=data, job=job)
+
+    # Get the hCaptcha response from the form submission
+    hCaptchaResponse = data.get('h-captcha-response')
+
+    # Verify the hCaptcha response using the hCaptcha API
+    verification_data = {
+        'secret': os.environ['HCPATCHA_SECRET'],
+        'response': hCaptchaResponse
+    }
+    verification_response = requests.post('https://hcaptcha.com/siteverify', data=verification_data)
+    verification_result = verification_response.json()
+
+    # Check if the hCaptcha response is valid
+    if verification_result['success']:
+        applicant_email = data['email']
+        applicant_name = data['firstname']
+        last_name = data['lastname']
+        country = data['country']
+        job_title = job['title']
+        send_confirmation_email(job_title, applicant_email, applicant_name, last_name, country)
+
+        return render_template('submitted.html', application=data, job=job)
+    else:
+        return 'Invalid hCaptcha response. Please try again.'
 
 
 
