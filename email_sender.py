@@ -1,8 +1,8 @@
 from mailjet_rest import Client
 
 def send_confirmation_email(job_title, applicant_email, applicant_name,last_name, country):
-    api_key = '44c0aadab815085c5e43381feea607cc'
-    api_secret = 'dddf503912dfa3a5fdacea7a414db788'
+    api_key = 'API_KEY'
+    api_secret = 'API_SECRET'
 
     mailjet = Client(auth=(api_key, api_secret), version='v3.1')
 
