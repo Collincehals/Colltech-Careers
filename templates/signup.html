@@ -10,7 +10,8 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
+      background-image: url("/static/bg4.jpg");
+      background-size: contain;
     }
 
     .container {
@@ -49,7 +50,8 @@
     }
 
     .form-group .btn:hover {
-      background-color: #45a049;
+      background-color: #45a045;
+      box-shadow:0 0 5px  rgba(0,0,0,0.6);
     }
   </style>
 </head>
@@ -58,11 +60,11 @@
     {% include 'nav.html' %}
   <div class="container" style="margin-bottom: 50px">
     <h3>Sign Up</h3>
-    <form action="#" method="post">
+    <form action="/signup" method="post">
       
       <div class="form-group">
-        <label for="fname">First Name:</label>
-        <input type="text" id="fname" name="fname" required>
+        <label for="firstname">First Name:</label>
+        <input type="text" id="firstname" name="firstname" required>
     
         <label for="lastname">Last Name:</label>
         <input type="text" id="lastname" name="lastname" required>

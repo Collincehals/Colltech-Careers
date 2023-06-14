@@ -45,3 +45,17 @@ def add_application_to_db(job_id, data):
                      "resume_cv": data['resume'], 
                     "certificate": data['certificate'],
                      "email": data['email']})
+
+
+
+
+def add_user_to_db(data):
+    with engine.connect() as conn:
+        query = text("INSERT INTO users(first_name, last_name, email,username, password) VALUES (:first_name, :last_name, :email, :username, :password)")
+        conn.execute(query,
+                     {"first_name":data['firstname'], 
+                     "last_name": data['lastname'],
+                     "email": data['email'],
+                     "username": data['username'],
+                     "password": data['password']
+                     })

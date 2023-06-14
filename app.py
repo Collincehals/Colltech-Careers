@@ -1,8 +1,14 @@
-from flask import Flask, render_template, request
-from database import load_jobs_from_db, load_job_from_db, add_application_to_db
+from flask import Flask, render_template, request,flash,redirect,url_for,jsonify
+
+from database import load_jobs_from_db, load_job_from_db, add_application_to_db, add_user_to_db
+
 from email_sender import send_confirmation_email
+
+from sign_up_email import send_registration_email
 import os
+
 app = Flask(__name__)
+app.secret_key = os.environ['APP.SECRET_KEY']
 
 #Routes here#
 @app.route('/')
@@ -40,10 +46,6 @@ def faqs():
 def login():
   return render_template('login.html')
 
-@app.route('/signup')
-def signup():
-  return render_template('signup.html')
-  
 @app.route('/form/<id>')
 def fill_form(id):
   job=load_job_from_db(id)
@@ -52,6 +54,7 @@ def fill_form(id):
 
 
 # Form Submission here
+
 import requests
 
 @app.route("/form/<id>/submit", methods=["POST"])
@@ -85,6 +88,26 @@ def submit_form(id):
         return 'Invalid hCaptcha response. Please try again.'
 
 
+##Sign_up route here-->
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'POST':
+        first_name = request.form['firstname']
+        last_name = request.form['lastname']
+        email = request.form['email']
+        username = request.form['username']
+        password = request.form['password']
+        add_user_to_db(request.form)
+        send_registration_email(first_name, last_name, email,username)
+      
+        flash('Sign up successful! Please log in.', 'success')
+        return redirect(url_for('login'))
+
+    return render_template('signup.html')
+
+
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
+  
