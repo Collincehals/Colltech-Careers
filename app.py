@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request,redirect,url_for
+from flask import Flask, render_template, request,redirect,url_for,flash
 
 from database import load_jobs_from_db, load_job_from_db, add_application_to_db, add_user_to_db
 
