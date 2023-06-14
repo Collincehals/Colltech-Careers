@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request,flash,redirect,url_for,jsonify
+from flask import Flask, render_template, request,redirect,url_for
 
 from database import load_jobs_from_db, load_job_from_db, add_application_to_db, add_user_to_db
 
@@ -33,6 +33,11 @@ def show_job(id):
 @app.route('/about/')
 def about():
     return render_template('about.html')
+  #EXPERIMENTAL
+@app.route('/newlog')
+def login_reg():
+  return render_template ('imageoverlay.html')
+  
 
 @app.route('/portfolio')
 def portfolio():
