@@ -66,14 +66,45 @@ Join us on this exciting journey and discover your ideal job match. Together, le
           <img id="contain" href="/"class="img-fluid" style="border-radius:8px;" src="/static/Pic5.jpg" alt="HTML Dog">
         </div>
         </div>
-        
-      <h2 class="text-center mb-1 mt-2 animated zoomIn">Open Positions</h2>
+
+<div class="row">
+   <div class="row col-md-6 me-4 border" style="border-radius: 20px; margin-bottom: 20px; background-image: url(/static/bg7.jpg);">
+  <div class="col-md-8">
+    <h5>Recruiter</h5>
+    <p>
+      If you are a recruiter looking to post job openings and connect with job seekers, you've come to the right place.
+    </p>
+    <a href="/signup" class="btn btn-outline-primary btn-lg" style="margin-bottom: 20px;">Register Account</a>
+  </div>
+   <div class="col-md-4">
+    <img src="/static/Pic6.jpg" alt="Image" style="height:180px;width:175px;">
+  </div>
+</div>
+
+  <div class="row col-md-6 border" style="border-radius: 20px; margin-bottom: 20px; background-image: url(/static/bg6.jpg);">
+  <div class="col-md-8">
+    <h5>Job Seeker</h5>
+    <p>
+      If you are a job seeker looking for new career opportunities,
+you've come to the right place.
+    </p>
+    <a href="/signup" class="btn btn-outline-primary btn-lg" style="margin-bottom: 20px;">Register Account</a>
+  </div>
+   <div class="col-md-4">
+    <img src="/static/Pic3.jpg" alt="Image" style="height:180px;width:175px;">
+  </div>
+</div>
+ 
+</div>
+ 
+      <h2 class="text-center mb-1 mt-2">Open Positions</h2>
       <div class="row " style="background-color:rgb(240, 245, 250);border-radius:10px; margin-bottom:60px; margin-top:20px;">
         {%for job in jobs%} 
         {% include 'job.html' %}
         {% endfor %}
       </div>
-        
+
+  
         <!---Cards begin here--->
         {% include 'cards.html' %}
       <!---card ends here--->
