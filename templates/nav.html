@@ -5,15 +5,15 @@
    
     <div class="container-fluid">
       
-      <img src="/static/logo1.png" alt="" width="40" height="40" style="border-radius:2000px">
+      <img class="me-2" src="/static/logo1.png" alt="" width="45" height="45" style="border-radius:1000px">
       
-      <a class="navbar-brand" style="color:rgb(20,20,220)" href="/">Colltech Careers</a>
+      <a class="navbar-brand" style="color:rgb(20,20,220)" href="/">Colltech Careers </a>
       <button style="color:rgb(20,20,220)" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarsExample05">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a style="color:rgb(20,20,220)"class="nav-link" aria-current="page" href="/"><i class="fa-solid fa-house me-1"></i>Home </a>
           </li>
@@ -43,22 +43,32 @@
   </ul>
 </li>
           
-  </ul>
+</ul>
 
-<ul class="navbar-nav me-4 mb-2 mb-lg-0">
-  <li class="nav-item">
-            <a style="color:rgb(20,20,220)" class="nav-link" href="/login">Login</a>
-</li>
-    
+<ul  class="navbar-nav me-2 dropdown">
+   <a style="color:rgb(20,20,220)" class="nav-link dropdown-toggle-plus" role="link" data-bs-toggle="dropdown" aria-expanded="false">Search </a>
+<ul class="dropdown-menu bg-subtle">
+  <li class="dropdown-item ">
+<form action="/" class="d-flex" role="search">
+  <div class="input-group">
+    <input class="form-control me-2 border-primary" type="search" placeholder="Search..." aria-label="Search">
+    <button class="btn btn-sm " type="submit">
+      <i class="fas fa-search"></i>
+    </button>
+  </div>
+</form>
+ </li>
+</ul>
+</ul> 
+
+<ul class="navbar-nav mb-2 mb-lg-0">   
 <li class="nav-item">
-            <a style="color:rgb(20,20,220)" class="nav-link" href="/signup"><i class="fa-solid fa-user me-2"></i>Sign Up </a>
+            <a style="color:rgb(20,20,220)" class="nav-link" href="/signup"><i class="fa-solid fa-user me-1"></i>Register/Login</a>
 </li>
 </ul>
         
-  <form action ="/" class="d-flex" role="search">
-      <input class="form-control me-2 border-primary" type="search" placeholder="Search..." aria-label="Search">
-      <button class="btn btn-sm btn-outline-primary" type="submit">Search</button>
-    </form>
+
+
 
         
       </div>
