@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request,redirect,url_for,flash
+from flask import Flask, render_template, request,redirect,url_for,flash,session
 
 from database import load_jobs_from_db, load_job_from_db, add_application_to_db, add_user_to_db
 
@@ -47,9 +47,6 @@ def portfolio():
 def faqs():
     return render_template('faqs.html')
 
-@app.route('/login')
-def login():
-  return render_template('login.html')
 
 @app.route('/form/<id>')
 def fill_form(id):
@@ -111,8 +108,38 @@ def signup():
     return render_template('signup.html')
 
 
+#Login and Logout Routes here
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        
+        # Check the username and password against your user database
+        if username == 'admin' and password == 'password':
+            # Successful login
+            session['logged_in'] = True
+            session['username'] = username
+            return redirect(url_for('dashboard'))
+        else:
+            # Invalid login
+            flash('Invalid username or password', 'error')
+            return redirect(url_for('login'))
+    
+    return render_template('login.html')
+#Logout
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('login'))
 
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
+
+
+
+
+
+
   

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .user-info {
+            margin-bottom: 20px;
+        }
+
+        .user-info h2 {
+            margin-top: 0;
+        }
+
+        .user-info p {
+            margin-bottom: 10px;
+        }
+
+        .tasks {
+            margin-bottom: 20px;
+        }
+
+        .tasks h2 {
+            margin-top: 0;
+        }
+
+        .task-item {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, {{ username }}!</h1>
+
+        <div class="user-info">
+            <h2>User Information</h2>
+            <p><strong>Name:</strong> {{ user_name }}</p>
+            <p><strong>Email:</strong> {{ user_email }}</p>
+        </div>
+
+        <div class="tasks">
+            <h2>Your Tasks</h2>
+            <div class="task-item">
+                <h3>Task 1</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+            <div class="task-item">
+                <h3>Task 2</h3>
+                <p>Nulla facilisi. Aenean id diam ut lectus fermentum gravida.</p>
+            </div>
+        </div>
+        
+        <!-- Add more sections or elements as needed -->
+
+    </div>
+</body>
+</html>

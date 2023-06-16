@@ -8,7 +8,7 @@
       <img class="me-2" src="/static/logo1.png" alt="" width="45" height="45" style="border-radius:1000px">
       
       <a class="navbar-brand" style="color:rgb(20,20,220)" href="/">Colltech Careers </a>
-      <button style="color:rgb(20,20,220)" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+      <button  style="color:rgb(20,20,220)" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -27,14 +27,13 @@
             <a style="color:rgb(20,20,220)" class="nav-link" href="/portfolio"  style="color: rgb(255,255,255)">Portfolio</a>
           </li>
           
-          <!--Dropdown starts here--> 
-          
-<li class="dropdown">
+          <!--Dropdown starts here-->      
+<li class="dropdown me-4">
   <a style="color:rgb(20,20,220)" class="nav-link dropdown-toggle-plus" role="link" data-bs-toggle="dropdown" aria-expanded="false">Products & Services<span class="plus-sign">+</span></a>
       
-  <ul class="dropdown-menu bg-subtle">
+  <ul class="dropdown-menu bg-subtle fixed" style="left: 10px;width:200px;height:200px;">
     <li class="dropdown-item">
-      <a class="link" href="#">All Products</a>
+      <a class="link" href="/login">All Products</a>
     </li>
     <li class="dropdown-item"><a class="link" href="/login">Application Status</a></li>
     <li class="dropdown-item"><a class="link" href="/jobs">Careers at Colltech</a></li>
@@ -42,42 +41,38 @@
     <li class="dropdown-item"><a class="link" href="/faqs">FAQs</a></li>
   </ul>
 </li>
-          
-</ul>
+  
+<li class="nav-item">
+            <a style="color:rgb(20,20,220)" class="nav-link" href="/login"><i class="fa-solid fa-user me-1"></i>Login/Register</a>
+</li>
+ 
 
-<ul  class="navbar-nav me-2 dropdown">
-   <a style="color:rgb(20,20,220)" class="nav-link dropdown-toggle-plus" role="link" data-bs-toggle="dropdown" aria-expanded="false">Search </a>
-<ul class="dropdown-menu bg-subtle">
-  <li class="dropdown-item ">
-<form action="/" class="d-flex" role="search">
+  <ul  class="dropdown">
+   <a style="color:rgb(20,20,220)" class="nav-link dropdown-toggle-plus" role="link" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-search fa-lg"></i></a>
+<ul class="dropdown-menu bg-secondary" style="top:40px; right: 2px;width:300px;height:100px;">
+<li class="dropdown-items ">
+<form action="/" class="d-flex p-4" role="search">
   <div class="input-group">
-    <input class="form-control me-2 border-primary" type="search" placeholder="Search..." aria-label="Search">
-    <button class="btn btn-sm " type="submit">
-      <i class="fas fa-search"></i>
+    <input class="form-control me-1" type="search" placeholder="Search..." aria-label="Search">
+    <button class="btn btn-outline-white btn-sm " type="submit">
+      <i class="fas fa-search" style="color: white;"></i>
     </button>
   </div>
 </form>
- </li>
-</ul>
-</ul> 
-
-<ul class="navbar-nav mb-2 mb-lg-0">   
-<li class="nav-item">
-            <a style="color:rgb(20,20,220)" class="nav-link" href="/signup"><i class="fa-solid fa-user me-1"></i>Register/Login</a>
 </li>
 </ul>
-        
+</ul> 
+          
+</ul>
 
 
 
-        
-      </div>
-    </div>
-   
-  </nav>
+ 
+  </div>
+   </div>
+    </nav>
 
-  <div style="height:85px"></div>
-
+<div style="height:85px"></div>
 
 
 <!---CSS Styles for navbar here --->
