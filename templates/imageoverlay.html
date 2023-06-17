@@ -300,28 +300,3 @@ body{
 
 
 
-def login_required(view):
-    @wraps(view)
-    def wrapped_view(*args, **kwargs):
-        if session.get('logged_in'):
-            return view(*args, **kwargs)
-        else:
-            flash('You need to login first', 'error')
-            return redirect(url_for('login'))
-    return wrapped_view
-
-@app.route('/dashboard')
-@login_required
-def dashboard():
-    # Code for the dashboard route
-    return render_template('dashboard.html')
-
-
-
-
-{% if session.logged_in %}
-    <p>Welcome, {{ session.username }}!</p>
-    <a href="{{ url_for('logout') }}">Logout</a>
-{% else %}
-    <a href="{{ url_for('login') }}">Login</a>
-{% endif %}

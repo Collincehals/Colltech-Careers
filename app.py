@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request,redirect,url_for,flash,session
+from flask import Flask, render_template, request,redirect,url_for,flash,session, jsonify
 
 from database import load_jobs_from_db, load_job_from_db, add_application_to_db, add_user_to_db
 
@@ -34,9 +34,9 @@ def show_job(id):
 def about():
     return render_template('about.html')
   #EXPERIMENTAL
-@app.route('/newlog')
-def login_reg():
-  return render_template ('imageoverlay.html')
+@app.route('/recruiter_signup')
+def recruiter_reg():
+  return render_template ('recruiter_signup.html')
   
 
 @app.route('/portfolio')
@@ -46,7 +46,6 @@ def portfolio():
 @app.route('/faqs')
 def faqs():
     return render_template('faqs.html')
-
 
 @app.route('/form/<id>')
 def fill_form(id):
@@ -132,6 +131,53 @@ def login():
 def logout():
     session.clear()
     return redirect(url_for('login'))
+
+
+from bs4 import BeautifulSoup
+
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    if request.method == 'POST':
+        query = request.form.get('query')
+        search_results = perform_search(query)
+        return jsonify(search_results)
+    else:
+        return render_template('search.html', search_results=None)  # Pass search_results as None initially
+
+def perform_search(query):
+    search_results = []
+
+    # Directory path where your website's HTML files are stored
+    html_directory = os.path.join(os.getcwd(), 'templates')
+
+    # Loop through each HTML file in the directory
+    for filename in os.listdir(html_directory):
+        if filename.endswith('.html'):
+            file_path = os.path.join(html_directory, filename)
+
+            # Read the contents of the HTML file
+            with open(file_path, 'r') as file:
+                html_content = file.read()
+
+            # Parse the HTML content using BeautifulSoup
+            soup = BeautifulSoup(html_content, 'html.parser')
+
+            # Search for elements containing the query
+            matching_elements = soup.find_all(text=lambda text: query.lower() in text.lower())
+
+            # Process the matching elements and prepare them for rendering
+            for element in matching_elements:
+                # Extract relevant information from the element or its parent elements
+                # For example, you can extract the element's text, parent's text, URL, etc.
+                element_text = element.strip()
+                if query.lower() in element_text.lower():
+                    result = {
+                        'title': filename,  # Use the filename as the title
+                        'description': element_text  # Use the matching element's text as the description
+                    }
+                    search_results.append(result)
+
+    return search_results
 
 
 if __name__ == '__main__':

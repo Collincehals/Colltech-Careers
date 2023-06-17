@@ -1,0 +1,57 @@
+<!-- search.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search Results</title>
+</head>
+<body>
+  <h1>Search Results</h1>
+  
+  <div id="results">
+    {% if search_results %}
+      {% for result in search_results %}
+        <h3>{{ result.title }}</h3>
+        <p>{{ result.description }}</p>
+      {% endfor %}
+    {% else %}
+      <p>No results found.</p>
+    {% endif %}
+  </div>
+
+  <script>
+    // Retrieve the search query from the URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const query = urlParams.get('query');
+
+    // Make an AJAX request to fetch the search results
+    fetch('/search', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ query: query })
+    })
+      .then(response => response.json())
+      .then(results => {
+        // Display the search results on the page
+        const resultsContainer = document.getElementById('results');
+
+        if (results.length === 0) {
+          resultsContainer.innerHTML = '<p>No results found.</p>';
+        } else {
+          resultsContainer.innerHTML = ''; // Clear any previous content
+
+          results.forEach(result => {
+            const resultElement = document.createElement('div');
+            resultElement.innerHTML = `<h3>${result.title}</h3><p>${result.description}</p>`;
+            resultsContainer.appendChild(resultElement);
+          });
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching search results:', error);
+      });
+  </script>
+</body>
+</html>
