@@ -34,10 +34,18 @@ def show_job(id):
 def about():
     return render_template('about.html')
   #EXPERIMENTAL
-@app.route('/recruiter_signup')
-def recruiter_reg():
+@app.route('/merged_signup')
+def merged_reg():
+  return render_template ('merged_regforms.html')
+
+@app.route('/signup')
+def sign_up():
+  return render_template ('signup.html')
+
+@app.route('/employer_signup')
+def employer_signup():
   return render_template ('recruiter_signup.html')
-  
+
 
 @app.route('/portfolio')
 def portfolio():
