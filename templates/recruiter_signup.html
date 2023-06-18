@@ -12,55 +12,57 @@
       background-image: url('/static/bg6.jpg');
       background-repeat: no-repeat;
       background-size:cover;
-      font-family: Arial, sans-serif;
-      font-size: 16px;
+      
+     
     }
     .container {
+      font-family: Arial, sans-serif;
       max-width: 700px;
+      font-size: 16px;
       width: 90%;
-      padding:20px;
+      padding:40px;
       margin:0 auto;
       margin-bottom:20px;
       margin-top:40px;
       border-radius: 15px;
-      background-color: rgb(240,245,250);   
+      background-color: rgb(255,255,255);
+         
     }
     
     .form-group label {
       display: block;
-      margin-bottom:6px;
-      font-weight: bold;
-      margin-bottom: 4px;
+      margin-bottom: 5px;
     }
 
     .form-group input {
       width: 100%;
-      border: 1px;
-      border-radius: 15px;
-      background-color: #f0f0f0;
-      padding: 10px;
-      margin-bottom: 10px;  
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 20px;
+      background-color: rgb(240,245,255);
     }
-
     .form-group select {
       width: 100%;
       border: 1px;
-      background-color: #f0f0f0;
-      border-radius: 15px;
-      padding: 10px;
-      margin-bottom: 10px;
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 20px;
+      background-color: rgb(240,245,255);
     }
 
     .form-group .btn{
       width: 100%;
       border: 1px;
-      background-color: #4caf50;
-      border-radius: 15px;
-      padding: 10px;
-      margin-bottom: 4px; 
+      color:white;
+      background-color: #0000FF;
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 15px; 
     }
-    .form-group .btn:hover {
-      background-color: #45a045;
+    
+    .form-group  .btn:hover {
+      background-color: #003296;
       box-shadow:0 0 5px  rgba(0,0,0,0.6);
     }
     
@@ -84,12 +86,13 @@
     {% include 'nav.html' %}
     <div class="container">
     <form>
+      <h5 style="color:blue;padding-bottom:4px;"><i class="fa-solid fa-briefcase me-2"></i>Register as an Employer</h5>
       <div class="form-group">
         <label for="firstname">First Name: </label>
-        <input type="text" name="firstname" placeholder="Jac...">
+        <input type="text" name="firstname" placeholder="First Name...">
 
         <label for="lastname" >Last Name: </label>
-        <input type="text" name="lastname" placeholder="Smith...">
+        <input type="text" name="lastname" placeholder="Last Name...">
 
         <label for="email">Email Address: </label>
         <input type="email" name="email" placeholder="colltech@careers.com">
