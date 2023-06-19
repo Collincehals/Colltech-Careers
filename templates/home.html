@@ -88,7 +88,7 @@ Join us on this exciting journey and discover your ideal job match. Together, le
       If you are a job seeker looking for new career opportunities,
 you've come to the right place.
     </p>
-    <a href="/signup" class="btn btn-outline-primary btn-lg" style="margin-bottom: 20px;">Register Account</a>
+    <a href="/signup" class="btn btn-outline-primary btn-lg mt-4" style="margin-bottom: 20px;">Register Account</a>
   </div>
    <div class="col-md-4">
     <img src="/static/Pic3.jpg" alt="Image" style="height:180px;width:175px;">
@@ -96,6 +96,15 @@ you've come to the right place.
 </div>
  
 </div>
+
+
+       <h1 style="text-align:center;padding-bottom:40px;padding-top:40px;">Services we're offering to <br>our customers.</h1>
+
+        <!---Cards begin here--->
+      <div class="mb-5">
+        {% include 'cards.html' %}
+      </div>
+      <!---card ends here--->
  
       <h2 class="text-center mb-1 mt-2">Featured Jobs</h2>
       <div class="row " style="background-color:rgb(240, 245, 250);border-radius:10px; margin-bottom:60px; margin-top:20px;">
@@ -104,10 +113,7 @@ you've come to the right place.
         {% endfor %}
       </div>
 
-  
-        <!---Cards begin here--->
-        {% include 'cards.html' %}
-      <!---card ends here--->
+     
       <div class="text-center mt-4 mb-4 p-2">
         <a style="border-radius:50px;"href="mailto:odhiambocollince702@gmail.com?subject=Question%20about%20job%20opening&body=My%20Name%3A%3Cyour%20name%20here%3E%0D%0A%0D%0AMy%20question%3A%3CKindly%20leave%20your%20enquiry%20here%3E" class="btn btn-primary btn-sm">Have Enquiries? Email Us</a>
       </div>

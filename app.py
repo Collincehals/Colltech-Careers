@@ -51,6 +51,19 @@ def employer_signup():
 def portfolio():
     return render_template('portfolio.html')
 
+@app.route('/int_programs')
+def int_programmes():
+  return render_template('int_programmes.html')
+
+@app.route('/prof_guidance')
+def prof_guidance():
+  return render_template('prof_guidance.html')
+
+@app.route('/industry_services')
+def industry_services():
+  return render_template('industry_services.html')
+
+
 @app.route('/faqs')
 def faqs():
     return render_template('faqs.html')

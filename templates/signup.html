@@ -74,13 +74,21 @@
   cursor: pointer;
   color: #666;
 }
+    .confirm-password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #666;
+}
   </style>
 </head>
 <body>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     {% include 'nav.html' %}
   <div class="container" style="margin-bottom: 50px">
-    <h5 style="font-weight:bold ;margin-top:20px;margin-bottom:20px;">Create a free Colltech Account</h5>
+    <h5 style="margin-top:20px;margin-bottom:20px;color:blue;"><i class="fa-solid fa-user me-2 "></i>Create a free Colltech Account</h5>
     <form action="/signup" method="post">
       
       <div class="form-group">
@@ -108,8 +116,10 @@
         <input type="password" id="password" name="password" required>
       <span class="password-toggle" onclick="togglePasswordVisibility()"><i class="fas fa-eye"></i></span>
     </div>
+      <div class="password-container">
         <label for="password">Confirm Password:</label>
-        <input type="password" id="password" name="password" required>
+        <input type="password" id="confirmpassword" name="password" required><span class="confirm-password-toggle" onclick="toggleConfirmPasswordVisibility()"><i class="fas fa-eye"></i></span>
+      </div>
 
         <input type="submit" value="Sign Up" class="btn">
       </div>
@@ -131,6 +141,19 @@
   function togglePasswordVisibility() {
   var passwordInput = document.getElementById('password');
   var passwordToggle = document.querySelector('.password-toggle');
+  
+  if (passwordInput.type === 'password') {
+    passwordInput.type = 'text';
+    passwordToggle.innerHTML = '<i class="fas fa-eye-slash"></i>';
+  } else {
+    passwordInput.type = 'password';
+    passwordToggle.innerHTML = '<i class="fas fa-eye"></i>';
+  }
+}
+
+  function toggleConfirmPasswordVisibility() {
+  var passwordInput = document.getElementById('confirmpassword');
+  var passwordToggle = document.querySelector('.confirm-password-toggle');
   
   if (passwordInput.type === 'password') {
     passwordInput.type = 'text';
