@@ -63,6 +63,9 @@ def prof_guidance():
 def industry_services():
   return render_template('industry_services.html')
 
+@app.route('/resume-builder')
+def resume_bulder():
+  return render_template ('resume_builder.html')
 
 @app.route('/faqs')
 def faqs():
