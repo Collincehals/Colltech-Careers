@@ -8,82 +8,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <!---Homepage CSS here --->
+<link rel="stylesheet" type="text/css" href="/static/homepage.css">
+    <!--- End --->
     
-    <style>
-      h1{
-        font-size: 45px;
-        font-family: Roboto;
-        font-weight:normal;
-        color: rgb(100,50,20)
-      }
-      h2{
-        font-size: 30px;
-        font-family: Roboto;
-        font-weight:normal;
-        color: rgb(100,50,20);
-      }
-      
-      p{
-        font-size: 16px;
-        font-family:Arial;
-        font-weight:normal;
-        text-align:left;
-        color:rgb(40,40,60);
-        transform: rotate(0deg);  
-      }
-        body {
-      background-color:rgb(220,220,220);
-      }
-      /* Image overlay styling start*/
-
-            .contain {
-        position: relative;
-      }
-          .middle {
-        transition: .6s ease;
-        opacity: 0;
-        position: absolute;
-        top: 40%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        -ms-transform: translate(-50%, -50%)
-      }
-      
-      .contain:hover .img-fluid {
-        opacity: 0.6;
-      }
-      .contain:hover {
-        transform: scale(1.01);
-        box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
-      }
-
-      .user {
-        background-color:rgb(230,245,255);
-      }
-
-      .user:hover {
-        transform: scale(1.01);
-        box-shadow: 0 0 1px rgba(0, 0, 120, 0.9);
-        border-color:darkblue;
-        background-color:rgba(135, 206, 235,0.3);
-      }
-      
-      .contain:hover .middle {
-        opacity: 1;
-      }
-      .text {
-        background-color: darkblue;
-        border-radius:20px;
-        color: white;
-        font-size: 16px;
-        padding: 16px 32px;
-      }
-      .float {
-        position: fixed;
-        right: 40px;
-        bottom: 10px;
-      } 
-    </style>
   </head>
   <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
@@ -95,6 +23,7 @@
         <div class="col-md-5">
           <h1 style="color:darkblue;">Join us & Explore <br>Thousands of Jobs Posted Here <br>For you!</h1>
           <h6>Find Jobs, Employment & Career Opportunities</h6>
+          <a href="/jobs" type="button" class="btn btn-primary btn-lg active px-5 mt-3 mb-3">Explore Jobs<i class="fa-solid fa-magnifying-glass-location ms-2"></i></a>
         </div>
         <div class="col-md-7">
           <!---Slideshow begins here --->
@@ -188,13 +117,15 @@ you've come to the right place.
 
   <div class="btn-group" role="group" aria-label="Third group">
     <a href="https://twitter.com/collinceodhix" target="_blank" class="twitter-link"><i class="fa-brands fa-twitter fa-2x fa-beat"></i></a>
+  </div> 
   </div>
-</div>
       <a href="https://wa.me/254707123444?text=Hello Colltech Careers Team!" class="float" target="_blank">
-<i class="fa-brands fa-square-whatsapp fa-3x" style="color: #3caa3e;"></i>
+<i class="fa-brands fa-square-whatsapp fa-2x" style="color: #3caa3e;border-radius:80%x;"></i>
 </a>
+      <!---Back-to-top arrow --->
+      <a href="#" class="back-to-top"><i class="fa-solid fa-angle-up"></i></a>
+      <script src="/static/homepage.js"></script> 
      </div>
     {% include 'footer.html' %}
-    
   </body>
 </html>
