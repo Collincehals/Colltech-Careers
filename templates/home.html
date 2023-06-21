@@ -29,69 +29,124 @@
         font-weight:normal;
         text-align:left;
         color:rgb(40,40,60);
-        transform: rotate(0deg);
-        
+        transform: rotate(0deg);  
       }
-      
-      #industry:hover {
-  opacity:0.8;
-  }
         body {
       background-color:rgb(220,220,220);
       }
+      /* Image overlay styling start*/
+
+            .contain {
+        position: relative;
+      }
+          .middle {
+        transition: .6s ease;
+        opacity: 0;
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%)
+      }
+      
+      .contain:hover .img-fluid {
+        opacity: 0.6;
+      }
+      .contain:hover {
+        transform: scale(1.01);
+        box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+      }
+
+      .user {
+        background-color:rgb(230,245,255);
+      }
+
+      .user:hover {
+        transform: scale(1.01);
+        box-shadow: 0 0 1px rgba(0, 0, 120, 0.9);
+        border-color:darkblue;
+        background-color:rgba(135, 206, 235,0.3);
+      }
+      
+      .contain:hover .middle {
+        opacity: 1;
+      }
+      .text {
+        background-color: darkblue;
+        border-radius:20px;
+        color: white;
+        font-size: 16px;
+        padding: 16px 32px;
+      }
+      .float {
+        position: fixed;
+        right: 40px;
+        bottom: 10px;
+      } 
     </style>
   </head>
   <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     {% include 'nav.html' %}
     <div class="container">
-      <h1 class="text-center mb-3 mt-1">{{company_name}} Careers</h1>
+      <h1 class="text-center mb-3 mt-3">{{company_name}} Careers</h1>
       
-      <!---Slideshow begins here --->
-{% include 'slideshow.html' %}
-   <!---Slideshow ends here --->
+      <div class="row mb-5">
+        <div class="col-md-5">
+          <h1 style="color:darkblue;">Join us & Explore <br>Thousands of Jobs Posted Here <br>For you!</h1>
+          <h6>Find Jobs, Employment & Career Opportunities</h6>
+        </div>
+        <div class="col-md-7">
+          <!---Slideshow begins here --->
+          {% include 'slideshow.html' %}
+          <!---Slideshow ends here --->
+        </div>
+      </div>
       
-      <h2 class="text-center mb-4 mt-2">About Colltech</h2>
-      <div class="row " style="margin-bottom:20px">
-        <div class="col-md-6 border" style="border-radius:15px;background-color:rgb(240,250,255);">
-      <p class="text-justify">
-        At Colltech Careers, we are dedicated to empowering individuals in their career journeys. Our platform serves as a comprehensive gateway for job seekers to explore a wide range of open positions and take the next step in their professional growth. We strive to connect talented individuals with exciting opportunities, fostering meaningful connections between candidates and employers.<br>
-Our mission is to revolutionize the way talent is discovered and connected. We aim to become the go-to destination for job seekers and employers, providing a user-friendly environment where individuals can explore diverse career paths.<br>
-We believe in empowering individuals by providing them with the tools, resources, and opportunities to thrive in their careers. We value diversity and inclusion, promoting an environment where everyone has equal access to opportunities and can contribute their unique perspectives.<br>
-Join us on this exciting journey and discover your ideal job match. Together, let's shape the future of careers.
-      </p>
+      <h1 class="text-center mb-4 mt-2">About Colltech</h1>
+      <div class="row mb-5" >
+
+         <div class="contain  col-md-6">
+          <img href="/"class="img-fluid" style="border-radius:8px;" src="/static/Pic5.jpg" alt="HTML Dog">
+           <div class="middle">
+             <a href="/about/" style="text-decoration:none;"><div class="text">Discover More About Us... </div></a>
+           </div>
         </div>
         
-        <div id="industry" class="d-none d-md-block col-md-6">
-          <img id="contain" href="/"class="img-fluid" style="border-radius:8px;" src="/static/Pic5.jpg" alt="HTML Dog">
+        <div class="col-md-6 border" style="border-radius:15px;background-color:rgb(240,250,255);">
+      <p class="text-justify p-3" style="font-family: sans-serif;font-size:17px;word-spacing:5px;">
+        At Colltech Careers, we are dedicated to empowering individuals in their career journeys. Our platform serves as a comprehensive gateway for job seekers to explore a wide range of open positions and take the next step in their professional growth. <br>We strive to connect talented individuals with exciting opportunities, fostering meaningful connections between candidates and employers.<br>
+Our mission is to revolutionize the way talent is discovered and connected. We aim to become the go-to destination for job seekers and employers, providing a user-friendly environment where individuals can explore diverse career paths.<br>
+Join us on this exciting journey and discover your ideal job match. Together, let's shape the future of careers.
+      </p>
         </div>
         </div>
 
 <div class="row">
-   <div class="row col-md-6 me-4 border" style="border-radius: 20px; margin-bottom: 20px; background-image: url(/static/bg7.jpg);">
-  <div class="col-md-8">
+   <div class="user row col-md-6 me-4 border" style="border-radius: 20px; margin-bottom: 20px;">
+  <div class="col-md-8 p-4">
     <h5 style="color:darkblue">Recruiter</h5>
     <p>
       If you are a recruiter looking to post job openings and connect with job seekers, you've come to the right place.
     </p>
-    <a href="/employer_signup" class="btn btn-outline-primary btn-lg" style="margin-bottom: 20px;">Register Account</a>
+    <a href="/employer_signup" class="btn btn-outline-primary btn-lg" style="margin-top: 10px;">Register Account</a>
   </div>
-   <div class="col-md-4">
-    <img src="/static/Pic6.jpg" alt="Image" style="height:180px;width:175px;">
+   <div class="col-md-4 pt-1">
+    <img src="/static/employer.png" alt="Image" style="height:250px;width:175px;">
   </div>
 </div>
 
-  <div class="row col-md-6 border" style="border-radius: 20px; margin-bottom: 20px; background-image: url(/static/bg6.jpg);">
-  <div class="col-md-8">
+  <div class="user row col-md-6 border" style="border-radius: 20px; margin-bottom: 20px;">
+  <div class="col-md-8 p-4">
     <h5 style="color:darkblue">Job Seeker</h5>
     <p>
       If you are a job seeker looking for new career opportunities,
 you've come to the right place.
     </p>
-    <a href="/signup" class="btn btn-outline-primary btn-lg mt-4" style="margin-bottom: 20px;">Register Account</a>
+    <a href="/signup" class="btn btn-outline-primary btn-lg mt-4" style="margin-bottom:40px;">Register Account</a>
   </div>
    <div class="col-md-4">
-    <img src="/static/Pic3.jpg" alt="Image" style="height:180px;width:175px;">
+    <img src="/static/jobseeker.png" alt="Image" style="height:250px;width:175px;">
   </div>
 </div>
  
@@ -135,7 +190,9 @@ you've come to the right place.
     <a href="https://twitter.com/collinceodhix" target="_blank" class="twitter-link"><i class="fa-brands fa-twitter fa-2x fa-beat"></i></a>
   </div>
 </div>
-      
+      <a href="https://wa.me/254707123444?text=Hello Colltech Careers Team!" class="float" target="_blank">
+<i class="fa-brands fa-square-whatsapp fa-3x" style="color: #3caa3e;"></i>
+</a>
      </div>
     {% include 'footer.html' %}
     
