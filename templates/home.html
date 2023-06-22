@@ -96,9 +96,8 @@ you've come to the right place.
         {% endfor %}
       </div>
 
-     
       <div class="text-center mt-4 mb-4 p-2">
-        <a style="border-radius:50px;"href="mailto:odhiambocollince702@gmail.com?subject=Question%20about%20job%20opening&body=My%20Name%3A%3Cyour%20name%20here%3E%0D%0A%0D%0AMy%20question%3A%3CKindly%20leave%20your%20enquiry%20here%3E" class="btn btn-primary btn-sm">Have Enquiries? Email Us</a>
+        <a style="border-radius:50px;"href="mailto:odhiambocollince702@gmail.com?subject=Question%20about%20job%20opening&body=My%20Name%3A%3Cyour%20name%20here%3E%0D%0A%0D%0AMy%20question%3A%3CKindly%20leave%20your%20enquiry%20here%3E" class="btn btn-primary active">Have Enquiries? Email Us</a>
       </div>
 
       <!--- Social Media accounts here --->
@@ -117,7 +116,7 @@ you've come to the right place.
   <div class="btn-group" role="group" aria-label="Third group">
     <a href="https://twitter.com/collinceodhix" target="_blank" class="twitter-link"><i class="fa-brands fa-twitter fa-2x fa-beat"></i></a>
   </div> 
-  </div>
+  </div>  
       <a href="https://wa.me/254707123444?text=Hello Colltech Careers Team!" class="float" target="_blank">
 <i class="fa-brands fa-square-whatsapp fa-2x" style="color: #3caa3e;border-radius:80%x;"></i>
 </a>
@@ -125,6 +124,25 @@ you've come to the right place.
       <a href="#" class="back-to-top"><i class="fa-solid fa-angle-up"></i></a>
       <script src="/static/homepage.js"></script> 
      </div>
+    <!---Subscribe to jobs here --->
+        <div class="row" style="background-color:rgb(0,0,255);">
+       <div class="col-md-4">
+         <h2 style="padding-left:30px;padding-bottom:10px;padding-top:20px;color:white;">Subscribe to Job Alerts</h2>
+         <h6 style="padding-left:30px;padding-bottom:10px;color:white;">Join our Happy Subscribers</h6>
+       </div>
+        <div class="col-md-8" style="margin-top:30px;margin-bottom:30px;">
+<form action="/submit" class="d-flex" style="padding-left:10px; padding-right:10px;">
+  <div class="input-group">
+    <input type="text" class="form-control me-2" name="subscribe"  style="width:50%;border-radius:15px;" placeholder="Your Email...">
+    <button class="btn btn-lg" type="submit">
+      <i class="fa-solid fa-location-arrow fa-2x" style="color:white;"></i>
+    </button>
+  </div>
+</form>
+    </div>
+      </div>
+     <!---Subscribe to jobs ENDS here --->
+   
     {% include 'footer.html' %}
   </body>
 </html>
