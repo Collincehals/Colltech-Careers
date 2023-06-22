@@ -1,12 +1,12 @@
-<div class="row border-bottom">
+<div class="row border-bottom pt-2">
   <div class="col-8">
-          <h5 class="mb-1 mt-2" style="color:rgb(10,80,220); font-style">{{job['title']}}
+          <h5 class="mb-1 mt-2" style="color:rgb(10,80,220);padding-left:10px;">{{job['title']}}
           </h5>
-          <div class="mb-1 mt-auto"><b>Location: </b>{{job.location}}            </div>
+          <div class="mb-1 mt-auto" style="padding-left:10px;"><b>Location: </b>{{job.location}}            </div>
  
   
 {% if job['salary'] %}
-  <div class="mb-4 mt-auto">
+  <div class="mb-4 mt-auto" style="padding-left:10px;">
     <b>Salary: </b>{{ job['currency'] }}{{ job['salary'] }}
   </div>
 {% endif %}
