@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request,redirect,url_for,flash,session, jsonify
 
-from database import load_jobs_from_db, load_job_from_db, add_application_to_db, add_user_to_db
+from database import load_jobs_from_db, load_job_from_db, add_application_to_db, add_user_to_db, add_employer_to_db
 
 from email_sender import send_confirmation_email
+
+from employer_reg_email import send_employerreg_email
 
 from sign_up_email import send_registration_email
 import os
@@ -41,11 +43,6 @@ def merged_reg():
 @app.route('/signup')
 def sign_up():
   return render_template ('signup.html')
-
-@app.route('/employer_signup')
-def employer_signup():
-  return render_template ('recruiter_signup.html')
-
 
 @app.route('/portfolio')
 def portfolio():
@@ -129,6 +126,26 @@ def signup():
         return redirect(url_for('login'))
 
     return render_template('signup.html')
+
+
+@app.route('/employer_signup', methods = ['POST', 'GET'])  
+def employer_signup():
+  if request.method == 'POST':
+    first_name = request.form['firstname']
+    last_name = request.form['lastname']
+    email = request.form['email']
+    company_name = request.form['company_name']
+    company_category = request.form['category']
+    password = request.form['password']
+    password = request.form['password']
+    add_employer_to_db (request.form)
+    send_employerreg_email(first_name, last_name, email,company_name, company_category)
+    
+    flash('Sign up successful! Please log in.', 'success')
+    return redirect(url_for('login'))
+
+  return render_template('recruiter_signup.html')
+    
 
 
 #Login and Logout Routes here

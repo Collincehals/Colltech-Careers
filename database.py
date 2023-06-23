@@ -59,3 +59,16 @@ def add_user_to_db(data):
                      "username": data['username'],
                      "password": data['password']
                      })
+
+
+def add_employer_to_db(data):
+    with engine.connect() as conn:
+        query = text("INSERT INTO employers(first_name, last_name, email,company_name, company_category, password) VALUES (:first_name, :last_name, :email, :company_name, :company_category, :password)")
+        conn.execute(query,
+                     {"first_name":data['firstname'], 
+                     "last_name": data['lastname'],
+                     "email": data['email'],
+                     "company_name": data['company_name'],
+                     "company_category": data['category'],
+                     "password": data['password']
+                     })
