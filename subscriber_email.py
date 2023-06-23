@@ -1,6 +1,6 @@
 from mailjet_rest import Client
 import os
-def send_registration_email(first_name, last_name, email,username):
+def send_subscriber_email(email):
     api_key = os.environ['API_KEY']
     api_secret =os.environ['API_SECRET']
 
@@ -18,25 +18,19 @@ def send_registration_email(first_name, last_name, email,username):
                         'Email': email
                     }
                 ],
-                'Subject': 'Registration Confirmation',
+                'Subject': 'Job Alert Subscription Confirmation',
                 'HTMLPart': '''
                     <html>
                         <body>
-                            <h3>Subject: Registration Confirmation</h3>
+                            <h3>Subject: Job Alert Subscription Confirmation</h3>
                             <p>
-                                Dear {first_name},
+                                Dear {email},
                             </p>
                             <p>
-                                Thank you for registering on Colltech Careers website. We are excited to have you join our community. Your registration details are as follows:
-                            </p>
-                            <h4>Registration Details:</h4>    
-                            <ul>
-                                <li>Full Names: {first_name} {last_name}</li>
-                                <li>Username: {username}</li>
-                                <li>Email: {email}</li>
-                            </ul>
-                            <p>
-                                If you have any questions, feel free to reach out to our support team at colltechcareers.support.@gmail.com or through our toll-free landline number at +010200100.We are here to help!<br>
+                               Thank you for subscribing to our job alerts service with the email: {email}.<br>
+
+By subscribing to our job alerts, you will receive regular updates about new job postings, industry insights, and valuable career-related information directly in your inbox. We strive to provide you with the most relevant and valuable content to support your job search and career growth.<br>
+                                If at any time you wish to unsubscribe from our job alerts service, you can do so by clicking on the "Unsubscribe" link provided at the bottom of our emails.Thank You!<br>
               
                             </p>
                             <p>
@@ -45,7 +39,7 @@ def send_registration_email(first_name, last_name, email,username):
                             </p>
                         </body>
                     </html>
-                '''.format(first_name=first_name,last_name=last_name, email=email, username=username)
+                '''.format(email=email)
             }
         ]
     }

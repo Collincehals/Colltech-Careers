@@ -10,7 +10,7 @@ def send_confirmation_email(job_title, applicant_email, applicant_name,last_name
         'Messages': [
             {
                 'From': {
-                    'Email':'odhiambocollince702@gmail.com',
+                    'Email':'Colltechcareers@gmail.com',
                     'Name': 'Colltech Careers'
                 },
                 'To': [

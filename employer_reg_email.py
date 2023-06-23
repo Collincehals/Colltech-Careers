@@ -10,7 +10,7 @@ def send_employerreg_email(first_name, last_name, email,company_name, company_ca
         'Messages': [
             {
                 'From': {
-                    'Email':'odhiambocollince702@gmail.com',
+                    'Email':'Colltechcareers@gmail.com',
                     'Name': 'Colltech Careers'
                 },
                 'To': [

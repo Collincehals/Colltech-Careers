@@ -1,12 +1,14 @@
 from flask import Flask, render_template, request,redirect,url_for,flash,session, jsonify
 
-from database import load_jobs_from_db, load_job_from_db, add_application_to_db, add_user_to_db, add_employer_to_db
+from database import load_jobs_from_db, load_job_from_db, add_application_to_db, add_user_to_db, add_employer_to_db, add_subscriber_to_db
 
 from email_sender import send_confirmation_email
 
 from employer_reg_email import send_employerreg_email
 
 from sign_up_email import send_registration_email
+
+from subscriber_email import send_subscriber_email
 import os
 
 app = Flask(__name__)
@@ -78,7 +80,6 @@ def fill_form(id):
 # Form Submission here
 
 import requests
-
 @app.route("/form/<id>/submit", methods=["POST"])
 def submit_form(id):
     job = load_job_from_db(id)
@@ -145,7 +146,20 @@ def employer_signup():
     return redirect(url_for('login'))
 
   return render_template('recruiter_signup.html')
-    
+
+
+
+@app.route('/subscribe', methods = ['POST', 'GET'])  
+def subscription():
+  if request.method == 'POST':
+    email = request.form['email']
+    add_subscriber_to_db (request.form)
+    send_subscriber_email(email)
+    flash('Subscription successful!', 'success')
+    return redirect(url_for('home'))
+
+  return render_template('home.html')
+
 
 
 #Login and Logout Routes here

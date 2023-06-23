@@ -72,3 +72,12 @@ def add_employer_to_db(data):
                      "company_category": data['category'],
                      "password": data['password']
                      })
+
+
+
+def add_subscriber_to_db(data):
+    with engine.connect() as conn:
+        query = text("INSERT INTO subscribers(email) VALUES (:email)")
+        conn.execute(query,
+                     {"email":data['email']
+                     })
