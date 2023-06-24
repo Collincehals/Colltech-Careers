@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request,redirect,url_for,flash,session, jsonify
 
-from database import load_jobs_from_db, load_job_from_db, add_application_to_db, add_user_to_db, add_employer_to_db, add_subscriber_to_db
+from database import load_jobs_from_db, load_job_from_db, add_application_to_db, add_user_to_db, add_employer_to_db, add_subscriber_to_db,add_job_to_db
 
 from email_sender import send_confirmation_email
 
@@ -66,6 +66,10 @@ def industry_services():
 def resume_bulder():
   return render_template ('resume_builder.html')
 
+@app.route('/job-posting')
+def job_posting():
+  return render_template('job_posting.html')
+
 @app.route('/faqs')
 def faqs():
     return render_template('faqs.html')
@@ -78,17 +82,14 @@ def fill_form(id):
 
 
 # Form Submission here
-
 import requests
 @app.route("/form/<id>/submit", methods=["POST"])
 def submit_form(id):
     job = load_job_from_db(id)
     data = request.form
     add_application_to_db(job['id'], data)
-
     # Get the hCaptcha response from the form submission
     hCaptchaResponse = data.get('h-captcha-response')
-
     # Verify the hCaptcha response using the hCaptcha API
     verification_data = {
         'secret': os.environ['HCPATCHA_SECRET'],
@@ -96,7 +97,6 @@ def submit_form(id):
     }
     verification_response = requests.post('https://hcaptcha.com/siteverify', data=verification_data)
     verification_result = verification_response.json()
-
     # Check if the hCaptcha response is valid
     if verification_result['success']:
         applicant_email = data['email']
@@ -119,7 +119,6 @@ def signup():
         last_name = request.form['lastname']
         email = request.form['email']
         username = request.form['username']
-        password = request.form['password']
         add_user_to_db(request.form)
         send_registration_email(first_name, last_name, email,username)
       
@@ -137,8 +136,6 @@ def employer_signup():
     email = request.form['email']
     company_name = request.form['company_name']
     company_category = request.form['category']
-    password = request.form['password']
-    password = request.form['password']
     add_employer_to_db (request.form)
     send_employerreg_email(first_name, last_name, email,company_name, company_category)
     
@@ -160,6 +157,14 @@ def subscription():
 
   return render_template('home.html')
 
+#Job Posting URL here
+@app.route('/post-job', methods=['POST', 'GET'])
+def post_job():
+  if request.method  == 'POST':
+    data = request.form
+    add_job_to_db(data)
+    return redirect(url_for('post_job'))
+  return render_template('job_posting.html')
 
 
 #Login and Logout Routes here
