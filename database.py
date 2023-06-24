@@ -95,3 +95,23 @@ def add_job_to_db(data):
                      "salary": data['salary'],
                      "responsibilities": data['responsibilities'], 
                      "requirements": data['requirements']})
+
+
+from datetime import datetime
+
+def load_subscriber_emails_from_db():
+    with engine.connect() as conn:
+        result = conn.execute(text("SELECT * FROM subscribers"))
+        column_names = result.keys()
+        result_all = result.fetchall()
+        
+        subscribers = []
+        for row in result_all:
+            subscriber = dict(zip(column_names, row))
+            # Convert datetime objects to strings
+            for key, value in subscriber.items():
+                if isinstance(value, datetime):
+                    subscriber[key] = value.strftime("%Y-%m-%d %H:%M:%S")
+            subscribers.append(subscriber)
+        
+        return subscribers

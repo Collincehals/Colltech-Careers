@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request,redirect,url_for,flash,session, jsonify
 
-from database import load_jobs_from_db, load_job_from_db, add_application_to_db, add_user_to_db, add_employer_to_db, add_subscriber_to_db,add_job_to_db
+from database import load_jobs_from_db, load_job_from_db, add_application_to_db, add_user_to_db, add_employer_to_db, add_subscriber_to_db,add_job_to_db,load_subscriber_emails_from_db
 
 from email_sender import send_confirmation_email
 
@@ -9,6 +9,8 @@ from employer_reg_email import send_employerreg_email
 from sign_up_email import send_registration_email
 
 from subscriber_email import send_subscriber_email
+
+from job_notification import send_job_notification
 import os
 
 app = Flask(__name__)
@@ -161,8 +163,16 @@ def subscription():
 @app.route('/post-job', methods=['POST', 'GET'])
 def post_job():
   if request.method  == 'POST':
+    title = request.form['title']
+    location = request.form['location']
+    currency = request.form['currency']
+    salary = request.form['salary']
     data = request.form
     add_job_to_db(data)
+    subscribers = load_subscriber_emails_from_db()
+    for subscriber in subscribers:
+        email = subscriber['email'] 
+        send_job_notification(title,location,currency,salary,email)
     return redirect(url_for('post_job'))
   return render_template('job_posting.html')
 
