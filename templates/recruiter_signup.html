@@ -86,6 +86,16 @@
     <div class="container">
     <form action="/employer_signup" method="post">
       <h5 style="color:blue;padding-bottom:4px;"><i class="fa-solid fa-briefcase me-2"></i>Register as an Employer</h5>
+
+      <div  id="flash-messages">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div style="text-align:center;color:maroon; background-color:lightpink;padding:15px;border:1px solid #ccc;width:100%;border-radius:15px;margin-bottom:15px;" class="flash-message">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
       <div class="form-group">
         <label for="firstname">First Name: </label>
         <input type="text" name="firstname" placeholder="First Name...">
@@ -93,7 +103,7 @@
         <label for="lastname" >Last Name: </label>
         <input type="text" name="lastname" placeholder="Last Name...">
 
-        <label for="email">Email Address: </label>
+        <label for="email">Company Email Address: </label>
         <input type="email" name="email" placeholder="colltech@careers.com">
 
         <label for="company_name" >Company Name: </label>
@@ -114,15 +124,20 @@
           <span class="password-toggle" onclick="togglePasswordVisibility()"><i class="fas fa-eye"></i></span>
         </div>
 
-        <label for="password" >Confirm Password: </label>
-        <input type="password" name="password">
+        <label for="confirm_password" >Confirm Password: </label>
+        <input type="password" name="confirm_password">
+
+        <div class="d-flex mt-2 mb-2">
+          <div> 
+        <input class="me-4" type="checkbox" name="terms">
+          </div>
+          <div>
+        <label>You accept our Terms & Conditions of Service</label>
+          </div>
+        </div>
 
         <input type="Submit" value="Sign Up"  class="btn">
       </div>
-      <div class="mt-3"> 
-        <input class="me-2" type="checkbox" name="checkbox">
-        <label>You accept our Terms & Conditions of Service</label>
-        </div>
     </form>
       <p class="mt-3 mb-4">Have an Account? <a style="text-decoration:none;"href="/login">Login</a> instead</p> 
   </div>
@@ -145,4 +160,26 @@
     passwordToggle.innerHTML = '<i class="fas fa-eye"></i>';
   }
 }
+
+  // jQuery Script for for displaying invalid username or email
+  $(document).ready(function() {
+    // Handle the form submission using AJAX
+    $('#signup-form').submit(function(event) {
+        event.preventDefault();  // Prevent the default form submission
+
+        // Send an AJAX request to the server
+        $.ajax({
+            url: '/signup',
+            type: 'POST',
+            data: $(this).serialize(),
+            success: function(response) {
+                // Handle the JSON response from the server
+                var flashMessage = response;
+
+                // Display the flash message in the designated container
+                $('#flash-messages').html('<div class="alert alert-' + flashMessage.type + '">' + flashMessage.message + '</div>');
+            }
+        });
+    });
+});
 </script>

@@ -44,18 +44,39 @@
     <li class="dropdown-item"><a class="link" href="/faqs">FAQs</a></li>
   </ul>
 </li>
-  {% if 'username' in session %}
-<li class="me-2">
-            <a type="button" class="btn btn-warning active" href="user-dashboard"><i class="fa-solid fa-user me-2"></i>{{username}}</a>
+  
+{% if 'username' in session or 'company_name' in session %}
+  
+      {% if 'username' in session %}
+      <li class="me-2">
+      <a type="button" class="btn btn-warning active" href="/user-dashboard">
+            <i class="fa-solid fa-user me-2"></i>{{ session['username'] }}</a>
+        </li>
+      
+      {% elif 'company_name' in session %}
+        <li class="me-2">
+        <a type="button" class="btn btn-warning active" href="/employer-dashboard">
+            <i class="fa-solid fa-user me-2"></i>{{ session['company_name'] }}</a>
+      {% endif %}
+        </li>
+  
+    {% if 'username' in session %}
+        <li class="me">
+            <a href="/logout" type="button" class="btn btn-primary active">Logout</a>
+        </li>
+    {% elif 'company_name' in session %}
+        <li class="me">
+            <a href="/employer-logout" type="button" class="btn btn-primary active">Logout</a>
+        </li>
+    {% endif %}
+{% else %}
+    <li class="me-2">
+    <a type="button" class="btn btn-primary active" href="/merged-login">
+        <i class="fa-solid fa-user me-1"></i>Login/Register
+    </a>
 </li>
-  <li class="me">
-    <a href="/logout" type="button" class="btn btn-primary active">Logout</a>
-  </li>
-  {% else %}
-<li class="me-2">
-            <a type="button" class="btn btn-primary active" href="/login"><i class="fa-solid fa-user me-1"></i>Login/Register</a>
-</li>
-  {% endif %}
+{% endif %}
+
  
   <li  class="dropdown me-4">
    <a style="color:rgb(20,20,220)" class="nav-link dropdown-toggle-plus" role="link" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-search fa-lg"></i></a>
@@ -80,4 +101,4 @@
   </div>
    </div>
     </nav>
-      <div style="height:90px"></div>  
+      <div style="height:90px"></div> 

@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request,redirect,url_for,flash,session, jsonify
 
-from database import load_jobs_from_db, load_job_from_db, add_application_to_db, add_user_to_db, add_employer_to_db, add_subscriber_to_db,add_job_to_db,load_subscriber_emails_from_db,load_users_from_db
+from database import load_jobs_from_db, load_job_from_db, add_application_to_db, add_user_to_db, add_employer_to_db, add_subscriber_to_db,add_job_to_db,load_subscriber_emails_from_db,load_users_from_db, load_employers_from_db
 
 from email_sender import send_confirmation_email
 
@@ -16,12 +16,21 @@ import os
 app = Flask(__name__)
 app.secret_key = os.environ['APP.SECRET_KEY']
 
-# Decorator function to check if the user is logged in
+# Decorator function to check if the user or employer is logged in
 from functools import wraps
 def login_required(route_function):
     @wraps(route_function)
     def wrapper(*args, **kwargs):
         if 'username' in session:
+            return route_function(*args, **kwargs)
+        else:
+            return redirect('/login')
+    return wrapper
+
+def employer_login_required(route_function):
+    @wraps(route_function)
+    def wrapper(*args, **kwargs):
+        if 'company_name' in session:
             return route_function(*args, **kwargs)
         else:
             return redirect('/login')
@@ -126,7 +135,7 @@ def submit_form(id):
         return 'Invalid hCaptcha response. Please try again.'
 
 
-##Sign_up route here-->
+#User Sign_up route here-->
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
@@ -134,30 +143,105 @@ def signup():
         last_name = request.form['lastname']
         email = request.form['email']
         username = request.form['username']
+        password = request.form['password']
+        confirm_password = request.form['confirm_password']
+        
+        # Check if username or email already exists in the database
+        users = load_users_from_db()
+        for user in users:
+            if user['username'] == username:
+                flash('Username already exists. Please choose a different username!!!', 'error')
+                return render_template('signup.html')
+            if user['email'] == email:
+                flash('Email already exists. Please use a different email !!!', 'error')
+                return render_template('signup.html')
+
+        # Check if terms and conditions checkbox is checked
+        if 'terms' not in request.form:
+            flash('You must accept the terms and conditions to sign up!', 'error')
+            return render_template('signup.html')
+
+        # Password validation checks
+        if len(password) < 8:
+            flash('Password must be at least 8 characters long!', 'error')
+            return render_template('signup.html')
+
+        import string
+        if not any(char in string.punctuation for char in password):
+            flash('Password must contain at least one special character!', 'error')
+            return render_template('signup.html')
+
+        if not any(char.isdigit() for char in password):
+            flash('Password must contain at least one numeric digit!', 'error')
+            return render_template('signup.html')
+
+        if password != confirm_password:
+            flash('Passwords do not match!', 'error')
+            return render_template('signup.html')
+
         add_user_to_db(request.form)
-        send_registration_email(first_name, last_name, email,username)
-      
+        send_registration_email(first_name, last_name, email, username)
         flash('Sign up successful! Please log in.', 'success')
         return redirect(url_for('login'))
 
     return render_template('signup.html')
 
-#Employer Signup here.
-@app.route('/employer_signup', methods = ['POST', 'GET'])  
-def employer_signup():
-  if request.method == 'POST':
-    first_name = request.form['firstname']
-    last_name = request.form['lastname']
-    email = request.form['email']
-    company_name = request.form['company_name']
-    company_category = request.form['category']
-    add_employer_to_db (request.form)
-    send_employerreg_email(first_name, last_name, email,company_name, company_category)
-    
-    flash('Sign up successful! Please log in.', 'success')
-    return redirect(url_for('login'))
 
-  return render_template('recruiter_signup.html')
+
+#Employer Signup here.
+@app.route('/employer_signup', methods=['POST', 'GET'])
+def employer_signup():
+    if request.method == 'POST':
+        first_name = request.form['firstname']
+        last_name = request.form['lastname']
+        email = request.form['email']
+        company_name = request.form['company_name']
+        company_category = request.form['category']
+        password = request.form['password']
+        confirm_password = request.form['confirm_password']
+
+        # Check if username or email already exists in the database
+        employers = load_employers_from_db()
+        for employer in employers:
+            if employer['company_name'] == company_name:
+                flash('Company already exists. Please choose a different name!!!', 'error')
+                return render_template('recruiter_signup.html')
+
+            if employer['email'] == email:
+                flash('Email already exists. Please use a different email !!!', 'error')
+                return render_template('recruiter_signup.html')
+
+        # Check if terms and conditions checkbox is checked
+        if 'terms' not in request.form:
+            flash('You must accept the terms and conditions to sign up!', 'error')
+            return render_template('recruiter_signup.html')
+
+        # Password validation checks
+        if len(password) < 8:
+            flash('Password must be at least 8 characters long!', 'error')
+            return render_template('recruiter_signup.html')
+
+        import string
+        if not any(char in string.punctuation for char in password):
+            flash('Password must contain at least one special character!', 'error')
+            return render_template('recruiter_signup.html')
+
+        if not any(char.isdigit() for char in password):
+            flash('Password must contain at least one numeric digit!', 'error')
+            return render_template('recruiter_signup.html')
+
+        if password != confirm_password:
+            flash('Passwords do not match!', 'error')
+            return render_template('recruiter_signup.html')
+
+        add_employer_to_db(request.form)
+        send_employerreg_email(first_name, last_name, email, company_name, company_category)
+
+        flash('Sign up successful! Please log in.', 'success')
+        return redirect(url_for('employer_login'))
+
+    return render_template('recruiter_signup.html')
+
 
 
 #Subscriber signup here.
@@ -174,7 +258,7 @@ def subscription():
 
 #Job Posting URL here
 @app.route('/post-job', methods=['POST', 'GET'])
-@login_required
+@employer_login_required
 def post_job():
   if request.method  == 'POST':
     title = request.form['title']
@@ -188,10 +272,15 @@ def post_job():
         email = subscriber['email'] 
         send_job_notification(title,location,currency,salary,email)
     return redirect(url_for('post_job'))
-  return render_template('job_posting.html',username=session['username'])
+  return render_template('job_posting.html',company_name=session['company_name'])
 
 
-#Login and Logout Routes here
+@app.route('/merged-login')
+def merged_login():
+  return render_template('merged_login.html')
+
+
+#User Login and Logout Routes here
 @app.route('/user-dashboard')
 def dashboard():
     if 'username' in session:
@@ -207,15 +296,14 @@ def login():
         password = request.form['password']
 
         users = load_users_from_db()
-
         for user in users:
             if user['username'] == username and user['password'] == password:
                 session['username'] = username
                 return redirect('user-dashboard')
-        
-        return 'Invalid username or password'
+        flash ('Wrong username or password. Please try again!!!')
+        return redirect(url_for('merged_login'))
     else:
-        return render_template('login.html')
+        return render_template('merged_login.html')
 
 @app.route('/logout')
 def logout():
@@ -223,6 +311,35 @@ def logout():
     return redirect('/')
 
 
+#Employer Login and Logout Routes here
+@app.route('/employer-dashboard')
+def employer_dashboard():
+    if 'company_name' in session:
+        company_name = session['company_name']
+        return render_template('employer_dashboard.html', company_name=company_name)
+    else:
+        return 'You are not logged in'
+
+@app.route('/employer-login', methods=['GET', 'POST'])
+def employer_login():
+    if request.method == 'POST':
+        company_name = request.form['company_name']
+        password = request.form['password']
+
+        employers = load_employers_from_db()
+        for employer in employers:
+            if employer['company_name'] == company_name and employer['password'] == password:
+                session['company_name'] =company_name
+                return redirect('employer-dashboard')
+        flash ('Wrong company name or password. Please try again!!!')
+        return redirect(url_for('merged_login'))
+    else:
+        return render_template('merged_login.html')
+
+@app.route('/employer-logout')
+def employer_logout():
+    session.pop('company_name', None)
+    return redirect('/')
 
 
 

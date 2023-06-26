@@ -124,3 +124,12 @@ def load_users_from_db():
     result_all = result.fetchall()
     users = [dict(zip(column_names, row)) for row in   result_all]
     return users
+
+
+def load_employers_from_db():
+  with engine.connect() as conn:
+    result = conn.execute(text("SELECT * FROM employers"))
+    column_names = result.keys()
+    result_all = result.fetchall()
+    employers = [dict(zip(column_names, row)) for row in   result_all]
+    return employers
