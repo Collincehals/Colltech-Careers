@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request,redirect,url_for,flash,session, jsonify
 
-from database import load_jobs_from_db, load_job_from_db, add_application_to_db, add_user_to_db, add_employer_to_db, add_subscriber_to_db,add_job_to_db,load_subscriber_emails_from_db
+from database import load_jobs_from_db, load_job_from_db, add_application_to_db, add_user_to_db, add_employer_to_db, add_subscriber_to_db,add_job_to_db,load_subscriber_emails_from_db,load_users_from_db
 
 from email_sender import send_confirmation_email
 
@@ -16,6 +16,17 @@ import os
 app = Flask(__name__)
 app.secret_key = os.environ['APP.SECRET_KEY']
 
+# Decorator function to check if the user is logged in
+from functools import wraps
+def login_required(route_function):
+    @wraps(route_function)
+    def wrapper(*args, **kwargs):
+        if 'username' in session:
+            return route_function(*args, **kwargs)
+        else:
+            return redirect('/login')
+    return wrapper
+  
 #Routes here#
 @app.route('/')
 def home():
@@ -77,13 +88,15 @@ def faqs():
     return render_template('faqs.html')
 
 @app.route('/form/<id>')
+@login_required
 def fill_form(id):
   job=load_job_from_db(id)
   return render_template('applicform.html',
-                         job=job)
+                         job=job,
+                         username=session['username'])
 
 
-# Form Submission here
+# Application Form Submission here
 import requests
 @app.route("/form/<id>/submit", methods=["POST"])
 def submit_form(id):
@@ -129,7 +142,7 @@ def signup():
 
     return render_template('signup.html')
 
-
+#Employer Signup here.
 @app.route('/employer_signup', methods = ['POST', 'GET'])  
 def employer_signup():
   if request.method == 'POST':
@@ -147,7 +160,7 @@ def employer_signup():
   return render_template('recruiter_signup.html')
 
 
-
+#Subscriber signup here.
 @app.route('/subscribe', methods = ['POST', 'GET'])  
 def subscription():
   if request.method == 'POST':
@@ -161,6 +174,7 @@ def subscription():
 
 #Job Posting URL here
 @app.route('/post-job', methods=['POST', 'GET'])
+@login_required
 def post_job():
   if request.method  == 'POST':
     title = request.form['title']
@@ -174,35 +188,52 @@ def post_job():
         email = subscriber['email'] 
         send_job_notification(title,location,currency,salary,email)
     return redirect(url_for('post_job'))
-  return render_template('job_posting.html')
+  return render_template('job_posting.html',username=session['username'])
 
 
 #Login and Logout Routes here
+@app.route('/user-dashboard')
+def dashboard():
+    if 'username' in session:
+        username = session['username']
+        return render_template('dashboard.html', username=username)
+    else:
+        return 'You are not logged in'
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+
+        users = load_users_from_db()
+
+        for user in users:
+            if user['username'] == username and user['password'] == password:
+                session['username'] = username
+                return redirect('user-dashboard')
         
-        # Check the username and password against your user database
-        if username == 'admin' and password == 'password':
-            # Successful login
-            session['logged_in'] = True
-            session['username'] = username
-            return redirect(url_for('dashboard'))
-        else:
-            # Invalid login
-            flash('Invalid username or password', 'error')
-            return redirect(url_for('login'))
-    
-    return render_template('login.html')
-#Logout
+        return 'Invalid username or password'
+    else:
+        return render_template('login.html')
+
 @app.route('/logout')
 def logout():
-    session.clear()
-    return redirect(url_for('login'))
+    session.pop('username', None)
+    return redirect('/')
 
 
+
+
+
+
+
+
+
+
+
+
+#Serch query here.
 from bs4 import BeautifulSoup
 
 @app.route('/search', methods=['GET', 'POST'])

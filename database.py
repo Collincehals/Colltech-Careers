@@ -115,3 +115,12 @@ def load_subscriber_emails_from_db():
             subscribers.append(subscriber)
         
         return subscribers
+
+
+def load_users_from_db():
+  with engine.connect() as conn:
+    result = conn.execute(text("SELECT * FROM users"))
+    column_names = result.keys()
+    result_all = result.fetchall()
+    users = [dict(zip(column_names, row)) for row in   result_all]
+    return users
