@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request,redirect,url_for,flash,session, jsonify
 
+from passlib.hash import bcrypt
+
 from database import load_jobs_from_db, load_job_from_db, add_application_to_db, add_user_to_db, add_employer_to_db, add_subscriber_to_db,add_job_to_db,load_subscriber_emails_from_db,load_users_from_db, load_employers_from_db
 
 from email_sender import send_confirmation_email
@@ -59,7 +61,8 @@ def show_job(id):
 @app.route('/about/')
 def about():
     return render_template('about.html')
-  #EXPERIMENTAL
+  
+#EXPERIMENTAL
 @app.route('/merged_signup')
 def merged_reg():
   return render_template ('merged_regforms.html')
@@ -140,6 +143,7 @@ def user_signup():
         email = request.form['email']
         username = request.form['username']
         password = request.form['password']
+        hashed_password = bcrypt.hash(password)
         confirm_password = request.form['confirm_password']
         
         # Check if username or email already exists in the database
@@ -174,8 +178,14 @@ def user_signup():
         if password != confirm_password:
             flash('Passwords do not match!', 'error')
             return render_template('signup.html')
-
-        add_user_to_db(request.form)
+        user_data = {
+            'firstname': first_name,
+            'lastname': last_name,
+            'email': email,
+            'username': username,
+            'password': hashed_password,
+        }
+        add_user_to_db(user_data)
         send_registration_email(first_name, last_name, email, username)
         flash('Sign up successful! Please log in.', 'success')
         return redirect(url_for('user_login'))
@@ -194,6 +204,7 @@ def employer_signup():
         company_name = request.form['company_name']
         company_category = request.form['category']
         password = request.form['password']
+        hashed_password = bcrypt.hash(password)
         confirm_password = request.form['confirm_password']
 
         # Check if username or email already exists in the database
@@ -229,8 +240,15 @@ def employer_signup():
         if password != confirm_password:
             flash('Passwords do not match!', 'error')
             return render_template('recruiter_signup.html')
-
-        add_employer_to_db(request.form)
+        user_data = {
+           'firstname': first_name,
+           'lastname':  last_name,
+           'email': email,
+           'company_name': company_name,
+           'category': company_category,
+           'password' : hashed_password,
+        }
+        add_employer_to_db(user_data)
         send_employerreg_email(first_name, last_name, email, company_name, company_category)
 
         flash('Sign up successful! Please log in.', 'success')
@@ -293,7 +311,8 @@ def user_login():
 
         users = load_users_from_db()
         for user in users:
-            if user['username'] == username and user['password'] == password:
+            hashed_password = user['password']
+            if user['username'] == username and bcrypt.verify(password, hashed_password):
                 session['username'] = username
                 return redirect('user-dashboard')
         flash ('Wrong username or password. Please try again!!!')
@@ -324,7 +343,8 @@ def employer_login():
 
         employers = load_employers_from_db()
         for employer in employers:
-            if employer['company_name'] == company_name and employer['password'] == password:
+            hashed_password = employer['password']
+            if employer['company_name'] == company_name and bcrypt.verify(password, hashed_password):
                 session['company_name'] =company_name
                 return redirect('/employer-dashboard')
         flash ('Wrong company name or password. Please try again!!!')
@@ -336,12 +356,6 @@ def employer_login():
 def employer_logout():
     session.pop('company_name', None)
     return redirect('/')
-
-
-
-
-
-
 
 
 
