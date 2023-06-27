@@ -4,3 +4,4 @@ sqlalchemy
 pymysql
 mailjet_rest
 bs4
+passlib
