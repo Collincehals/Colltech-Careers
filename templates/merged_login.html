@@ -51,10 +51,31 @@
       cursor: pointer;
     }
 
+    .form-group .employerbtn {
+      width: 100%;
+      padding: 15px;
+      background-color: #008000;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
     .form-group .btn:hover {
       background-color: #003296;
       box-shadow:0 0 5px  rgba(0,0,0,0.6);
     }
+
+    .form-group .employerbtn:hover {
+      background-color: #009001;
+      box-shadow:0 0 5px  rgba(0,0,0,0.6);
+    }
+
+     #employerbtn:hover {
+      background-color: #009001;
+      box-shadow:0 0 5px  rgba(0,0,0,0.6);
+    }
+    
     .password-container {
   position: relative;
 }
@@ -65,7 +86,7 @@
   right: 10px;
   transform: translateY(-50%);
   cursor: pointer;
-  color: #666;
+  color: darkblue;
 }
     
     .employer-password-toggle {
@@ -74,7 +95,7 @@
     right: 10px;
     transform: translateY(-50%);
     cursor: pointer;
-    color: #666;
+    color: #008000;
   }
 
   </style>
@@ -91,7 +112,7 @@
         <a class="btn btn-primary" type="button" style="color:white; padding-left:40px; padding-right:40px;padding-top:10px;padding-bottom:10px;"onclick="showApplicantForm()"><i class="fa-solid fa-user me-2"></i>Candidate</a>
       </div>
       <div class="col-md-6">
-        <a class="btn btn-success" type="button" style="padding-left:40px; padding-right:40px;padding-top:10px;padding-bottom:10px;" onclick="showEmployerForm()"><i class="fa-solid fa-briefcase me-2"></i>Employer</a>
+        <a class="btn btn-success" id="employerbtn" type="button" style="padding-left:40px; padding-right:40px;padding-top:10px;padding-bottom:10px;" onclick="showEmployerForm()"><i class="fa-solid fa-briefcase me-2"></i>Employer</a>
       </div>
     </div>
 
@@ -105,13 +126,13 @@
         {% endwith %}
     </div>
 
-    <form action="/login" method="post" id="applicantForm">
+    <form action="/user-login" method="post" id="applicantForm">
       <!-- Applicant login form fields -->
       <div class="form-group">
-        <label for="username">Username:</label>
+        <label style="color:darkblue;" for="username">Username:</label>
         <input type="text" id="username" name="username" required>
     
-         <label for="password">Password:</label>
+         <label style="color:darkblue;" for="password">Password:</label>
     <div class="password-container">
         <input type="password" id="password" name="password" required>
       <span class="password-toggle" onclick="togglePasswordVisibility()"><i class="fas fa-eye"></i></span>
@@ -126,16 +147,16 @@
      
       <!-- Employer Login form fields -->
       <div class="form-group">
-        <label for="company_name">Company Name:</label>
+        <label style="color:darkgreen;" for="company_name">Company Name:</label>
         <input type="text" id="company" name="company_name" required>
     
-         <label for="password">Password:</label>
+         <label style="color:darkgreen" for="password">Password:</label>
     <div class="password-container">
         <input type="password" id="employerPassword" name="password" required>
       <span class="employer-password-toggle" onclick="toggleEmployerPasswordVisibility()"><i class="fas fa-eye"></i></span>
     </div>
 
-        <input type="submit" value="Login" class="btn">
+        <input type="submit" value="Login" class="employerbtn">
       </div>
       <p class="mt-3 mb-4">Don't have an Account? <a style="text-decoration:none;"href="/merged_signup">Register</a> instead</p> 
     </form>

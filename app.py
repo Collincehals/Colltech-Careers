@@ -24,7 +24,7 @@ def login_required(route_function):
         if 'username' in session:
             return route_function(*args, **kwargs)
         else:
-            return redirect('/login')
+            return redirect('/user-login')
     return wrapper
 
 def employer_login_required(route_function):
@@ -33,7 +33,7 @@ def employer_login_required(route_function):
         if 'company_name' in session:
             return route_function(*args, **kwargs)
         else:
-            return redirect('/login')
+            return redirect('/employer-login')
     return wrapper
   
 #Routes here#
@@ -63,10 +63,6 @@ def about():
 @app.route('/merged_signup')
 def merged_reg():
   return render_template ('merged_regforms.html')
-
-@app.route('/signup')
-def sign_up():
-  return render_template ('signup.html')
 
 @app.route('/portfolio')
 def portfolio():
@@ -136,8 +132,8 @@ def submit_form(id):
 
 
 #User Sign_up route here-->
-@app.route('/signup', methods=['GET', 'POST'])
-def signup():
+@app.route('/user-signup', methods=['GET', 'POST'])
+def user_signup():
     if request.method == 'POST':
         first_name = request.form['firstname']
         last_name = request.form['lastname']
@@ -182,14 +178,14 @@ def signup():
         add_user_to_db(request.form)
         send_registration_email(first_name, last_name, email, username)
         flash('Sign up successful! Please log in.', 'success')
-        return redirect(url_for('login'))
+        return redirect(url_for('user_login'))
 
     return render_template('signup.html')
 
 
 
 #Employer Signup here.
-@app.route('/employer_signup', methods=['POST', 'GET'])
+@app.route('/employer-signup', methods=['POST', 'GET'])
 def employer_signup():
     if request.method == 'POST':
         first_name = request.form['firstname']
@@ -287,10 +283,10 @@ def dashboard():
         username = session['username']
         return render_template('dashboard.html', username=username)
     else:
-        return 'You are not logged in'
+        return render_template('merged_login.html')
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
+@app.route('/user-login', methods=['GET', 'POST'])
+def user_login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -301,11 +297,11 @@ def login():
                 session['username'] = username
                 return redirect('user-dashboard')
         flash ('Wrong username or password. Please try again!!!')
-        return redirect(url_for('merged_login'))
+        return redirect(url_for('user_login'))
     else:
-        return render_template('merged_login.html')
+        return render_template('login.html')
 
-@app.route('/logout')
+@app.route('/user-logout')
 def logout():
     session.pop('username', None)
     return redirect('/')
@@ -318,7 +314,7 @@ def employer_dashboard():
         company_name = session['company_name']
         return render_template('employer_dashboard.html', company_name=company_name)
     else:
-        return 'You are not logged in'
+        return render_template('employer_login.html')
 
 @app.route('/employer-login', methods=['GET', 'POST'])
 def employer_login():
@@ -330,11 +326,11 @@ def employer_login():
         for employer in employers:
             if employer['company_name'] == company_name and employer['password'] == password:
                 session['company_name'] =company_name
-                return redirect('employer-dashboard')
+                return redirect('/employer-dashboard')
         flash ('Wrong company name or password. Please try again!!!')
-        return redirect(url_for('merged_login'))
+        return redirect(url_for('employer_login'))
     else:
-        return render_template('merged_login.html')
+        return render_template('employer_login.html')
 
 @app.route('/employer-logout')
 def employer_logout():

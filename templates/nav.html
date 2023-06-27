@@ -21,27 +21,28 @@
             <a style="color:rgb(20,20,220)"class="nav-link" aria-current="page" href="/"><i class="fa-solid fa-house me-1"></i>Home </a>
           </li>
           <li class="nav-item me-2">
-            <a style="color:rgb(20,20,220)" class="nav-link" href="/about/">Who We Are</a>
+            <a style="color:rgb(20,20,220)" class="nav-link" href="/about/">About Us</a>
           </li>
           <li class="nav-item me-2">
-            <a style="color:rgb(20,20,220)" class="nav-link" href="/jobs">Job Listings</a>
+            <a style="color:rgb(20,20,220)" class="nav-link" href="/jobs">All Jobs</a>
           </li>
-          <li class="nav-item me-4">
-            <a style="color:rgb(20,20,220)" class="nav-link" href="/portfolio"  style="color: rgb(255,255,255)">Portfolio</a>
+          <li class="nav-item me-2">
+            <a style="color:rgb(20,20,220)" class="nav-link" href="/user-dashboard"  style="color: rgb(255,255,255)">Application Status</a>
           </li>
           
           <!--Dropdown starts here-->      
 <li class="dropdown me-3">
-  <a style="color:rgb(20,20,220)" class="nav-link dropdown-toggle-plus" role="link" data-bs-toggle="dropdown" aria-expanded="false">Products & Services<span class="plus-sign">+</span></a>
+  <a style="color:rgb(20,20,220)" class="nav-link dropdown-toggle-plus" role="link" data-bs-toggle="dropdown" aria-expanded="false">Services & More<span class="plus-sign">+</span></a>
       
   <ul class="dropdown-menu bg-subtle fixed" style="left: 10px;width:200px;height:200px;">
+    <li class="dropdown-item"><a class="link" href="/user-login">Candidate Dashboard</a></li>
+    <li class="dropdown-item"><a class="link" href="/employer-login">Employer Dashboard</a></li>
+    <li class="dropdown-item"><a class="link" href="/user-login">Application Status</a></li>
     <li class="dropdown-item">
-      <a class="link" href="/login">All Products</a>
+      <a class="link" href="/resume-builder">Resume Builder</a>
     </li>
-    <li class="dropdown-item"><a class="link" href="/login">Application Status</a></li>
-    <li class="dropdown-item"><a class="link" href="/jobs">Careers at Colltech</a></li>
-    <li class="dropdown-item"><a class="link" href="/login">Application Status</a></li>
     <li class="dropdown-item"><a class="link" href="/faqs">FAQs</a></li>
+    
   </ul>
 </li>
   
@@ -62,7 +63,7 @@
   
     {% if 'username' in session %}
         <li class="me">
-            <a href="/logout" type="button" class="btn btn-primary active">Logout</a>
+            <a href="/user-logout" type="button" class="btn btn-primary active">Logout</a>
         </li>
     {% elif 'company_name' in session %}
         <li class="me">
