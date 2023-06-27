@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request,redirect,url_for,flash,session, jsonify
+from flask import Flask, render_template, request,redirect,url_for,flash,session, jsonify,abort
 
 from passlib.hash import bcrypt
 
@@ -37,18 +37,62 @@ def employer_login_required(route_function):
         else:
             return redirect('/employer-login')
     return wrapper
-  
+import math 
 #Routes here#
 @app.route('/')
 def home():
-    jobs= load_jobs_from_db()
-    return render_template('home.html',jobs=jobs, company_name='Colltech')
+    page = int(request.args.get('page', 1))
+    items_per_page = 5 # Number of jobs per page
+
+    all_jobs = load_jobs_from_db()
+    total_jobs = len(all_jobs)
+
+    total_pages = math.ceil(total_jobs / items_per_page)
+
+    start_index = (page - 1) * items_per_page
+    end_index = start_index + items_per_page
+
+    jobs = all_jobs[start_index:end_index]
   
+    return render_template('home.html',jobs=jobs, company_name='Colltech',page=page, total_pages=total_pages)
+
+
 @app.route('/jobs')
 def list_jobs():
-  jobs = load_jobs_from_db()
-  return render_template('open_positions.html',
-                         jobs=jobs)
+    page = int(request.args.get('page', 1))
+    items_per_page = 5 # Number of jobs per page
+
+    all_jobs = load_jobs_from_db()
+    total_jobs = len(all_jobs)
+
+    total_pages = math.ceil(total_jobs / items_per_page)
+
+    start_index = (page - 1) * items_per_page
+    end_index = start_index + items_per_page
+
+    jobs = all_jobs[start_index:end_index]
+
+    # Calculate the previous and next page numbers
+    prev_page = page - 1 if page > 1 else None
+    next_page = page + 1 if page < total_pages else None
+
+    # Calculate the range of page numbers to display
+    max_display_pages = 5
+    half_max_display_pages = max_display_pages // 2
+
+    if total_pages <= max_display_pages:
+        page_nums = range(1, total_pages + 1)
+    elif page <= half_max_display_pages:
+        page_nums = range(1, max_display_pages + 1)
+    elif page >= total_pages - half_max_display_pages:
+        page_nums = range(total_pages - max_display_pages + 1, total_pages + 1)
+    else:
+        page_nums = range(page - half_max_display_pages, page + half_max_display_pages + 1)
+
+    return render_template('open_positions.html', jobs=jobs, page=page, prev_page=prev_page,
+                           next_page=next_page, page_nums=page_nums, total_pages=total_pages)
+
+
 
 @app.route("/job/<id>")
 def show_job(id):
