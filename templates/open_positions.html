@@ -56,14 +56,14 @@
   <div class="mb-4 mt-auto" style="padding-left:10px;">
     <b>Salary: </b>{{ job['currency'] }}{{ job['salary'] }}
   </div>
-{% endif %}
+  {% endif %}
   </div>
   
   <div class=" col-4 mt-4">
   <a href="/job/{{job['id']}}" type="button" class="btn btn-primary btn-sm" style="border-radius:12px;">Apply</a>
   </div>    
 </div>
-        {% endfor %}
+    {% endfor %}
       </div>
 
     <!-- Buttons for navigating job pages here -->

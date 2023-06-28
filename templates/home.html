@@ -89,9 +89,11 @@ you've come to the right place.
       <!---card ends here--->
  
       <h2 class="text-center mb-1 mt-2">Featured Jobs</h2>
-      <div class="row " style="background-color:rgb(240, 245, 250);border-radius:10px; margin-bottom:60px; margin-top:20px;">
+      <div class="row " style="border-radius:10px; margin-bottom:60px; margin-top:20px;">
         {%for job in jobs%} 
+        <div class="row job pt-2" style="background-color:rgb(253,255,255);border:1px solid #ccc; border-radius:10px;margin:5px auto;">
         {% include 'job.html' %}
+        </div>
         {% endfor %}
       </div>
 
@@ -116,7 +118,7 @@ you've come to the right place.
 <form action="/subscribe" method="post" class="d-flex" style="padding-left:10px; padding-right:10px;">
   <div class="input-group" style="width: 100%;">
   <input type="email" class="form-control" name="email" style="border-radius: 15px 0 0 15px;" placeholder="Your Email..." required>
-  <button style="color: white;margin-right:5px;postion:absolute; " class="btn btn-secondary active btn-lg" type="submit" name="subscribe">Subscribe</button>
+  <button style="color: white;margin-right:5px;postion:absolute; " class="btn btn-primary active btn-lg" type="submit" name="subscribe">Subscribe</button>
 </div>
 
 </form>
