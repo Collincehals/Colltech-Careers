@@ -1,6 +1,6 @@
 from mailjet_rest import Client
 import os
-def send_job_notification(title, location, currency, salary, email):
+def send_job_notification(title, company, location, currency, salary, email):
     api_key = os.environ['API_KEY']
     api_secret =os.environ['API_SECRET']
 
@@ -32,6 +32,7 @@ We are excited to inform you about a new job posting on our website. Here are th
                             <h4>Job Details:</h4>    
                             <ul>
                                 <li>Job Title: {title}</li>
+                                <li>Hiring Company: {company}</li>
                                 <li>Location: {location}</li>
                                 <li>Salary: {currency}{salary}</li>
                             </ul>
@@ -46,7 +47,7 @@ Thank you for subscribing to our job alerts. We wish you the best in your job se
                             </p>
                         </body>
                     </html>
-                '''.format(title=title,location=location, currency= currency, salary=salary, email=email)
+                '''.format(title=title, company=company, location=location, currency= currency, salary=salary, email=email)
             }
         ]
     }

@@ -87,9 +87,10 @@ def add_subscriber_to_db(data):
 
 def add_job_to_db(data):
     with engine.connect() as conn:
-        query = text("INSERT INTO jobs(title, location, currency, salary, responsibilities, requirements) VALUES (:title, :location, :currency, :salary, :responsibilities, :requirements)")
+        query = text("INSERT INTO jobs(title, company, location, currency, salary, responsibilities, requirements) VALUES (:title, :company, :location, :currency, :salary, :responsibilities, :requirements)")
         conn.execute(query,
-                     {"title": data["title"],         
+                     {"title": data["title"], 
+                     "company": data['company'],
                      "location":data['location'], 
                      "currency": data['currency'], 
                      "salary": data['salary'],

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request,redirect,url_for,flash,session, jsonify,abort
+from flask import Flask, render_template, request,redirect,url_for,flash,session, jsonify
 
 from passlib.hash import bcrypt
 
@@ -72,6 +72,10 @@ def list_jobs():
 
     jobs = all_jobs[start_index:end_index]
 
+     # Calculate the range of results being displayed
+    results_start = start_index + 1
+    results_end = min(start_index + items_per_page, total_jobs)
+
     # Calculate the previous and next page numbers
     prev_page = page - 1 if page > 1 else None
     next_page = page + 1 if page < total_pages else None
@@ -90,7 +94,7 @@ def list_jobs():
         page_nums = range(page - half_max_display_pages, page + half_max_display_pages + 1)
 
     return render_template('open_positions.html', jobs=jobs, page=page, prev_page=prev_page,
-                           next_page=next_page, page_nums=page_nums, total_pages=total_pages)
+                           next_page=next_page, page_nums=page_nums, total_pages=total_pages,  results_start=results_start, results_end=results_end, total_jobs=total_jobs)
 
 
 
@@ -320,6 +324,7 @@ def subscription():
 def post_job():
   if request.method  == 'POST':
     title = request.form['title']
+    company = request.form['company']
     location = request.form['location']
     currency = request.form['currency']
     salary = request.form['salary']
@@ -328,7 +333,7 @@ def post_job():
     subscribers = load_subscriber_emails_from_db()
     for subscriber in subscribers:
         email = subscriber['email'] 
-        send_job_notification(title,location,currency,salary,email)
+        send_job_notification(title,company,location,currency,salary,email)
     return redirect(url_for('post_job'))
   return render_template('job_posting.html',company_name=session['company_name'])
 

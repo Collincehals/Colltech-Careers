@@ -29,7 +29,7 @@
       }
 
       .job:hover .title{
-        color:darkorange;
+        color:blue;
       }
 
     </style>
@@ -41,10 +41,13 @@
       <h1 class="text-center mb-3 mt-1">Job Listings </h1>
   
       <div class="row">
+        <div class="text-center mt-4 mb-4">
+  Showing <b>{{ results_start }}</b> – <b>{{ results_end }}</b> of <b>{{ total_jobs }}</b> results
+</div>
         {%for job in jobs%} 
   <div class="row job pt-2" style="background-color:rgb(253,255,255);border:1px solid #ccc; border-radius:10px;margin:10px auto;">
   <div class="col-8">
-          <a style="text-decoration:none" href="/job/{{job['id']}}"><h5 class="title mb-1 mt-2" style="padding-left:10px;">{{job['title']}}
+          <a style="text-decoration:none" href="/job/{{job['id']}}"><h5 class="title mb-1 mt-2" style="padding-left:10px;">{{job['title']}} at {{job.company}}
           </h5></a>
           <div class="mb-1 mt-auto" style="padding-left:10px;"><b>Location: </b>{{job.location}}            </div>
 
@@ -64,19 +67,19 @@
       </div>
 
     <!-- Buttons for navigating job pages here -->
-<div class="text-center mt-3 mb-5">
+<div class="text-center" style="margin-bottom:50px; margin-top: 40px;">
   {% if prev_page is defined %}
-    <a href="{{ url_for('list_jobs', page=prev_page) }}" class="btn me-3" style="border-radius: 2000px;"><i style="color:darkblue;" class="fa-solid fa-arrow-left"></i></a>
+    <a href="{{ url_for('list_jobs', page=prev_page) }}" class="btn me-3 {% if page == prev_page %}btn-primary{% else %}btn{% endif %}" style="border-radius: 2000px;"><i style="color:darkblue;" class="fa-solid fa-arrow-left fa-beat-fade"></i></a>
   {% else %}
     <a class="btn btn-primary disabled" style="border-radius: 2000px;">Previous</a>
   {% endif %}
   
   {% for num in page_nums %}
-    <a href="{{ url_for('list_jobs', page=num) }}" class="btn  mx-1" style="border-radius: 2000px;">{{ num }}</a>
+    <a href="{{ url_for('list_jobs', page=num) }}" class="btn mx-1 {% if page == num %}btn-primary visited{% else %}btn{% endif %}" style="border-radius: 100%;">{{ num }}</a>
   {% endfor %}
   
   {% if next_page is defined %}
-    <a href="{{ url_for('list_jobs', page=next_page) }}" class="btn" style="border-radius:2000px;"><i style="color:darkblue;" class="fa-solid fa-arrow-right"></i></a>
+    <a href="{{ url_for('list_jobs', page=next_page) }}" class="btn {% if page == next_page %}btn-primary{% else %}btn{% endif %}" style="border-radius:2000px;"><i style="color:darkblue;" class="fa-solid fa-arrow-right fa-beat-fade"></i></a>
   {% else %}
     <a class="btn btn-primary disabled" style="border-radius: 2000px;">Next</a>
   {% endif %}
