@@ -143,6 +143,10 @@ def job_posting():
 def faqs():
     return render_template('faqs.html')
 
+@app.route('/contact')
+def contact_details():
+  return render_template('contact.html')
+
 @app.route('/form/<id>')
 @login_required
 def fill_form(id):

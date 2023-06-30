@@ -27,11 +27,11 @@
             <a style="color:rgb(20,20,220)" class="nav-link" href="/jobs">All Jobs</a>
           </li>
           <li class="nav-item me-2">
-            <a style="color:rgb(20,20,220)" class="nav-link" href="/user-dashboard"  style="color: rgb(255,255,255)">Application Status</a>
+            <a style="color:rgb(20,20,220)" class="nav-link" href="/user-dashboard">Application Status</a>
           </li>
           
           <!--Dropdown starts here-->      
-<li class="dropdown me-3">
+<li class="dropdown">
   <a style="color:rgb(20,20,220)" class="nav-link dropdown-toggle-plus" role="link" data-bs-toggle="dropdown" aria-expanded="false">Services & More<span class="plus-sign">+</span></a>
       
   <ul class="dropdown-menu bg-subtle fixed" style="left: 10px;width:200px;height:200px;">
@@ -45,6 +45,9 @@
     
   </ul>
 </li>
+  <li class="nav-item me-2">
+    <a style="color:rgb(20,20,220)" class="nav-link" href="/contact">Contact Us</a>
+  </li>
   
 {% if 'username' in session or 'company_name' in session %}
   
@@ -81,7 +84,7 @@
  
   <li  class="dropdown me-4">
    <a style="color:rgb(20,20,220)" class="nav-link dropdown-toggle-plus" role="link" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-search fa-lg"></i></a>
-<ul class="dropdown-menu" style="top:40px; left: 1px;width:250px; height:auto;background-color:#A9A9A9">
+<ul class="dropdown-menu" style="top:40px; right: 1px;width:250px; height:auto;background-color:#A9A9A9">
 <li class="dropdown-items ">
 <form action="/search" class="d-flex" style="padding-left:10px; padding-right:10px;" role="search">
   <div class="input-group">
