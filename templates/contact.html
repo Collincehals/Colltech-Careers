@@ -23,31 +23,27 @@
       .form:hover {
         box-shadow:0 0 5px  rgba(0,0,0,0.6);
       }
-      .form-group label {
-        display:block;
-        font-weight: normal;
-        margin-bottom: 5px;
-      }
+      
       .form-group input {
         width:100%;
-        padding:15px;
+        padding:20px;
         border: 1px solid #ccc;
-        border-radius: 5px;
+        border-radius: 0px;
         margin-bottom: 25px;
-        background-color:rgb(252,253,255);
-        
+        background-color:rgb(252,253,255); 
       }
+
+      
       .form-group btn {
-        padding:12px;
         color: white;
       }
       .form-group textarea {
         display: inline-block;
         width: 100%;
-        height: 250px;
+        height: 200px;
         padding:12px;
         border: 1px soild #ccc;
-        border-radius: 5px;
+        border-radius: 0px;
         margin-bottom: 25px;
         background-color:rgb(252,253,255);
       }
@@ -76,12 +72,12 @@
             <div class="col-2"><button class="btn btn-primary" style="border-radius:100%;padding:10px;"><i class="fa-regular fa-envelope fa-beat-fade fa-2x" style="color:white;"></i></button></div>
             <div class="col-10">
               <h5 class="pb-1"><b>Email Us</b></h5>
-              <a class="btn" style="text-decoration:none;" href="mailto:odhiambocollince702@gmail.com?subject=Question%20about%20job%20opening&body=My%20Name%3A%3Cyour%20name%20here%3E%0D%0A%0D%0AMy%20question%3A%3CKindly%20leave%20your%20enquiry%20here%3E"><h5>colltechcareers@gmail.com</h5></a>
+              <a class="btn" style="text-decoration:none;" href="mailto:colltechcareers@gmail.com?subject=Question%20about%20job%20opening&body=My%20Name%3A%3Cyour%20name%20here%3E%0D%0A%0D%0AMy%20question%3A%3CKindly%20leave%20your%20enquiry%20here%3E"><h5>colltechcareers@gmail.com</h5></a>
             </div>
           </div>
 
           <div class="row contact-details mt-4 mb-4">
-            <div class="col-2"><button class="btn btn-primary" style="border-radius:100%;padding:10px;"><i class="fa-solid fa-location-dot fa-spin fa-2x" style="color: #fafcff;"></i></button></div>
+            <div class="col-2"><button class="btn btn-primary" style="border-radius:100% ;padding-left:15px;padding-right:15px;padding-top:10px;padding-bottom:10px;"><i class="fa-solid fa-location-dot fa-spin fa-2x" style="color: #fafcff;"></i></button></div>
             <div class="col-10">
               <h5 class="pb-1"><b>Visit Us Any Time</b></h5>
               <h5>Ruiru Fairview Estate, Street No.4 </h5>
@@ -92,25 +88,18 @@
         <div class="col">
           <div class="form">
           <div class="form-group">
-            <div style="margin-bottom: 30px; color:darkblue;text-align:center;"><h4><b>Leave a Message </b</h4></div>
-            
-            <form action="#" method='post'>
-              
-              <label for="name" name="name">Enter your Name </label>
-              <input type="text" name="name" placeholder="Enter your Name" required>
-
-              <label for="email" name="email">Enter your Email </label>
-              <input type="email" name="email" placeholder="Enter your Email" required>
-
-              <label for="subject" name="subject">Subject </label>
-              <input type="text" name="subject" placeholder="Enter Subject" required>
-
-              <label for="comment" name="comment">Comment</label>
-              <textarea name="comment" placeholder="Enter Message" required></textarea>
-
-              <a type="submit" style="padding-left:40px;padding-right:40px;" class="btn btn-primary">Send Message </a>
+            <div style="margin-bottom: 30px; color: darkblue; text-align: center;">
+              <h4><b>Leave a Message</b></h4>
+            </div>
+            <form action="#" method="post">
+              <input type="text" name="name" class="form-control" placeholder="Enter your Name" required>
+              <input type="email" name="email" class="form-control" placeholder="Enter your Email" required>
+              <input type="text" name="subject" class="form-control" placeholder="Enter Subject" required>
+              <textarea name="comment" class="form-control" placeholder="Enter Message" required></textarea>
+              <button type="submit" style="padding-top:12px;padding-bottom: 12px;padding-left: 80px; padding-right: 80px;" class="btn btn-primary">Send Message</button>
             </form>
           </div>
+
         </div>
         </div>
         

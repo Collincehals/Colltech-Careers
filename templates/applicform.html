@@ -93,13 +93,13 @@ input[type=submit]:hover {
   
 <form action="/form/{{job['id']}}/submit" method='post'>
     <label for="fname">First Name</label>
-    <input type="text" id="fname" name="firstname" placeholder="Bruce... " required>
+    <input type="text" id="fname" name="firstname" placeholder="Bruce... " class="form-control" required>
 
     <label for="lname">Last Name</label>
-    <input type="text" id="lname" name="lastname" placeholder="Smith..." required>
+    <input type="text" id="lname" name="lastname" placeholder="Smith..." class="form-control" required>
 
     <label for="country">Country</label>
-    <select id="country" name="country">
+    <select id="country" name="country" class="form-control">
       <option value="Kenya">Kenya</option>
       <option value="Uganda">Uganda</option>
        <option value="Ethiopia">Ethiopia</option>
@@ -109,19 +109,19 @@ input[type=submit]:hover {
       <option value="Rwanda">Rwanda</option>
     </select>
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" placeholder="e.g colltechcareers@hotmail.com" required>
+        <input type="email" id="email" name="email" placeholder="e.g colltechcareers@hotmail.com" class="form-control" required>
   
         <label for="education"> Education Background: </label>
-        <textarea name="education"></textarea>
+        <textarea name="education" class="form-control"></textarea>
   
         <label for="experience">Work Experience: </label>
-        <textarea name="experience"></textarea>
+        <textarea name="experience" class="form-control"></textarea>
   
         <label for="resume">Resume:</label>
-        <input type="file" id="resume" name="resume">
+        <input type="file" id="resume" name="resume" class="form-control">
   
         <label for="certificate">Certificate:</label>
-        <input type="file" id="certificate" name="certificate">
+        <input type="file" id="certificate" name="certificate" class="form-control">
   <!---hCaptcha here --->
   <div class="h-captcha" data-sitekey="1b0b1dc3-2a1a-4e49-9530-474f675e79b0"></div>
   
