@@ -1,8 +1,8 @@
-from flask import Flask, render_template, request,redirect,url_for,flash,session, jsonify
+from flask import Flask, render_template, request,redirect,url_for,flash,session
 
 from passlib.hash import bcrypt
 
-from database import load_jobs_from_db, load_job_from_db, add_application_to_db, add_user_to_db, add_employer_to_db, add_subscriber_to_db,add_job_to_db,load_subscriber_emails_from_db,load_users_from_db, load_employers_from_db, add_feedback_to_db
+from database import load_jobs_from_db, load_job_from_db, add_application_to_db, add_user_to_db, add_employer_to_db, add_subscriber_to_db,add_job_to_db,load_subscriber_emails_from_db,load_users_from_db, load_employers_from_db, add_feedback_to_db, load_feedbacks_from_db
 
 from email_sender import send_confirmation_email
 
@@ -13,6 +13,8 @@ from sign_up_email import send_registration_email
 from subscriber_email import send_subscriber_email
 
 from job_notification import send_job_notification
+
+from comment_notification import send_admin_comment_email
 import os
 
 app = Flask(__name__)
@@ -411,12 +413,12 @@ def employer_logout():
     return redirect('/')
 
 
-#Survey Route herev--->
+#Feedback Survey Route here--->
 @app.route('/user-feedback')
 def user_feedback():
-  return render_template('user_feedback.html')
+  return render_template('user_feedbackform.html')
 
-@app.route('/submitted_feeback', methods=["GET", "POST"])
+@app.route('/submitted_feedback', methods=["GET", "POST"])
 def feedback_submitted():
   if request.method == "POST":
     firstname = request.form['firstname']
@@ -428,56 +430,29 @@ def feedback_submitted():
     usability=request.form['usability']
     response_time = request.form['response_time']
     add_feedback_to_db(request.form)
+    flash('Feedback sent successfully.Thank you!','success')
     return render_template('feedback_page.html',firstname=firstname,email=email,experience=experience,listings=listings, suggestions = suggestions,communication=communication, usability = usability, response_time=response_time)
   return redirect(url_for('user_feedback'))
   
+#Load feedback from db
+@app.route('/all-feedbacks')
+@employer_login_required
+def all_feedbacks():
+  feedbacks = load_feedbacks_from_db()
+  return render_template('all_feedbacks.html',feedbacks=feedbacks)
 
-#Serch query here.
-from bs4 import BeautifulSoup
+#Send Comments and Questions to employer email:
+@app.route('/comments', methods = ["POST", "GET"])
+def comments():
+  if request.method == "POST":
+    name = request.form['name']
+    email = request.form['email']
+    subject = request.form['subject']
+    message = request.form['message']
+    send_admin_comment_email(name=name,email=email,subject=subject,message=message)
+    flash ('Message sent successfully!')
+  return redirect(url_for('contact_details'))
 
-@app.route('/search', methods=['GET', 'POST'])
-def search():
-    if request.method == 'POST':
-        query = request.form.get('query')
-        search_results = perform_search(query)
-        return jsonify(search_results)
-    else:
-        return render_template('search.html', search_results=None)  # Pass search_results as None initially
-
-def perform_search(query):
-    search_results = []
-
-    # Directory path where your website's HTML files are stored
-    html_directory = os.path.join(os.getcwd(), 'templates')
-
-    # Loop through each HTML file in the directory
-    for filename in os.listdir(html_directory):
-        if filename.endswith('.html'):
-            file_path = os.path.join(html_directory, filename)
-
-            # Read the contents of the HTML file
-            with open(file_path, 'r') as file:
-                html_content = file.read()
-
-            # Parse the HTML content using BeautifulSoup
-            soup = BeautifulSoup(html_content, 'html.parser')
-
-            # Search for elements containing the query
-            matching_elements = soup.find_all(text=lambda text: query.lower() in text.lower())
-
-            # Process the matching elements and prepare them for rendering
-            for element in matching_elements:
-                # Extract relevant information from the element or its parent elements
-                # For example, you can extract the element's text, parent's text, URL, etc.
-                element_text = element.strip()
-                if query.lower() in element_text.lower():
-                    result = {
-                        'title': filename,  # Use the filename as the title
-                        'description': element_text  # Use the matching element's text as the description
-                    }
-                    search_results.append(result)
-
-    return search_results
 
 
 if __name__ == '__main__':

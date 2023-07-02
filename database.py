@@ -148,3 +148,11 @@ def add_feedback_to_db(data):
                      "usability": data['usability'],
                      "response_time": data['response_time']
                      })
+#load feedback from db
+def load_feedbacks_from_db():
+  with engine.connect() as conn:
+    result = conn.execute(text("SELECT * FROM feedback"))
+    column_names = result.keys()
+    result_all = result.fetchall()
+    feedbacks = [dict(zip(column_names, row)) for row in   result_all]
+    return feedbacks
