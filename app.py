@@ -411,7 +411,25 @@ def employer_logout():
     return redirect('/')
 
 
+#Survey Route herev--->
+@app.route('/user-feedback')
+def user_feedback():
+  return render_template('user_feedback.html')
 
+@app.route('/submitted_feeback', methods=["GET", "POST"])
+def feedback_submitted():
+  if request.method == "POST":
+    name = request.form['name']
+    email = request.form['email']
+    experience=request.form['experience']
+    listings = request.form['listings']
+    suggestions=request.form['suggestions']
+    communication = request.form['communication']
+    usability=request.form['usability']
+    response_time = request.form['response_time']
+    return render_template('feedback_page.html',name=name,email=email,experience=experience,listings=listings, suggestions = suggestions,communication=communication, usability = usability, response_time=response_time)
+  return redirect(url_for('user_feedback'))
+  
 
 #Serch query here.
 from bs4 import BeautifulSoup
