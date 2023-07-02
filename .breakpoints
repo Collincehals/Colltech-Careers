@@ -1,5 +1,13 @@
 {
   "files": {
+    "email_sender.py": [
+      {
+        "id": "86f5ff83-ef60-4e04-a69b-dd7de418c748",
+        "line": 13,
+        "version": 48,
+        "index": 359
+      }
+    ],
     "templates/footer.html": [
       {
         "id": "63615026-3d2f-4ad5-86d3-aa7dd6d6aa6a",

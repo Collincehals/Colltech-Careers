@@ -2,7 +2,7 @@ from flask import Flask, render_template, request,redirect,url_for,flash,session
 
 from passlib.hash import bcrypt
 
-from database import load_jobs_from_db, load_job_from_db, add_application_to_db, add_user_to_db, add_employer_to_db, add_subscriber_to_db,add_job_to_db,load_subscriber_emails_from_db,load_users_from_db, load_employers_from_db
+from database import load_jobs_from_db, load_job_from_db, add_application_to_db, add_user_to_db, add_employer_to_db, add_subscriber_to_db,add_job_to_db,load_subscriber_emails_from_db,load_users_from_db, load_employers_from_db, add_feedback_to_db
 
 from email_sender import send_confirmation_email
 
@@ -419,7 +419,7 @@ def user_feedback():
 @app.route('/submitted_feeback', methods=["GET", "POST"])
 def feedback_submitted():
   if request.method == "POST":
-    name = request.form['name']
+    firstname = request.form['firstname']
     email = request.form['email']
     experience=request.form['experience']
     listings = request.form['listings']
@@ -427,7 +427,8 @@ def feedback_submitted():
     communication = request.form['communication']
     usability=request.form['usability']
     response_time = request.form['response_time']
-    return render_template('feedback_page.html',name=name,email=email,experience=experience,listings=listings, suggestions = suggestions,communication=communication, usability = usability, response_time=response_time)
+    add_feedback_to_db(request.form)
+    return render_template('feedback_page.html',firstname=firstname,email=email,experience=experience,listings=listings, suggestions = suggestions,communication=communication, usability = usability, response_time=response_time)
   return redirect(url_for('user_feedback'))
   
 

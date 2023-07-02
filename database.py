@@ -134,3 +134,17 @@ def load_employers_from_db():
     result_all = result.fetchall()
     employers = [dict(zip(column_names, row)) for row in   result_all]
     return employers
+
+def add_feedback_to_db(data):
+    with engine.connect() as conn:
+        query = text("INSERT INTO feedback(firstname, email, experience, listings, suggestions, communication, usability, response_time) VALUES (:firstname, :email, :experience,:listings, :suggestions, :communication, :usability, :response_time)")
+        conn.execute(query,
+                     {"firstname": data["firstname"], 
+                     "email": data['email'],
+                     "experience":data['experience'], 
+                     "listings": data['listings'], 
+                     "suggestions": data['suggestions'],
+                     "communication": data['communication'], 
+                     "usability": data['usability'],
+                     "response_time": data['response_time']
+                     })
