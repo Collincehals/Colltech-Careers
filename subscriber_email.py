@@ -1,6 +1,6 @@
 from mailjet_rest import Client
 import os
-def send_subscriber_email(email):
+def send_subscriber_email(email,confirmation_link):
     api_key = os.environ['API_KEY']
     api_secret =os.environ['API_SECRET']
 
@@ -27,7 +27,7 @@ def send_subscriber_email(email):
                                 Dear {email},
                             </p>
                             <p>
-                               Thank you for subscribing to our job alerts service with the email: {email}.<br>
+                               Thank you for subscribing to our job alerts service with the email: {email}.Please confirm your subsrciption here: {confirmation_link}<br>
 
 By subscribing to our job alerts, you will receive regular updates about new job postings, industry insights, and valuable career-related information directly in your inbox. We strive to provide you with the most relevant and valuable content to support your job search and career growth.<br>
                                 If at any time you wish to unsubscribe from our job alerts service, you can do so by clicking on the "Unsubscribe" link provided at the bottom of our emails.Thank You!<br>
@@ -39,7 +39,7 @@ By subscribing to our job alerts, you will receive regular updates about new job
                             </p>
                         </body>
                     </html>
-                '''.format(email=email)
+                '''.format(email=email, confirmation_link=confirmation_link)
             }
         ]
     }

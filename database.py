@@ -75,12 +75,28 @@ def add_employer_to_db(data):
 
 
 
+import secrets
+
+# Generate a unique token for each subscriber
+def generate_confirmation_token():
+    return secrets.token_urlsafe(16)
+
+# Save subscriber details and token to the database
 def add_subscriber_to_db(data):
     with engine.connect() as conn:
-        query = text("INSERT INTO subscribers(email) VALUES (:email)")
-        conn.execute(query,
-                     {"email":data['email']
-                     })
+        query = text("INSERT INTO subscribers(email, token, confirmed) VALUES (:email, :token, :confirmed)")
+        conn.execute(query, {
+            "email": data['email'],
+            "token": data['token'],
+            "confirmed": data['confirmed']
+        })
+
+# Update subscriber's confirmation status in the database
+def update_subscriber_confirmation_status(subscriber_id):
+    with engine.connect() as conn:
+        query = text("UPDATE subscribers SET confirmed = :confirmed WHERE id = :subscriber_id")
+        conn.execute(query, {"confirmed": True, "subscriber_id": subscriber_id})
+
 
 
 
@@ -100,7 +116,7 @@ def add_job_to_db(data):
 
 from datetime import datetime
 
-def load_subscriber_emails_from_db():
+def load_subscribers_from_db():
     with engine.connect() as conn:
         result = conn.execute(text("SELECT * FROM subscribers"))
         column_names = result.keys()

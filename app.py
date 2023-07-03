@@ -2,7 +2,7 @@ from flask import Flask, render_template, request,redirect,url_for,flash,session
 
 from passlib.hash import bcrypt
 
-from database import load_jobs_from_db, load_job_from_db, add_application_to_db, add_user_to_db, add_employer_to_db, add_subscriber_to_db,add_job_to_db,load_subscriber_emails_from_db,load_users_from_db, load_employers_from_db, add_feedback_to_db, load_feedbacks_from_db
+from database import load_jobs_from_db, load_job_from_db, add_application_to_db, add_user_to_db, add_employer_to_db, add_subscriber_to_db,add_job_to_db,load_subscribers_from_db,load_users_from_db, load_employers_from_db, add_feedback_to_db, load_feedbacks_from_db, update_subscriber_confirmation_status, generate_confirmation_token
 
 from email_sender import send_confirmation_email
 
@@ -310,19 +310,42 @@ def employer_signup():
 
     return render_template('recruiter_signup.html')
 
-
-
-#Subscriber signup here.
-@app.route('/subscribe', methods = ['POST', 'GET'])  
+#Subscription to Job Alerts here --->
+@app.route('/subscribe', methods=['POST', 'GET'])
 def subscription():
-  if request.method == 'POST':
-    email = request.form['email']
-    add_subscriber_to_db (request.form)
-    send_subscriber_email(email)
-    flash('Subscription successful!', 'success')
-    return redirect(url_for('home'))
+    if request.method == 'POST':
+        email = request.form['email']
+        token = generate_confirmation_token()
+        confirmed = False
 
-  return render_template('home.html')
+        subscriber_data = {
+            'email': email,
+            'token': token,
+            'confirmed': confirmed
+        }
+        add_subscriber_to_db(subscriber_data)
+
+        confirmation_token = token
+        confirmation_link = f"https://colltech-careers--collincehals.repl.co/subscription-confirmation/confirm?token={confirmation_token}"
+        send_subscriber_email(email, confirmation_link)
+        return redirect(url_for('home'))
+
+    return render_template('home.html')
+
+@app.route('/subscription-confirmation/confirm', methods=["GET"])
+def subscription_confirmation():
+    token = request.args.get('token')
+    subscriber_tokens = load_subscribers_from_db()
+
+    for subscriber_token in subscriber_tokens:
+        if subscriber_token['token'] == token:
+            # Mark the subscriber as confirmed in the database
+            subscriber_id = subscriber_token['id']
+            update_subscriber_confirmation_status(subscriber_id)
+            return "Subscription Confirmation successful!"
+
+    return "Subscription not Successful"
+
 
 #Job Posting URL here
 @app.route('/post-job', methods=['POST', 'GET'])
@@ -336,7 +359,7 @@ def post_job():
     salary = request.form['salary']
     data = request.form
     add_job_to_db(data)
-    subscribers = load_subscriber_emails_from_db()
+    subscribers = load_subscribers_from_db()
     for subscriber in subscribers:
         email = subscriber['email'] 
         send_job_notification(title,company,location,currency,salary,email)
