@@ -69,17 +69,17 @@
     <!-- Buttons for navigating job pages here -->
 <div class="text-center" style="margin-bottom:50px; margin-top: 40px;">
   {% if prev_page is defined %}
-    <a href="{{ url_for('list_jobs', page=prev_page) }}" class="btn me-3 {% if page == prev_page %}btn-primary{% else %}btn{% endif %}" style="border-radius: 2000px;"><i style="color:darkblue;" class="fa-solid fa-arrow-left fa-beat-fade"></i></a>
+    <a href="{{ url_for('list_jobs', page=prev_page) }}" class="btn me-3 {% if page == prev_page %}btn-primary{% else %}btn{% endif %}" style="border-radius: 100%;padding-left:15px;padding-right:15px;padding-top:10px;padding-bottom:10px;"><i style="color:darkblue;" class="fa-solid fa-arrow-left fa-beat-fade"></i></a>
   {% else %}
-    <a class="btn btn-primary disabled" style="border-radius: 2000px;">Previous</a>
+    <a class="btn btn-primary disabled"style="border-radius: 100%;padding-left:15px;padding-right:15px;padding-top:10px;padding-bottom:10px;">Previous</a>
   {% endif %}
   
   {% for num in page_nums %}
-    <a href="{{ url_for('list_jobs', page=num) }}" class="btn mx-1 {% if page == num %}btn-primary visited{% else %}btn{% endif %}" style="border-radius: 100%;">{{ num }}</a>
+    <a href="{{ url_for('list_jobs', page=num) }}" class="btn mx-1 {% if page == num %}btn-primary visited{% else %}btn{% endif %}" style="border-radius: 100%;padding-left:20px;padding-right:20px;padding-top:10px;padding-bottom:10px;">{{ num }}</a>
   {% endfor %}
   
   {% if next_page is defined %}
-    <a href="{{ url_for('list_jobs', page=next_page) }}" class="btn {% if page == next_page %}btn-primary{% else %}btn{% endif %}" style="border-radius:2000px;"><i style="color:darkblue;" class="fa-solid fa-arrow-right fa-beat-fade"></i></a>
+    <a href="{{ url_for('list_jobs', page=next_page) }}" class="btn {% if page == next_page %}btn-primary{% else %}btn{% endif %}" style="border-radius: 100%;padding-left:15px;padding-right:15px;padding-top:10px;padding-bottom:10px;"><i style="color:darkblue;" class="fa-solid fa-arrow-right fa-beat-fade"></i></a>
   {% else %}
     <a class="btn btn-primary disabled" style="border-radius: 2000px;">Next</a>
   {% endif %}
