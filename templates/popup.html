@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html class="dark">
+  <head>
+    <link rel="icon" type="image/svg" href="/static/icon.svg">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/static/output.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/fbd3b48644.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+   
+
+    <style>
+      * {
+        box-sizing:border-box;
+      }
+      body {
+        margin:0;
+        font-family: 'Montserrat', sans-serif;
+      }
+      ul {
+        list-style-type:none;
+        margin:0;
+        padding:0;
+        overflow: hidden;
+        background-color:blue;  
+      }
+      li {
+        float: left;
+        
+      }
+      li a {
+        color: white;
+        display: block;
+        padding: 20px 20px;
+        text-decoration:none;
+      }
+      li a:hover {
+        background-color:black;
+      }
+/* Popup Form Styles */
+#popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+#popup-content {
+  background-color: #fff;
+  max-width:600px;
+  width:90%;
+  margin-top:30px;
+  margin-bottom:30px;
+  padding: 30px;
+  border-radius: 10px;
+}
+#popup-content form label {
+  display:block;
+  padding-bottom:3px;
+  font-weight:200;
+}
+      
+#popup-content form input {
+  width: 100%;
+  margin-bottom: 15px;
+  padding:15px;
+  border:0px;
+  border-radius:10px;
+  background-color:rgba(240,245,255,0.6);
+}
+#popup-content form textarea {
+  width: 100%;
+  margin-bottom: 15px;
+  padding:10px;
+  height:100px;
+  border:0px;
+  resize:vertical;
+  border-radius:10px;
+  background-color:rgba(240,245,255,0.6);
+}
+#popup-content form input[type='submit'] {
+    padding:15px;
+    width:100%;
+    background-color:blue;
+    color:white;
+    border-radius:10px;
+  }
+ #popup-content form input[type='submit']:hover {
+    background-color:darkblue;
+    color:white;
+  }
+  .fa-xmark {
+    color:black;
+  }
+
+  .fa-xmark:hover {
+    color:red;
+  }
+  
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/portfolio">Portfolio</a></li>
+        <li><a>About</a></li>
+        <li><a>Contact</a></li>
+        <li><a style="cursor:pointer;" id="popup-button">Contact</a></li>
+      </ul>
+    </div>
+    <!-- Popup Form -->
+<div id="popup-overlay">
+  <div id="popup-content">
+  <div style="display:flex; justify-content: space-between;">
+  <div >
+    <h3><b>Let's Get in Touch. Send me a message.</b></h3>
+  </div>
+  <div style="margin-top:20px;">
+    <span id="close-button">
+      <i class="fa-solid fa-xmark"></i>
+    </span>
+  </div>
+</div>
+     
+  <form action="/message" method="post">
+    <label for="inputField" name="name">Name</label>
+    <input type="text" id="inputField" autocomplete="on" name="name" placeholder="Collince Smith" required>
+    
+    <label for="emailField" name="email">Email</label>
+    <input type="email" id="emailField" name="email" placeholder="mma@gmail.com" autocomplete="on" required>
+    
+    <label for="subjectField" name="subject">Subject</label>
+    <input type="text" id="subjectField" name="subject" placeholder="Subject" required>
+    
+    <label for="messageField" name="message">Message</label>
+    <textarea name="message" id="messageField"></textarea>
+    
+    <input type="submit" class="btn">
+  </form>
+
+  </div>
+</div>
+    
+    <div class="container">{% block content %}{% endblock %}</div>
+    
+  </body>
+</html>
+
+
+
+<script>
+  document.getElementById('popup-button').addEventListener('click',function() { document.getElementById('popup-overlay').style.display="flex";
+})
+  document.getElementById('close-button').addEventListener('click',function() { document.getElementById('popup-overlay').style.display='none';
+})
+</script>
