@@ -70,12 +70,21 @@
       .float {
         position: fixed;
         right: 20px;
-        bottom:10px;
+        bottom:60px;
+        z-index:9999;
       } 
+
+      .float:hover {
+              background-color:#241e1e;
+              border-radius:100%;
+              padding:5px 10px;
+        
+            } 
+
               .back-to-top {
         display: none;
         position: fixed;
-        bottom: 40px;
+        bottom: 20px;
         right: 20px;
         width: 40px;
         height: 40px;
@@ -84,6 +93,7 @@
         color: white;
         line-height: 40px;
         border-radius: 100px;
+        z-index:9999;
       }
       .back-to-top:hover {
         background-color: #646262;
