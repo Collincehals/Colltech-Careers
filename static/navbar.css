@@ -14,11 +14,19 @@
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
   color:#033ddd;
 }
-.fa-xmark {
+#fa-xmark-search {
   color:#ffffff;
   font-size:2em;
 }
-.fa-xmark:hover {
+#fa-xmark-search:hover {
+  color:#f20707;
+}
+
+#fa-xmark-login {
+  color:#0617f9;
+  
+}
+#fa-xmark-login:hover {
   color:#f20707;
 }
   .dropdown:hover .dropdown-menu {
@@ -49,29 +57,115 @@
 .nav-item:hover::after, .dropdown:hover::after,.dropdown-item:hover::after {
   transform: scaleX(1);
 }
-
+/*---Styling for SEARCH POPUP STARTS here --->*/
   #popup-overlay {
     position:fixed;
     left:0;
     top:0;
     height:100%;
     width:100%;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0.8);
     display: none;
     align-content:center;
     justify-content: center;
-    z-index: 999;
+    z-index: 9999;
   }
  #popup-items {
-    max-width:1400px;
+    max-width:1100px;
     width:90%;
     background-color: rgba(0,0,0,0.9);
     margin-bottom:30px;
-    margin-top:100px;
-    padding-top:130px;
-    padding-right: 200px;
-    padding-left:200px;
-    border:1px solid #ccc;
+    margin-top:30px;
+    padding-top:100px;
     border-radius:10px;
   }
+#popup-items .input-group {
+  margin:0 auto;
+  width:100%;
+  padding:30px;
+}
 
+#popup-items .flex {
+  margin:0 auto;
+  width:100%;
+  padding:30px;
+}
+/*---Styling for search popup ENDS here --->*/
+
+/*---Styling for Merged LOGIN starts here --->*/
+  .popup-container {
+    display:none;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background-color:rgba(0,0,0,0.8);
+    align-content:center;
+    justify-content:center; 
+    z-index:9999;
+    position:fixed;
+  }
+  .popup-content {
+    max-width:550px;
+    width:90%;
+    margin-top:40px;
+    margin-bottom:30px;
+    padding:30px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    background-color:rgba(255,255,255);
+  }
+  .popup-content form label {
+    display:block;
+    padding-bottom:3px;
+  }
+  
+  .popup-content form input {
+    padding:12px;
+    margin-bottom:20px;
+    background-color:rgba(240,245,255,0.8);
+    border-radius:10px;
+    width:100%;
+  }
+  .popup-content #user-btn {
+    background-color:blue;
+    color:white;
+  }
+  .popup-content .employerbtn {
+    background-color:green;
+    color:white;
+    outline:none;
+    border:none;
+  }
+  .popup-content .employerbtn:hover {
+      background-color: #009001;
+      box-shadow:0 0 5px  rgba(0,0,0,0.6);
+    }
+
+   .popup-content  #employerbtn:hover {
+      background-color: #009001;
+      box-shadow:0 0 5px  rgba(0,0,0,0.6);
+    }
+
+  .popup-container .password-container {
+  position: relative;
+}
+
+ .popup-container .user-password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: darkblue;
+}
+    
+   .popup-container .recruiter-password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #008000;
+  }
+/*---Styling for Merged LOGIN ends here --->*/

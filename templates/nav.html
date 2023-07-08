@@ -76,7 +76,7 @@
     {% endif %}
 {% else %}
     <li class="me-2">
-    <a type="button" class="btn btn-primary active" href="/popup">
+    <a type="button" style="cursor:pointer;" class="popup-button btn btn-primary active">
         <i class="fa-solid fa-user me-1"></i>Login/Register
     </a>
 </li>
@@ -98,19 +98,19 @@
 <!---Search page popup here --->
 <div id="popup-overlay">
 <div id="popup-items">
-  <div style="display:flex; justify-content: space-between;margin-bottom:7px;">
+  <div class="flex" style="display:flex; justify-content: space-between;">
   <div >
     <h5 style="color:white;"><b>Enter your search term...</b></h5>
   </div>
   <div style="margin-bottom:20px;">
     <span id="close-button">
-      <i class="fa-solid fa-xmark"></i>
+      <i id="fa-xmark-search" class="fa-solid fa-xmark"></i>
     </span>
   </div>
 </div>
 <form action="/#" class="d-flex" style="padding-left:10px; padding-right:10px;" role="search">
   <div class="input-group">
-    <input class="form-control me-1" name="query" type="search" placeholder="Search..." aria-label="Search">
+    <input class="form-control me-1 p-2" name="query" type="search" placeholder="Search..." aria-label="Search">
     <button id="button" type="submit">
       <i class="fas fa-search fa-lg"></i>
     </button>
@@ -118,7 +118,80 @@
 </form>
 </div>
 </div> 
+<!---Search page popup ENDS here --->
 
+
+
+<!---MERGED LOGIN STARTS here --->
+<div class="popup-container">
+  <div class="popup-content">
+    <div style="display:flex;justify-content:space-between;">
+    <div><h4 style="font-weight:bold; margin-top:10px;color:darkblue;">Login to Colltech Account</h4>
+    </div>
+      <div><span class="close-button">
+      <i id="fa-xmark-login" class="fa-solid fa-xmark fa-lg mt-4"></i>
+    </span></div>
+    </div>
+    <div class="row mt-4 mb-3">
+      <div class="col-md-6">
+        <a class="btn btn-primary" id="user-btn" type="button" style="color:white; padding-left:40px; padding-right:40px;padding-top:10px;padding-bottom:10px;"onclick="showUserForm()"><i class="fa-solid fa-user me-2"></i>Candidate</a>
+      </div>
+      <div class="col-md-6">
+        <a class="btn btn-success" id="employerbtn" type="button" style="padding-left:40px; padding-right:40px;padding-top:10px;padding-bottom:10px;" onclick="showRecruiterForm()"><i class="fa-solid fa-briefcase me-2"></i>Employer</a>
+      </div>
+    </div>
+
+    <div id="flash-messages">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div style="text-align:center;color:maroon; background-color:lightpink;padding:15px;border:1px solid #ccc;width:100%;border-radius:15px;margin-bottom:15px;" class="flash-message">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <form action="/user-login" method="post" id="userForm">
+      <!-- Applicant login form fields -->
+      <div class="form-group">
+        <label style="color:darkblue;" for="username">Username:</label>
+        <input type="text" id="username" name="username" class="form-control" required>
+    
+         <label style="color:darkblue;" for="password">Password:</label>
+    <div class="password-container">
+        <input type="password" id="user-password" name="password" class="form-control" required>
+      <span class="user-password-toggle" onclick="toggleUserPasswordVisibility()"><i class="fas fa-eye"></i></span>
+    </div>
+
+        <input type="submit" value="Login" id="user-btn" class="btn">
+      </div>
+      <p class="mt-3 mb-4">Don't have an Account? <a style="text-decoration:none;"href="/merged_signup">Register</a> instead</p> 
+    </form>
+   <!-- Employer Login form fields -->  
+    <form action="/employer-login" method="post" id="recruiterForm" style="display: none;">
+      <div class="form-group">
+        <label style="color:darkgreen;" for="company_name">Company Name:</label>
+        <input type="text" id="company" name="company_name" class="form-control" required>
+    
+         <label style="color:darkgreen" for="password">Password:</label>
+    <div class="password-container">
+        <input type="password" id="recruiterPassword" name="password" class="form-control" required>
+      <span class="recruiter-password-toggle" onclick="toggleRecruiterPasswordVisibility()"><i class="fas fa-eye"></i></span>
+    </div>
+
+        <input type="submit" value="Login" class="employerbtn">
+      </div>
+      <p class="mt-3 mb-4">Don't have an Account? <a style="text-decoration:none;"href="/merged_signup">Register</a> instead</p> 
+    </form>
+  </div>
+  </div>
+<!---MERGED LOGIN ENDS here --->
+
+
+
+
+
+<!---Scripts for popups start here --->
 <script>
   document.getElementById('popup-button').addEventListener('click', function() {document.getElementById('popup-overlay').style.display='flex';
  })
@@ -126,3 +199,65 @@
   document.getElementById('close-button').addEventListener('click', function() {document.getElementById('popup-overlay').style.display='none';
  })
 </script>
+
+<script>
+  document.querySelector('.popup-button').addEventListener('click',function() {document.querySelector('.popup-container').style.display="flex";
+ })
+
+  document.querySelector('.close-button').addEventListener('click',function() {document.querySelector('.popup-container').style.display="none";
+ })
+</script>
+<!---Scripts for popups END here --->
+
+<!---Scripts for switching forms start here --->
+<script>
+    function showRecruiterForm() {
+      var applicantForm = document.getElementById('userForm');
+      var employerForm = document.getElementById('recruiterForm');
+
+      applicantForm.style.display = 'none';
+      employerForm.style.display = 'block';
+    }
+  </script>
+  
+   <script>
+    function showUserForm() {
+      var employerForm = document.getElementById('recruiterForm');
+      var applicantForm = document.getElementById('userForm');
+
+      employerForm.style.display = 'none';
+      applicantForm.style.display = 'block';
+    }
+  </script>
+  <!---Scripts for switching forms end here --->
+
+  
+  <!---JS reveal password Event Listener --->
+<script>
+  function toggleUserPasswordVisibility() {
+  var passwordInput = document.getElementById('user-password');
+  var passwordToggle = document.querySelector('.user-password-toggle');
+  
+  if (passwordInput.type === 'password') {
+    passwordInput.type = 'text';
+    passwordToggle.innerHTML = '<i class="fas fa-eye-slash"></i>';
+  } else {
+    passwordInput.type = 'password';
+    passwordToggle.innerHTML = '<i class="fas fa-eye"></i>';
+  }
+}
+
+  function toggleRecruiterPasswordVisibility() {
+    var passwordInput = document.getElementById('recruiterPassword');
+    var passwordToggle = document.querySelector('.recruiter-password-toggle');
+
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      passwordToggle.innerHTML = '<i class="fas fa-eye-slash"></i>';
+    } else {
+      passwordInput.type = 'password';
+      passwordToggle.innerHTML = '<i class="fas fa-eye"></i>';
+    }
+  }
+</script>
+<!---JS reveal password Event Listener --->

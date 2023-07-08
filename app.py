@@ -111,10 +111,6 @@ def show_job(id):
 @app.route('/about/')
 def about():
     return render_template('about.html')
-
-@app.route('/popup')
-def popup():
-  return render_template('popup.html')
   
 #EXPERIMENTAL
 @app.route('/merged_signup')
