@@ -75,7 +75,7 @@
   {% endif %}
   
   {% for num in page_nums %}
-    <a href="{{ url_for('list_jobs', page=num) }}" class="btn mx-1 {% if page == num %}btn-primary visited{% else %}btn{% endif %}" style="border-radius: 100%;padding-left:20px;padding-right:20px;padding-top:10px;padding-bottom:10px;">{{ num }}</a>
+    <a href="{{ url_for('list_jobs', page=num) }}" class="btn mx-1 {% if page == num %}btn-primary visited{% else %}btn{% endif %}" style="border-radius: 100%;padding-left:18px;padding-right:18px;padding-top:10px;padding-bottom:10px;">{{ num }}</a>
   {% endfor %}
   
   {% if next_page is defined %}
