@@ -24,7 +24,7 @@
       .form-group input {
         width:100%;
         padding:10px;
-        border: 1px solid #ccc;
+        border-bottom: 2px solid #ccc;
         border-radius: 0px;
         margin-bottom: 25px;
         background-color:rgb(252,253,255); 
@@ -51,10 +51,10 @@
         width: 100%;
         height: 120px;
         padding:10px;
-        border: 1px soild #ccc;
         border-radius: 0px;
         margin-bottom: 25px;
         background-color:rgb(252,253,255);
+        border-bottom: 2px solid #ccc;
       }
     </style>
   </head>
@@ -110,10 +110,10 @@
         {% endwith %}
     </div>
             <form action="/comments" method="post">
-              <input type="text" name="name" class="form-control" placeholder="Enter your Name" required>
-              <input type="email" name="email" class="form-control" placeholder="Enter your Email" required>
-              <input type="text" name="subject" class="form-control" placeholder="Enter Subject" required>
-              <textarea name="message" class="form-control" placeholder="Enter Message" required></textarea>
+              <input type="text" name="name" class="form-control" placeholder="Name" required>
+              <input type="email" name="email" class="form-control" placeholder="Email" required>
+              <input type="text" name="subject" class="form-control" placeholder="Subject" required>
+              <textarea name="message" class="form-control" placeholder="Message..." required></textarea>
               <button type="submit" class="submit">Send Message</button>
             </form>
           </div>
