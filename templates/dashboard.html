@@ -12,19 +12,66 @@
 <link rel="stylesheet" type="text/css" href="/static/homepage.css">
     <!--- End --->
     <style>
-        .container {
-            font-family: Arial, sans-serif;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
+
+.side-bar {
+  background-color: rgba(255,255,255,0.9);
+  width: 30%;
+  padding:20px;
+  float:left;
+  border-radius:10px;
+  height:100vh;
+  overflow-y:scroll;
+  position:fixed;
+}
+
+.side-bar-item {
+  justify-content:center;
+  margin-bottom:5px;
+  border-radius:15px;
+  padding:12px;
+}
+
+.side-bar-item:hover  {
+  transform:translateX(10px);
+  background-color:rgba(240,245,255,0.9);
+}
+
+.middle-content {
+  width: 65%;
+  position:relative;
+  background-color: rgba(255,255,255,0.9);
+  margin-left: 32%;
+  margin-right:10px;
+  padding:30px;
+  border-radius:10px;
+  height:100vh;
+}
+
+div a {
+  text-decoration:none;
+  font-size:17px;
+}
+
     </style>
 </head>
 <body>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-    {% include 'nav.html' %}
-    <div class="container">
+    {% include 'nav.html' %} 
+  
+   <!---SIDE BAR HERE --->
+  <div class="side-bar">
+    <div class="side-bar-item"><a href="user-logout">Logout</a></div>
+    <div class="side-bar-item"><a href="user-dashboard">User- Dashboard</a></div>
+    <div class="side-bar-item"><a href="#">Profile</a></div>
+    <div class="side-bar-item"><a href="#">My Resume</a></div>
+    <div class="side-bar-item"><a href="#">Jobs Short-listed</a></div>
+    <div class="side-bar-item"><a href="#">My Applied Jobs </a></div>
+    <div class="side-bar-item"><a href="#">Saved Jobs</a></div>
+    <div class="side-bar-item"><a href="#">Change Password </a></div>
+    <div class="side-bar-item"><a href="#">Delete Account </a></div>
+  </div>
+    
+  <div class="middle-content">
         <!-- User Profile Section -->
     <section class="profile pb-4">
         <h1 class="pb-4 text-center">Welcome, {{ username }}!</h1>
@@ -70,24 +117,6 @@
  <!---Back-to-top arrow --->
       <a href="#" class="back-to-top"><i class="fa-solid fa-angle-up"></i></a>
       <script src="/static/homepage.js"></script>
-        <!---Subscribe to jobs here --->
-       <div class="row " style="background-color:rgb(0,0,255);margin-bottom:10px;">
-       <div class="col-md-4">
-         <h2 style="padding-left:30px;padding-bottom:10px;padding-top:20px;color:white;">Subscribe to Job Alerts</h2>
-         <h6 style="padding-left:30px;padding-bottom:10px;color:white;">Join our Happy Subscribers</h6>
-       </div>
-        <div class="col-md-8" style="margin-top:30px;margin-bottom:30px;">
-<form action="/subscribe" method="post" class="d-flex" style="padding-left:10px; padding-right:10px;">
-  <div class="input-group" style="width: 100%;">
-  <input type="email" class="form-control" name="email" style="border-radius: 15px 0 0 15px;" placeholder="Your Email..." required>
-  <button style="color: white;margin-right:5px;postion:absolute; " class="btn btn-secondary active btn-lg" type="submit" name="subscribe">Subscribe</button>
-</div>
-
-</form>
-    </div>
-      </div>
-       <!---Subscribe to jobs ENDS here --->
-    </div>
-  {% include 'footer.html' %}
+  </div>
 </body>
 </html>
