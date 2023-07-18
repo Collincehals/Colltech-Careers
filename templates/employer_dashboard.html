@@ -4,29 +4,102 @@
   <link rel="icon" type="image/png" href="/static/COLLTECH.png" style="border-radius:2000px">
     <!-- Fontawesome KIT Link -->
     <script src="https://kit.fontawesome.com/fbd3b48644.js" crossorigin="anonymous"></script>
-    <title>User Dashboard </title>
+    <title>Employer-Dashboard </title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
   <!---Homepage CSS here --->
 <link rel="stylesheet" type="text/css" href="/static/homepage.css">
     <!--- End --->
-    <style>
-        .container {
-            font-family: Arial, sans-serif;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
+<style>
+body {
+  background-color:rgba(240,245,255,0.8);
+}
+/* WEBKIT SCROLLBAR STYLING STARTS HERE */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background-color: lightgray;
+  border-radius: 5px;
+}
+/* WEBKIT SCROLLBAR STYLING ENDS HERE */
+  
+.side-bar {
+  background-color: rgba(255,255,255,0.9);
+  width: 30%;
+  padding:20px;
+  float:left;
+  border-radius:10px;
+  height:100vh;
+  overflow-y:scroll;
+  position:fixed;
+  padding-bottom:150px;
+}
+
+.side-bar-item {
+  justify-content:center;
+  margin-bottom:8px;
+  border-radius:15px;
+  padding:12px;
+}
+
+.side-bar-item:hover  {
+  transform:translateX(10px);
+  background-color:rgba(240,245,255,0.9);
+}
+
+.middle-content {
+  width: 65%;
+  background-color: rgba(255,255,255,0.9);
+  margin-left: 32%;
+  margin-right:10px;
+  padding:30px;
+  border-radius:10px;
+  height:100vh;
+}
+
+div a {
+  text-decoration:none;
+  font-size:17px;
+}
+
+.side-bar-item a.active {
+  color: orange;
+  justify-content:center;
+  border-radius:15px;
+  padding:12px;
+  padding-right:80px;
+  background-color:rgba(240,245,255,0.9);
+}
+
+
     </style>
 </head>
 <body>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-    {% include 'nav.html' %}
-    <div class="container">
-        <!-- User Profile Section -->
-    <section class="profile pb-4">
+    {% include 'nav.html' %} 
+  
+   <!---SIDE BAR HERE --->
+  <div class="side-bar">
+    <div class="side-bar-item"><a href="employer-logout" style="color:red;"><i class="fa-solid fa-power-off" style="color: #042e76;margin-right:10px;"></i>Logout</a></div>
+    <div class="side-bar-item"><a href="employer-dashboard"><i class="fa-solid fa-chalkboard-user" style="color: #022b74;margin-right:10px;"></i>Employer- Dashboard</a></div>
+    <div class="side-bar-item"><a href="#"><i class="fa-regular fa-user" style="color: #042e76;margin-right:10px;"></i>Profile</a></div>
+    <div class="side-bar-item"><a href="#"><i class="fa-solid fa-arrow-right-to-bracket" style="color: #07327e;margin-right:10px;"></i>Received Applications </a></div>
+    <div class="side-bar-item"><a href="#"><i class="fa-solid fa-users-line" style="color: #083177;margin-right:10px;"></i>Meeting</a></div>
+    <div class="side-bar-item"><a href="#"><i class="fa-regular fa-bell" style="color: #072f74;margin-right:10px;"></i>Job Alerts</a></div>
+    <div class="side-bar-item"><a href="#"><i class="fa-regular fa-message" style="color: #042867;margin-right:10px;"></i>Messages </a></div>
+    <div class="side-bar-item"><a href="#"><i class="fa-solid fa-lock" style="color: #042867;margin-right:10px;"></i>Change Password </a></div>
+    <div class="side-bar-item"><a href="#" onmouseover="this.style.color='red'" onmouseout="this.style.color='darkblue'"><i class="fa-solid fa-trash-can" style="color: #042a6c;margin-right:10px;"></i>Delete Profile </a></div>
+    
+  </div>
+    
+  <div class="middle-content">
+        <!-- Employer Profile Section -->
+     <section class="profile pb-4">
         <h1 class="pb-4 text-center">Welcome, {{ company_name }}!</h1>
         <div class="profile-details">
             <h2 >Profile Information</h2>
@@ -63,8 +136,23 @@
                 </li>
             {% endfor %}
         </ul>
-    </section>
-    </div>
-  {% include 'footer.html' %}
+    </section>    
+        
+ <!---Back-to-top arrow --->
+      <a href="#" class="back-to-top"><i class="fa-solid fa-angle-up"></i></a>
+      <script src="/static/homepage.js"></script>
+  </div>
+
+<!---JS script for highlighting visited/active URL --->
+  <script>
+  var currentUrl = window.location.href;
+  var links = document.querySelectorAll('.side-bar-item a');
+  links.forEach(function(link) {
+    if (link.href === currentUrl) {
+      link.classList.add('active');
+    }
+  });
+</script>
+
 </body>
 </html>

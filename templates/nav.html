@@ -64,16 +64,7 @@
             <i class="fa-solid fa-user me-2"></i>{{ session['company_name'] }}</a>
       {% endif %}
         </li>
-  
-    {% if 'username' in session %}
-        <li class="me">
-            <a href="/user-logout" type="button" class="btn btn-primary active">Logout</a>
-        </li>
-    {% elif 'company_name' in session %}
-        <li class="me">
-            <a href="/employer-logout" type="button" class="btn btn-primary active">Logout</a>
-        </li>
-    {% endif %}
+ 
 {% else %}
     <li class="me-2">
     <a type="button" style="cursor:pointer;" class="popup-button btn btn-primary active">

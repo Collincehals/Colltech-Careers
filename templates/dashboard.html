@@ -11,8 +11,23 @@
   <!---Homepage CSS here --->
 <link rel="stylesheet" type="text/css" href="/static/homepage.css">
     <!--- End --->
-    <style>
-
+<style>
+body {
+  background-color:rgba(240,245,255,0.8);
+}  
+/* WEBKIT SCROLLBAR STYLING STARTS HERE */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background-color: lightgray;
+  border-radius: 5px;
+}
+/* WEBKIT SCROLLBAR STYLING ENDS HERE */
+  
 .side-bar {
   background-color: rgba(255,255,255,0.9);
   width: 30%;
@@ -22,11 +37,12 @@
   height:100vh;
   overflow-y:scroll;
   position:fixed;
+  padding-bottom:150px;
 }
 
 .side-bar-item {
   justify-content:center;
-  margin-bottom:5px;
+  margin-bottom:8px;
   border-radius:15px;
   padding:12px;
 }
@@ -38,7 +54,6 @@
 
 .middle-content {
   width: 65%;
-  position:relative;
   background-color: rgba(255,255,255,0.9);
   margin-left: 32%;
   margin-right:10px;
@@ -50,8 +65,21 @@
 div a {
   text-decoration:none;
   font-size:17px;
+  color:darkblue;
 }
 
+div a:hover {
+  color:blue;
+}
+
+.side-bar-item a.active {
+  color: orange;
+  justify-content:center;
+  border-radius:15px;
+  padding:12px;
+  padding-right:80px;
+  background-color:rgba(240,245,255,0.9);
+}
     </style>
 </head>
 <body>
@@ -60,18 +88,20 @@ div a {
   
    <!---SIDE BAR HERE --->
   <div class="side-bar">
-    <div class="side-bar-item"><a href="user-logout">Logout</a></div>
-    <div class="side-bar-item"><a href="user-dashboard">User- Dashboard</a></div>
-    <div class="side-bar-item"><a href="#">Profile</a></div>
-    <div class="side-bar-item"><a href="#">My Resume</a></div>
-    <div class="side-bar-item"><a href="#">Jobs Short-listed</a></div>
-    <div class="side-bar-item"><a href="#">My Applied Jobs </a></div>
-    <div class="side-bar-item"><a href="#">Saved Jobs</a></div>
-    <div class="side-bar-item"><a href="#">Change Password </a></div>
-    <div class="side-bar-item"><a href="#">Delete Account </a></div>
+    <div class="side-bar-item"><a href="user-logout" style="color:red;"><i class="fa-solid fa-power-off" style="color: #042e76;margin-right:10px;"></i>Logout</a></div>
+    <div class="side-bar-item"><a href="user-dashboard"><i class="fa-solid fa-chalkboard-user" style="color: #022b74;margin-right:10px;"></i>User- Dashboard</a></div>
+    <div class="side-bar-item" ><a id="user-profile"  href="/user-profile"><i class="fa-regular fa-user" style="color: #042e76;margin-right:10px;"></i>Profile</a></div>
+    <div class="side-bar-item"><a id="resume" href="/resume"><i class="fa-solid fa-file" style="color: #042a6c;margin-right:10px;"></i>My Resume</a></div>
+    <div class="side-bar-item"><a id="shortlist" href="/shortlist"><i class="fa-regular fa-rectangle-list" style="color: #052a6b;margin-right:10px;"></i>Short-list Jobs</a></div>
+    <div class="side-bar-item"><a href="#"><i class="fa-solid fa-arrow-up-from-bracket" style="color: #07327e;margin-right:10px;"></i>My Applied Jobs </a></div>
+    <div class="side-bar-item"><a href="#"><i class="fa-regular fa-bookmark" style="color: #083177;margin-right:10px;"></i>Saved Jobs</a></div>
+    <div class="side-bar-item"><a href="#"><i class="fa-regular fa-bell" style="color: #072f74;margin-right:10px;"></i>Job Alerts</a></div>
+    <div class="side-bar-item"><a href="#"><i class="fa-regular fa-message" style="color: #042867;margin-right:10px;"></i>Messages </a></div>
+    <div class="side-bar-item"><a href="#"><i class="fa-solid fa-lock" style="color: #042867;margin-right:10px;"></i>Change Password </a></div>
+    <div class="side-bar-item"><a href="#" style="color:darkblue;" onmouseover="this.style.color='red'" onmouseout="this.style.color='darkblue'"><i class="fa-solid fa-trash-can" style="color: #042a6c;margin-right:10px;"></i>Delete Profile </a></div> 
   </div>
     
-  <div class="middle-content">
+  <div id="main-content" class="middle-content">
         <!-- User Profile Section -->
     <section class="profile pb-4">
         <h1 class="pb-4 text-center">Welcome, {{ username }}!</h1>
@@ -111,12 +141,61 @@ div a {
                 </li>
             {% endfor %}
         </ul>
-    </section>
-        
+    </section>     
         <!-- Add more sections or elements as needed -->
+    
  <!---Back-to-top arrow --->
       <a href="#" class="back-to-top"><i class="fa-solid fa-angle-up"></i></a>
       <script src="/static/homepage.js"></script>
   </div>
+
+  <!---JS script for highlighting visited/active URL --->
+  <script>
+  var currentUrl = window.location.href;
+  var links = document.querySelectorAll('.side-bar-item a');
+  links.forEach(function(link) {
+    if (link.href === currentUrl) {
+      link.classList.add('active');
+    }
+  });
+</script>
+  
+
+
+  <script>
+    // Function to load HTML content into the main content area
+function loadContent(url) {
+  const mainContent = document.getElementById('main-content');
+  mainContent.innerHTML = ''; // Clear previous content
+
+  // Make a request for the HTML content
+  fetch(url)
+    .then(response => response.text())
+    .then(data => {
+      // Set the received HTML content to the main content area
+      mainContent.innerHTML = data;
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+}
+
+// Event listener for sidebar link clicks
+document.getElementById('user-profile').addEventListener('click', function(event) {
+  event.preventDefault(); // Prevent default link behavior
+  loadContent('/user-profile'); // Load the HTML content for Link 1
+});
+
+document.getElementById('resume').addEventListener('click', function(event) {
+  event.preventDefault(); // Prevent default link behavior
+  loadContent('/resume'); // Load the HTML content for Link 1
+});
+
+document.getElementById('shortlist').addEventListener('click', function(event) {
+  event.preventDefault(); // Prevent default link behavior
+  loadContent('/shortlist'); // Load the HTML content for Link 1
+});
+  </script>
+
 </body>
 </html>

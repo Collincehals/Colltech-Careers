@@ -476,7 +476,18 @@ def comments():
     flash ('Message sent successfully!')
   return redirect(url_for('contact_details'))
 
+@app.route('/user-profile')
+def user_profile():
+  return render_template('user-profile.html')
 
+
+@app.route('/resume')
+def resume():
+  return render_template('portfolio.html')
+
+@app.route('/shortlist')
+def shortlist():
+  return render_template('open_positions.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True) 
