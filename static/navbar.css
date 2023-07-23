@@ -3,17 +3,7 @@
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
   color:white;
 }
-#button {
-  background-color:transparent;
-  color:white;
-  border:none;
-  outline:none;
-}
-#button:hover {
-  background-color:#eeeef6;
-  box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
-  color:#033ddd;
-}
+
 #fa-xmark-search {
   color:#ffffff;
   font-size:2em;
@@ -58,37 +48,51 @@
   transform: scaleX(1);
 }
 /*---Styling for SEARCH POPUP STARTS here --->*/
-  #popup-overlay {
+#popup-overlay {
     position:fixed;
     left:0;
     top:0;
     height:100%;
     width:100%;
-    background-color: rgba(0,0,0,0.8);
+    background-color: rgba(0,0,0,.9);
     display: none;
-    align-content:center;
+    align-items:center;
     justify-content: center;
     z-index: 9999;
   }
- #popup-items {
-    max-width:1100px;
-    width:90%;
-    background-color: rgba(0,0,0,0.9);
-    margin-bottom:30px;
-    margin-top:30px;
-    padding-top:100px;
-    border-radius:10px;
-  }
-#popup-items .input-group {
-  margin:0 auto;
-  width:100%;
-  padding:30px;
+
+#popup-overlay .form-items {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  max-width:800px;
+  width:90%;
+  height:50px;
+  background:#fff;
+  border-radius:10px;
 }
 
-#popup-items .flex {
-  margin:0 auto;
+#popup-overlay .form-items input{
+  outline:none;
+  border:none;
+  background:none;
   width:100%;
-  padding:30px;
+  height:100%;
+  padding:0 20px;
+}
+#popup-overlay .form-items label {
+  font-size:22px;
+  color:black;
+  padding-right:20px;
+}
+#popup-overlay .form-items label:hover {
+  color:darkorange;
+}
+
+#popup-overlay #fa-xmark-search {
+  position:absolute;
+  right:25px;
+  top:40px;
 }
 /*---Styling for search popup ENDS here --->*/
 

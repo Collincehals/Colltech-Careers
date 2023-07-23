@@ -87,28 +87,18 @@
       <div style="height:90px"></div> 
 
 <!---Search page popup here --->
-<div id="popup-overlay">
-<div id="popup-items">
-  <div class="flex" style="display:flex; justify-content: space-between;">
-  <div >
-    <h5 style="color:white;"><b>Enter your search term...</b></h5>
-  </div>
-  <div style="margin-bottom:20px;">
-    <span id="close-button">
-      <i id="fa-xmark-search" class="fa-solid fa-xmark"></i>
-    </span>
-  </div>
-</div>
-<form action="/#" class="d-flex" style="padding-left:10px; padding-right:10px;" role="search">
-  <div class="input-group">
-    <input class="form-control me-1 p-2" name="query" type="search" placeholder="Search..." aria-label="Search">
-    <button id="button" type="submit">
+
+  
+<form action="#" id="popup-overlay">
+  <i id="fa-xmark-search" class="fa-solid fa-xmark"></i>
+  <div class="form-items">
+    <input type="search" placeholder="Enter a Search...">
+    <label type="submit">
       <i class="fas fa-search fa-lg"></i>
-    </button>
-  </div>
+    </label>
+  </div>    
 </form>
-</div>
-</div> 
+
 <!---Search page popup ENDS here --->
 
 
@@ -187,7 +177,7 @@
   document.getElementById('popup-button').addEventListener('click', function() {document.getElementById('popup-overlay').style.display='flex';
  })
 
-  document.getElementById('close-button').addEventListener('click', function() {document.getElementById('popup-overlay').style.display='none';
+  document.getElementById('fa-xmark-search').addEventListener('click', function() {document.getElementById('popup-overlay').style.display='none';
  })
 </script>
 
@@ -195,7 +185,7 @@
   document.querySelector('.popup-button').addEventListener('click',function() {document.querySelector('.popup-container').style.display="flex";
  })
 
-  document.querySelector('.close-button').addEventListener('click',function() {document.querySelector('.popup-container').style.display="none";
+  document.querySelector('#fa-xmark-login').addEventListener('click',function() {document.querySelector('.popup-container').style.display="none";
  })
 </script>
 <!---Scripts for popups END here --->
