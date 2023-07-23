@@ -2,12 +2,9 @@
 <html>
   <head>
     <link rel="icon" type="image/png" href="/static/COLLTECH.png" style="border-radius:2000px">
-    <!-- Fontawesome KIT Link -->
-    <script src="https://kit.fontawesome.com/fbd3b48644.js" crossorigin="anonymous"></script>
     <title>Colltech Careers</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <!---Homepage CSS here --->
 <link rel="stylesheet" type="text/css" href="/static/homepage.css">
@@ -43,7 +40,7 @@
         </div>
         
         <div class="col-md-6 border" style="border-radius:15px;background-color:rgb(240,250,255);">
-      <p class="text-justify p-4" style="font-family: sans-serif;font-size:17px;word-spacing:5px;">
+      <p class="text-justify p-4" style="font-size:17px;word-spacing:3px;">
         At Colltech Careers, we are dedicated to empowering individuals in their career journeys. Our platform serves as a comprehensive gateway for job seekers to explore a wide range of open positions and take the next step in their professional growth. <br>We strive to connect talented individuals with exciting opportunities, fostering meaningful connections between candidates and employers.<br>
 Join us on this exciting journey and discover your ideal job match. Together, let's shape the future of careers.
       </p>
@@ -108,24 +105,21 @@ you've come to the right place.
       <!---Back-to-top arrow --->
       <a href="#" class="back-to-top"><i class="fa-solid fa-angle-up"></i></a>
       <script src="/static/homepage.js"></script>
-
-       <!---Subscribe to jobs here --->
-       <div class="row" style="background-color:rgb(0,0,255);margin-bottom:20px;">
+    </div>
+    <!---Subscribe to jobs here --->
+      <div class="row" style="background:rgba(0,0,255,0.9);margin:0 auto;">
        <div class="col-md-4">
          <h2 style="padding-left:30px;padding-bottom:10px;padding-top:20px;color:white;">Subscribe to Job Alerts</h2>
          <h6 style="padding-left:30px;padding-bottom:10px;color:white;">Join our Happy Subscribers</h6>
        </div>
-        <div class="col-md-8" style="margin-top:30px;margin-bottom:30px;">
-<form action="/subscribe" method="post" class="d-flex" style="padding-left:10px; padding-right:10px;">
-  <div class="input-group" style="width: 100%;">
-  <input type="email" class="form-control" name="email" style="border-radius: 15px 0 0 15px;" placeholder="Your Email..." class="form-control" required>
-  <button style="color: white;margin-right:5px;postion:absolute; " class="btn btn-primary active btn-lg" type="submit" name="subscribe">Subscribe</button>
-</div>
+    <div class="col-md-8" style="padding:30px 0;">
+<form action="/subscribe" method="post" style="display:flex;gap:10px;justify-content:center;align-items:center;max-width:600px;width:90%;margin:0 auto;height:60px;background:white;border-radius:10px;">
+  <input type="email" name="email" style="width:100%;height:100%;border:none;outline:none;background:none;padding:20px;" placeholder="Enter your Email..." required>
+  <button class="subscribe-btn" style="padding:8px 15px;font-size:18px;margin-right:12px;border-radius:10px;outline:none;border:none;" type="submit" name="subscribe">Subscribe</button>
 </form>
     </div>
       </div>
        <!---Subscribe to jobs ENDS here --->
-    </div>
     {% include 'footer.html' %}
   </body>
 </html>

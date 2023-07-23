@@ -74,7 +74,7 @@
 {% endif %}
 
 <li class="me-2">
-   <a id="popup-button" style="color:rgb(20,20,220);cursor:pointer;" class="nav-link dropdown-toggle-plus"><i class="fas fa-search fa-lg"></i></a>
+   <a id="search-button" style="color:rgb(20,20,220);cursor:pointer;" class="nav-link dropdown-toggle-plus"><i class="fas fa-search fa-lg"></i></a>
 </li> 
 
 <li>
@@ -86,9 +86,7 @@
     </nav>
       <div style="height:90px"></div> 
 
-<!---Search page popup here --->
-
-  
+<!---Search page popup here ---> 
 <form action="#" id="popup-overlay">
   <i id="fa-xmark-search" class="fa-solid fa-xmark"></i>
   <div class="form-items">
@@ -98,10 +96,7 @@
     </label>
   </div>    
 </form>
-
 <!---Search page popup ENDS here --->
-
-
 
 <!---MERGED LOGIN STARTS here --->
 <div class="popup-container">
@@ -171,13 +166,12 @@
 
 
 
-
 <!---Scripts for popups start here --->
 <script>
-  document.getElementById('popup-button').addEventListener('click', function() {document.getElementById('popup-overlay').style.display='flex';
+  document.getElementById('search-button').addEventListener('click', function() {document.getElementById('popup-overlay').classList.toggle('active');
  })
 
-  document.getElementById('fa-xmark-search').addEventListener('click', function() {document.getElementById('popup-overlay').style.display='none';
+  document.getElementById('fa-xmark-search').addEventListener('click', function() {document.getElementById('popup-overlay').classList.remove('active');
  })
 </script>
 

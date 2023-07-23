@@ -24,8 +24,9 @@
       .form-group input {
         width:100%;
         padding:10px;
+        border:none;
+        outline:none;
         border-bottom: 2px solid #ccc;
-        border-radius: 0px;
         margin-bottom: 25px;
         background-color:rgb(252,253,255); 
       }
@@ -44,6 +45,8 @@
 
     .submit:hover {
       background-color: darkblue;
+      letter-spacing:1.5px;
+      font-size:17px;
       box-shadow: 0 0 5px 0 rgba(0,0,0,0.7);
     }
       .form-group textarea {
@@ -51,11 +54,18 @@
         width: 100%;
         height: 120px;
         padding:10px;
-        border-radius: 0px;
-        margin-bottom: 25px;
-        background-color:rgb(252,253,255);
+        border:none;
+        outline:none;
         border-bottom: 2px solid #ccc;
+        margin-bottom: 25px;
+        background-color:rgb(252,253,255); 
       }
+       .form-group input:focus,
+      .form-group textarea:focus {
+        border-bottom-color:blue;
+        box-shadow: 0 5px 5px -5px rgba(0, 0, 0, 0.5);
+      }
+      
     </style>
   </head>
   <body>
@@ -70,26 +80,32 @@
           <p class="lead">With a focus on quality, efficiency, and customer satisfaction, we're committed to helping you reach your full potential. <br>So why wait?<br> Contact us today and discover what sets us apart from the rest.</p>
           </section>
           <div class="row contact-details mt-4 mb-4">
-            <div class="col-2"><button class="btn btn-primary" style="border-radius:100%;padding:10px;"><i class="fa-solid fa-phone fa-beat-fade fa-2x" style="color: white;"></i></button></div>
+            <div class="col-2">
+              <i class="fa-solid fa-phone fa-beat-fade" style="color: white;border-radius:100%;padding:10px;background:darkblue;font-size:20px;"></i>
+            </div>
             <div class="col-10">
               <h5 class="pb-1"><b>Have Any Question?</b></h5>
-              <h5>+254-000-134-123</h5>
+              <h6 style="color:darkblue;">+254-000-134-123</h6>
             </div>
           </div>
 
           <div class="row contact-details mt-4 mb-4">
-            <div class="col-2"><button class="btn btn-primary" style="border-radius:100%;padding:10px;"><i class="fa-regular fa-envelope fa-beat-fade fa-2x" style="color:white;"></i></button></div>
+            <div class="col-2">
+              <i class="fa-regular fa-envelope fa-beat-fade fa-2x" style="color: white;border-radius:100%;padding:10px;background:darkblue;font-size:20px;"></i>
+            </div>
             <div class="col-10">
               <h5 class="pb-1"><b>Email Us</b></h5>
-              <a class="btn" style="text-decoration:none;" href="mailto:colltechcareers@gmail.com?subject=Question%20about%20job%20opening&body=My%20Name%3A%3Cyour%20name%20here%3E%0D%0A%0D%0AMy%20question%3A%3CKindly%20leave%20your%20enquiry%20here%3E"><h5>colltechcareers@gmail.com</h5></a>
+              <a style="text-decoration:none;color:darkblue;" href="mailto:colltechcareers@gmail.com?subject=Question%20about%20job%20opening&body=My%20Name%3A%3Cyour%20name%20here%3E%0D%0A%0D%0AMy%20question%3A%3CKindly%20leave%20your%20enquiry%20here%3E"><h6>colltechcareers@gmail.com</h6></a>
             </div>
           </div>
 
           <div class="row contact-details mt-4 mb-4">
-            <div class="col-2"><button class="btn btn-primary" style="border-radius:100% ;padding-left:15px;padding-right:15px;padding-top:10px;padding-bottom:10px;"><i class="fa-solid fa-location-dot fa-fade fa-2x" style="color: #fafcff;"></i></button></div>
+            <div class="col-2">
+              <i class="fa-solid fa-location-dot fa-fade fa-2x" style="color: white;border-radius:100%;padding:10px 13px;background:darkblue;font-size:20px;"></i>
+            </div>
             <div class="col-10">
               <h5 class="pb-1"><b>Visit Us Any Time</b></h5>
-              <h5>Ruiru Fairview Estate, Street No.4 </h5>
+              <h6 style="color:darkblue;">Ruiru Fairview Estate, Street No.4 </h6>
             </div>
           </div>
           
@@ -110,10 +126,10 @@
         {% endwith %}
     </div>
             <form action="/comments" method="post">
-              <input type="text" name="name" class="form-control" placeholder="Name" required>
-              <input type="email" name="email" class="form-control" placeholder="Email" required>
-              <input type="text" name="subject" class="form-control" placeholder="Subject" required>
-              <textarea name="message" class="form-control" placeholder="Message..." required></textarea>
+              <input type="text" name="name"  placeholder="Name" required>
+              <input type="email" name="email"  placeholder="Email" required>
+              <input type="text" name="subject" placeholder="Subject" required>
+              <textarea name="message" placeholder="Message..." required></textarea>
               <button type="submit" class="submit">Send Message</button>
             </form>
           </div>

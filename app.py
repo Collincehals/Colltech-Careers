@@ -39,7 +39,9 @@ def employer_login_required(route_function):
         else:
             return redirect('/employer-login')
     return wrapper
+
 import math 
+
 #Routes here#
 @app.route('/')
 def home():
@@ -112,7 +114,6 @@ def show_job(id):
 def about():
     return render_template('about.html')
   
-#EXPERIMENTAL
 @app.route('/merged_signup')
 def merged_reg():
   return render_template ('merged_regforms.html')
