@@ -95,8 +95,8 @@ html {
 /*---Styling for SEARCH POPUP STARTS here --->*/
 #popup-overlay {
     position:fixed;
-    top:110%;
-    left:0;
+    top:0;
+    left:-110%;
     height:100%;
     width:100%;
     display:flex;
@@ -104,11 +104,11 @@ html {
     align-items:center;
     justify-content: center;
     z-index: 9999;
-    transition:.2s linear;
+    transition:.3s linear;
   }
 
 #popup-overlay.active {
-    top:0;
+    left:0;
 }
 
 #popup-overlay .form-items {
