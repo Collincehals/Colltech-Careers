@@ -12,47 +12,48 @@
 <link rel="stylesheet" type="text/css" href="/static/homepage.css">
     <!--- End --->
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;600&display=swap');
+  
 * {
-  transition: all 0.3s linear;
+  font-family:'Nunito Sans', sans-serif;
+  transition: all 0.2s linear;
   text-transform: capitalize;
+  box-sizing:border-box;
+  border:none; outline:none;
+  margin:0; padding:0;
+  text-decoration:none;
 } 
+
+html {
+  font-size:62.5%;
+  scroll-padding-top:10px;
+  overflow-x:hidden;
+  scroll-behavior:smooth;
+}
 body {
   background-color:rgba(240,245,255,0.8);
 }
-/* WEBKIT SCROLLBAR STYLING STARTS HERE */
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-track {
-  background-color: #f1f1f1;
-}
-::-webkit-scrollbar-thumb {
-  background-color: lightgray;
-  border-radius: 5px;
-}
-/* WEBKIT SCROLLBAR STYLING ENDS HERE */
-  
+ 
 .side-bar {
   background-color: rgba(255,255,255,0.9);
   width: 30%;
-  padding:20px;
+  padding:2rem;
   float:left;
-  border-radius:10px;
   height:100vh;
   overflow-y:scroll;
   position:fixed;
-  padding-bottom:150px;
+  padding-bottom:15rem;
 }
 
 .side-bar-item {
   justify-content:center;
-  margin-bottom:8px;
-  border-radius:15px;
-  padding:12px;
+  margin-bottom:.8rem;
+  border-radius:1.5rem;
+  padding:1.2rem;
 }
 
 .side-bar-item:hover  {
-  transform:translateX(10px);
+  transform:translateX(1rem);
   background-color:rgba(240,245,255,0.9);
 }
 
@@ -60,51 +61,198 @@ body {
   width: 65%;
   background-color: rgba(255,255,255,0.9);
   margin-left: 32%;
-  margin-right:10px;
-  padding:30px;
-  border-radius:10px;
+  margin-right:1rem;
+  padding:3rem;
+  border-radius:1rem;
   height:100vh;
 }
 
 div a {
   text-decoration:none;
-  font-size:17px;
+  font-size:1.7rem;
+  color:darkblue;
+}
+
+div a:hover {
+  color:blue;
 }
 
 .side-bar-item a.active {
-  color: orange;
-  justify-content:center;
-  border-radius:15px;
-  padding:12px;
-  padding-right:80px;
-  background-color:rgba(240,245,255,0.9);
+  color: darkorange;
+}
+  
+h1 {
+  font-size:4.0rem;
+  font-family: 'Nunito Sans', sans-serif;
 }
 
+h2 {
+  font-size:3.0rem;
+  font-family: 'Nunito Sans', sans-serif;
+  padding-bottom:.8rem;
+  text-align:center;
+}
+h3 {
+  font-size:2.5rem;
+  font-family: 'Nunito Sans', sans-serif;
+}
+p {
+  font-size:1.7rem;
+  font-family: 'Nunito Sans', sans-serif;
+}
+.sidebar-toggle-button {
+  position:fixed;
+  font-weight:bolder;
+  margin-bottom:1.5rem;
+  padding:1.2rem 2rem;
+  margin-left:0;
+  margin-top:-3rem;
+  margin-bottom:4rem;
+  z-index:1000;
+  background:rgba(240,245,255,0.9);
+  display:none;
+}
+.sidebar-toggle-button i {
+    font-size:2rem;color:darkblue; margin-right:1.5rem;
+  }
+.sidebar-toggle-button span {
+    color:darkblue;font-size:1.7rem;
+  }
 
-    </style>
+.sidebar-close-button {
+  position:relative;
+  margin-top:1.2rem;
+  text-align:center;
+  font-weight:500;
+  margin-bottom:2rem;
+  display:none;
+ 
+}
+.sidebar-close-button i {
+    font-size:2.5rem;color:red;margin-right:1rem;
+  }
+.sidebar-close-button span {
+    color:red;font-size:2rem;
+  }
+
+.subscribe-btn {
+  padding:.8rem 1.5rem;
+  font-size:1.8rem;
+  margin-right:1.2rem;
+  border-radius:1rem;
+  outline:none;border:none;
+}
+.navbar-brand {
+  font-size:1.7rem;
+}
+#user-btn {
+  font-size:1.7rem;
+  padding:.5rem 1.5rem;
+  color:black;
+  background:darkorange;
+}
+#postjob-btn {
+  font-size:1.7rem;
+  padding:.5rem 1.2rem;
+}
+
+section {
+  margin-bottom:4rem;
+}
+  
+/*Media queries*/
+  @media (max-width:768px) {
+    .side-bar {
+      position:fixed;
+      left:-110%;
+      top:0;
+      overflow-y:hidden;
+      width:60%;
+      height:auto;
+      margin:0 auto;
+      background:#eaebea;
+      z-index:3000;
+      clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    }
+
+    .side-bar.active {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      transition: .1s linear;
+      left:0;
+      
+    }
+    
+    .middle-content {
+      width: 100%;
+      margin: 0 auto;
+      padding:3rem;
+      border-radius:1rem;
+      height:100vh;
+    }
+    .sidebar-toggle-button {
+      display:block;
+    }
+    .sidebar-close-button {
+      display:block;
+    }
+    .subscribe-btn {
+      padding:.7rem 1.3rem;
+      font-size:1.8rem;
+      margin-right:1rem;
+      border-radius:1rem;
+      outline:none;border:none;
+    }
+    .side-bar-item a.active {
+      color: blue;
+    }
+}
+
+  
+@media (max-width: 420px){
+  html {
+    font-size:50%;
+  }
+  h1,h2 {
+    font-size:25px;
+  }
+}
+
+</style>
+  
 </head>
 <body>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+  <div style="font-size:1.6rem;">
     {% include 'nav.html' %} 
+  </div>
   
    <!---SIDE BAR HERE --->
   <div class="side-bar">
-    <div class="side-bar-item"><a href="employer-logout" style="color:red;"><i class="fa-solid fa-power-off" style="color: #042e76;margin-right:10px;"></i>Logout</a></div>
-    <div class="side-bar-item"><a href="employer-dashboard"><i class="fa-solid fa-chalkboard-user" style="color: #022b74;margin-right:10px;"></i>Employer- Dashboard</a></div>
-    <div class="side-bar-item"><a href="#"><i class="fa-regular fa-user" style="color: #042e76;margin-right:10px;"></i>Profile</a></div>
-    <div class="side-bar-item"><a href="#"><i class="fa-solid fa-arrow-right-to-bracket" style="color: #07327e;margin-right:10px;"></i>Received Applications </a></div>
-    <div class="side-bar-item"><a href="#"><i class="fa-solid fa-users-line" style="color: #083177;margin-right:10px;"></i>Meeting</a></div>
-    <div class="side-bar-item"><a href="#"><i class="fa-regular fa-bell" style="color: #072f74;margin-right:10px;"></i>Job Alerts</a></div>
-    <div class="side-bar-item"><a href="#"><i class="fa-regular fa-message" style="color: #042867;margin-right:10px;"></i>Messages </a></div>
-    <div class="side-bar-item"><a href="#"><i class="fa-solid fa-lock" style="color: #042867;margin-right:10px;"></i>Change Password </a></div>
-    <div class="side-bar-item"><a href="#" onmouseover="this.style.color='red'" onmouseout="this.style.color='darkblue'"><i class="fa-solid fa-trash-can" style="color: #042a6c;margin-right:10px;"></i>Delete Profile </a></div>
+     <div class="sidebar-close-button">
+      <i class="fa fa-times" id="sidebar-close-icon"></i><span>Close</span>
+    </div>
+    <div class="side-bar-item"><a href="employer-logout" style="color:red;"><i class="fa-solid fa-power-off" style="color: #042e76;margin-right:1rem;"></i>Logout</a></div>
+    <div class="side-bar-item"><a href="employer-dashboard"><i class="fa-solid fa-chalkboard-user" style="color: #022b74;margin-right:1rem;"></i>Employer- Dashboard</a></div>
+    <div class="side-bar-item"><a href="#"><i class="fa-regular fa-user" style="color: #042e76;margin-right:1rem;"></i>Profile</a></div>
+    <div class="side-bar-item"><a href="#"><i class="fa-solid fa-arrow-right-to-bracket" style="color: #07327e;margin-right:1rem;"></i>Received Applications </a></div>
+    <div class="side-bar-item"><a href="#"><i class="fa-solid fa-users-line" style="color: #083177;margin-right:1rem;"></i>Meeting</a></div>
+    <div class="side-bar-item"><a href="#"><i class="fa-regular fa-bell" style="color: #072f74;margin-right:1rem;"></i>Job Alerts</a></div>
+    <div class="side-bar-item"><a href="#"><i class="fa-regular fa-message" style="color: #042867;margin-right:1rem;"></i>Messages </a></div>
+    <div class="side-bar-item"><a href="#"><i class="fa-solid fa-lock" style="color: #042867;margin-right:1rem;"></i>Change Password </a></div>
+    <div class="side-bar-item"><a href="#" onmouseover="this.style.color='red'" onmouseout="this.style.color='darkblue'"><i class="fa-solid fa-trash-can" style="color: #042a6c;margin-right:1rem;"></i>Delete Profile </a></div>
     
   </div>
-    
+
+  <!---Sidebar-toggle button here --->
+    <div class="sidebar-toggle-button">
+      <i class="fas fa-bars" id="sidebar-icon"></i><span>Show Side Bar</span>
+    </div>
+  
   <div class="middle-content">
         <!-- Employer Profile Section -->
-     <section class="profile pb-4">
-        <h1 class="pb-4 text-center">Welcome, {{ company_name }}!</h1>
+     <section class="profile">
+        <h1 class="pb-2 text-center">Welcome, <span style="color:darkblue;">{{ company_name }}!</span></h1>
+        <hr style="padding-bottom:1.5rem;">
         <div class="profile-details">
             <h2 >Profile Information</h2>
             <p><strong>Company Name:</strong> {{ company_name }}</p>
@@ -114,8 +262,9 @@ div a {
     </section>
 
     <!-- Jobs Posted  Section -->
-    <section class="pb-4">
+    <section>
         <h2>Job Postings </h2>
+      <p style="font-size:1.6rem;padding:3rem 5rem;background:rgb(240,245,255);border-radius:.8rem;">You have not posted any jobs yet.</p>
         <ul>
             {% for application in job_applications %}
                 <li>
@@ -131,6 +280,7 @@ div a {
     <!-- Applications Received Section -->
     <section>
         <h2>Applications Received </h2>
+      <p style="font-size:1.6rem;padding:3rem 5rem;background:rgb(240,245,255);border-radius:.8rem;">There are no jobs applied for in your company yet.</p>
         <ul>
             {% for job in saved_jobs %}
                 <li>
@@ -140,7 +290,13 @@ div a {
                 </li>
             {% endfor %}
         </ul>
-    </section>    
+    </section> 
+    
+   <!--- Job posting section here--->
+    <section style="margin-bottom:10rem;">
+      <h2>Looking to Recruit? Post Job here! </h2>
+      {% include 'jobpostform.html' %}
+    </section>
         
  <!---Back-to-top arrow --->
       <a href="#" class="back-to-top"><i class="fa-solid fa-angle-up"></i></a>
@@ -157,6 +313,25 @@ div a {
     }
   });
 </script>
-
+  
+<script>
+let iconbars = document.querySelector('#sidebar-icon');
+let sidebarmenu = document.querySelector('.side-bar');
+let sidebarclose = document.querySelector('.sidebar-close-button');
+let sidebarlinks = document.querySelectorAll('.side-bar-item');
+  
+iconbars.onclick = () =>{
+  sidebarmenu.classList.toggle('active');
+}
+sidebarclose.onclick = () =>{
+  sidebarmenu.classList.remove('active');
+}
+sidebarlinks.forEach(link => 
+  {link.onclick = () => {
+    sidebarmenu.classList.remove('active');
+  };
+});
+</script>
+  
 </body>
 </html>

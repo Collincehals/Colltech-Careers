@@ -1,0 +1,99 @@
+<style>
+  * {
+    box-sizing:border-box;
+  }
+    body{
+      background-color:rgb(255,255,255);
+    }
+    .container {
+      max-width: 90rem;
+      border: 1px solid #ccc;
+      border-radius:1rem;
+      width: 100%;
+      margin: 0 auto;
+      background-color: rgb(240, 245, 255);
+      font-family: 'Nunito Sans', sans-serif;
+      font-weight: normal;
+      padding:1.5rem;
+    }
+    .form-group label {
+      display:block;
+      color:darkblue;
+      font-weight:bolder;
+      font-size:1.6rem;
+      margin-bottom:.5rem;
+    }
+    .form-group input {
+      width: 100%;
+      font-family: Arial, sans-serif;
+      border:none;outline:none;
+      border-bottom: .1rem solid #ccc;
+      background:transparent;
+      padding: 1.2rem;
+      margin-bottom: 2rem;
+      font-size:1.6rem;
+      
+    }
+    .form-group textarea {
+      padding:1.2rem;
+      height:15rem;
+      display:inline-block;
+      width: 100%;
+      border:none;outline:none;
+      border-bottom: .1rem solid #ccc;
+      background:transparent;
+      margin-bottom: 2rem;
+      font-family: Arial, sans-serif;
+      font-size:1.6rem;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color:blue;
+      box-shadow:0 .3rem 0 0 rgba(0,0,250,.3);
+    }
+
+      
+    .form-group .btn {
+      padding:1.2rem;
+      background:blue;
+      color:white;
+      font-size:1.7rem;
+      width: 100%;
+      margin-bottom: 1rem;
+      }
+
+    .required {
+        color: red;
+    }
+  </style>
+</head>
+<body>
+  <p style="color:red; margin-top:1rem;margin-bottom:1rem;"><span class="required">*</span>NOTE: All job responsibilities and requirements to be posted in a list format without numbering. </p>
+  <div class="container" style="padding:2rem;">
+    <h3 style="text-align:center;color:darkblue">Job Posting Form </h3>
+    
+    <form class="form-group" action="/post-job" method='post'>
+      <label for="title" name="title">Job Title<span class="required">*</span></label>
+      <input type="text" name="title" placeholder="Software Engineer" required>
+      <label name="company">Company<span class="required">*</span></label>
+      <input type="text" name="company" placeholder="Colltech" required>
+
+      <label for="location" name="location">Job Location<span class="required">*</span></label>
+      <input type="text" name="location" placeholder="Bengaluru,India" required>
+
+      <label for="currency" name="currency">Currency</label>
+      <input type="text" name="currency" placeholder="KShs.">
+
+      <label for="salary" name="salary">Salary</label>
+      <input type="number" step="0.01" name="salary" >
+
+      <label for="responsibilities" name="responsibilities">Job Responsibilities</label>
+      <textarea name="responsibilities"></textarea>
+
+      <label for="requirements" name="requirements">Job Requirements</label>
+      <textarea name="requirements"></textarea>
+
+      <input type="submit" value="Post Job" class="btn">
+    </form>
+  </div>
+</body>

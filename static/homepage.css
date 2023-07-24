@@ -160,6 +160,7 @@ h1{
   font-weight:bolder;
   color:blue;
   padding-bottom:10px;
+  background:;
 }
 
 @media (max-width: 600px){

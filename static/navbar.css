@@ -17,17 +17,28 @@ html {
   overflow-x:hidden;
 }
 
+/* WEBKIT SCROLLBAR STYLING STARTS HERE */
 ::-webkit-scrollbar {
-  width:10px;
+  width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background:#b5b0b0;
-} 
+  background-color: #f1f1f1;
+}
 ::-webkit-scrollbar-thumb {
-  background:rgba(0,0,139,0.7);
-  border-radius:15px;
-} 
+  background-color: rgba(45,45,45,0.3);
+  border-radius: 5px;
+}
+/* WEBKIT SCROLLBAR STYLING ENDS HERE */
 
+#navbar-toggler-icon {
+  color:darkblue;
+  font-size:2.5rem;
+}
+.navbar {
+  background:#eaebea;
+  border-bottom:1px solid #ccc;
+ 
+}
 .btn:hover {
   background-color:blue;
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
