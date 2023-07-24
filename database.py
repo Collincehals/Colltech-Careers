@@ -172,3 +172,29 @@ def load_feedbacks_from_db():
     result_all = result.fetchall()
     feedbacks = [dict(zip(column_names, row)) for row in   result_all]
     return feedbacks
+
+
+
+import pymysql
+def delete_unconfirmed_subscribers():
+    connection = pymysql.connect(
+        host=os.environ['HOST'],
+        user=os.environ['USER_NAME'],
+        password=os.environ['PASSWORD'],
+        database=os.environ['DB_NAME'],
+        ssl= {
+        "ssl_ca": "/etc/ssl/cert.pem"
+        }
+    )
+
+    try:
+        with connection.cursor() as cursor:
+            # Execute the SQL query to delete unconfirmed subscribers
+            sql = "DELETE FROM subscribers WHERE confirmed = 0"
+            cursor.execute(sql)
+            connection.commit()
+            print("Deleted unconfirmed subscribers from the database.")
+    except Exception as e:
+        print("An error occurred:", str(e))
+    finally:
+        connection.close()

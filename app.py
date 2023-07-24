@@ -2,7 +2,7 @@ from flask import Flask, render_template, request,redirect,url_for,flash,session
 
 from passlib.hash import bcrypt
 
-from database import load_jobs_from_db, load_job_from_db, add_application_to_db, add_user_to_db, add_employer_to_db, add_subscriber_to_db,add_job_to_db,load_subscribers_from_db,load_users_from_db, load_employers_from_db, add_feedback_to_db, load_feedbacks_from_db, update_subscriber_confirmation_status, generate_confirmation_token
+from database import load_jobs_from_db, load_job_from_db, add_application_to_db, add_user_to_db, add_employer_to_db, add_subscriber_to_db,add_job_to_db,load_subscribers_from_db,load_users_from_db, load_employers_from_db, add_feedback_to_db, load_feedbacks_from_db, update_subscriber_confirmation_status, generate_confirmation_token,delete_unconfirmed_subscribers
 
 from email_sender import send_confirmation_email
 
@@ -490,5 +490,18 @@ def resume():
 def shortlist():
   return render_template('open_positions.html')
 
+
+# Deleting unconfirmed subscribers from db
+from apscheduler.schedulers.background import BackgroundScheduler
+
+sched = BackgroundScheduler()
+
+
+def job1():
+    delete_unconfirmed_subscribers()
+
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True) 
+  sched.add_job(id='job1', func=job1, trigger='cron', day_of_week='*', hour=5, minute=10)
+  sched.start()
+  app.run(host='0.0.0.0', debug=True, use_reloader=False) 
