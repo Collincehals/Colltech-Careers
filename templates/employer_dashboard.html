@@ -239,7 +239,8 @@ section {
     <div class="side-bar-item"><a href="#"><i class="fa-regular fa-bell" style="color: #072f74;margin-right:1rem;"></i>Job Alerts</a></div>
     <div class="side-bar-item"><a href="#"><i class="fa-regular fa-message" style="color: #042867;margin-right:1rem;"></i>Messages </a></div>
     <div class="side-bar-item"><a href="#"><i class="fa-solid fa-lock" style="color: #042867;margin-right:1rem;"></i>Change Password </a></div>
-    <div class="side-bar-item"><a href="#" onmouseover="this.style.color='red'" onmouseout="this.style.color='darkblue'"><i class="fa-solid fa-trash-can" style="color: #042a6c;margin-right:1rem;"></i>Delete Profile </a></div>
+    <div class="side-bar-item"><a href="/delete-recruiter-account" style="color:darkblue;" onmouseover="this.style.color='red'" onmouseout="this.style.color='darkblue'"><i class="fa-solid fa-trash-can" style="color: #042a6c;margin-right:1rem;"></i>Delete Profile </a></div> 
+  </div>
     
   </div>
 
@@ -254,10 +255,12 @@ section {
         <h1 class="pb-2 text-center">Welcome, <span style="color:darkblue;">{{ company_name }}!</span></h1>
         <hr style="padding-bottom:1.5rem;">
         <div class="profile-details">
-            <h2 >Profile Information</h2>
-            <p><strong>Company Name:</strong> {{ company_name }}</p>
-            <p><strong>Company Email:</strong> {{ email }}</p>
-            <!-- Include additional profile details here -->
+            <h2>Profile Information</h2>
+            <p><span style="color:darkblue;font-weight:bold;">First Name:</span> {{ first_name }}</p>
+            <p><span style="color:darkblue;font-weight:bold;">Last Name:</span> {{ last_name }}</p>
+            <p><span style="color:darkblue;font-weight:bold;">Email:</span> {{ email }}</p>
+            <p><span style="color:darkblue;font-weight:bold;">Company-name:</span> {{ company_name }}</p>
+          <p><span style="color:darkblue;font-weight:bold;">Company-category:</span> {{ company_category }}</p>
         </div>
     </section>
 

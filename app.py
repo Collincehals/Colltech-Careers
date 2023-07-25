@@ -348,7 +348,7 @@ def subscription_confirmation():
     return "Subscription not Successful"
 
 
-#Job Posting URL here
+#Job Posting route here
 @app.route('/post-job', methods=['POST', 'GET'])
 @employer_login_required
 def post_job():
@@ -373,12 +373,16 @@ def merged_login():
   return render_template('merged_login.html')
 
 
-#User Login and Logout Routes here
+
 @app.route('/user-dashboard')
 def dashboard():
     if 'username' in session:
+        # Retrieve additional parameters from the session
         username = session['username']
-        return render_template('dashboard.html', username=username)
+        email = session['email']
+        last_name = session['last_name']
+        first_name  = session['first_name']
+        return render_template('dashboard.html', username=username, email=email, last_name=last_name, first_name =first_name )
     else:
         return render_template('merged_login.html')
 
@@ -393,6 +397,11 @@ def user_login():
             hashed_password = user['password']
             if user['username'] == username and bcrypt.verify(password, hashed_password):
                 session['username'] = username
+                session['email'] = user['email']
+                session['first_name'] = user['first_name']
+                session['last_name'] = user['last_name']
+                print("Logged in successfully!")
+                print(session) 
                 return redirect('user-dashboard')
         flash ('Wrong username or password. Please try again!!!')
         return redirect(url_for('user_login'))
@@ -401,8 +410,10 @@ def user_login():
 
 @app.route('/user-logout')
 def logout():
-    session.pop('username', None)
+    # Clear all session data when the user logs out
+    session.clear()
     return redirect('/')
+
 
 
 #Employer Login and Logout Routes here
@@ -410,7 +421,11 @@ def logout():
 def employer_dashboard():
     if 'company_name' in session:
         company_name = session['company_name']
-        return render_template('employer_dashboard.html', company_name=company_name)
+        first_name= session['first_name']
+        last_name = session['last_name']
+        email = session['email']
+        company_category = session['company_category']
+        return render_template('employer_dashboard.html', company_name=company_name, company_category=company_category,email=email,last_name=last_name,first_name=first_name)
     else:
         return render_template('employer_login.html')
 
@@ -425,6 +440,12 @@ def employer_login():
             hashed_password = employer['password']
             if employer['company_name'] == company_name and bcrypt.verify(password, hashed_password):
                 session['company_name'] =company_name
+                session['first_name'] = employer['first_name']
+                session['last_name'] = employer['last_name']
+                session['email'] = employer['email']
+                session['company_category'] = employer['company_category']
+                print('Logged in Successfully!')
+                print (session)
                 return redirect('/employer-dashboard')
         flash ('Wrong company name or password. Please try again!!!')
         return redirect(url_for('employer_login'))
@@ -491,12 +512,83 @@ def shortlist():
   return render_template('open_positions.html')
 
 
+#Route for deleting user account:
+import pymysql
+
+@app.route('/delete-account', methods=['GET', 'POST'])
+def delete_account():
+    if 'username' in session:
+        username = session['username']  
+        if request.method == 'POST':
+            connection = pymysql.connect(
+                host=os.environ['HOST'],
+                user=os.environ['USER_NAME'],
+                password=os.environ['PASSWORD'],
+                database=os.environ['DB_NAME'],
+                ssl= {
+                "ssl_ca": "/etc/ssl/cert.pem"
+                }
+            )
+
+            try:
+                with connection.cursor() as cursor:
+                    sql = "DELETE FROM users WHERE username = %s"
+                    cursor.execute(sql, (username,))
+                    connection.commit()
+                    return "Your Account has been deleted successfully!"
+            except Exception as e:
+                print("An error occurred:", str(e))
+                flash('An error occurred while deleting your account. Please try again later.')
+            finally:
+                connection.close()
+            session.pop('username', None)
+            return redirect(url_for('home'))
+        else:
+            return render_template('delete_account.html') 
+    else:
+        flash('You must be logged in to delete your account.')
+        return redirect(url_for('user_login'))
+
+#Route for deleting employer account:
+@app.route('/delete-recruiter-account', methods=['GET', 'POST'])
+def delete_recruiter_account():
+    if 'company_name' in session:
+        company_name = session['company_name']  
+        if request.method == 'POST':
+            connection = pymysql.connect(
+                host=os.environ['HOST'],
+                user=os.environ['USER_NAME'],
+                password=os.environ['PASSWORD'],
+                database=os.environ['DB_NAME'],
+                ssl= {
+                "ssl_ca": "/etc/ssl/cert.pem"
+                }
+            )
+
+            try:
+                with connection.cursor() as cursor:
+                    sql = "DELETE FROM employers WHERE company_name = %s"
+                    cursor.execute(sql, (company_name,))
+                    connection.commit()
+                    return "Your Account has been deleted successfully!"
+            except Exception as e:
+                print("An error occurred:", str(e))
+                flash('An error occurred while deleting your account. Please try again later.')
+            finally:
+                connection.close()
+            session.pop('company_name', None)
+            return redirect(url_for('home'))
+        else:
+            return render_template('delete_employer_account.html') 
+    else:
+        flash('You must be logged in to delete your account.')
+        return redirect(url_for('employer_login'))
+
+
+
 # Deleting unconfirmed subscribers from db
 from apscheduler.schedulers.background import BackgroundScheduler
-
 sched = BackgroundScheduler()
-
-
 def job1():
     delete_unconfirmed_subscribers()
 

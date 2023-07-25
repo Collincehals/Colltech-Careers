@@ -242,7 +242,7 @@ p {
     <div class="side-bar-item"><a href="#"><i class="fa-regular fa-bell" style="color: #072f74;margin-right:1rem;"></i>Job Alerts</a></div>
     <div class="side-bar-item"><a href="#"><i class="fa-regular fa-message" style="color: #042867;margin-right:1rem;"></i>Messages </a></div>
     <div class="side-bar-item"><a href="#"><i class="fa-solid fa-lock" style="color: #042867;margin-right:1rem;"></i>Change Password </a></div>
-    <div class="side-bar-item"><a href="#" style="color:darkblue;" onmouseover="this.style.color='red'" onmouseout="this.style.color='darkblue'"><i class="fa-solid fa-trash-can" style="color: #042a6c;margin-right:1rem;"></i>Delete Profile </a></div> 
+    <div class="side-bar-item"><a href="/delete-account" style="color:darkblue;" onmouseover="this.style.color='red'" onmouseout="this.style.color='darkblue'"><i class="fa-solid fa-trash-can" style="color: #042a6c;margin-right:1rem;"></i>Delete Profile </a></div> 
   </div>
   
     <!---Sidebar-toggle button here --->
@@ -257,10 +257,10 @@ p {
       <hr style="padding-bottom:1.5rem;">
         <div class="profile-details">
             <h2>Profile Information</h2>
-            <p><strong>First Name:</strong> {{ username }}</p>
-            <p><strong>Last Name:</strong> {{ last_name }}</p>
-            <p><strong>Email:</strong> {{ email }}</p>
-            <!-- Include additional profile details here -->
+            <p><span style="color:darkblue;font-weight:bold;">First Name:</span> {{ first_name }}</p>
+            <p><span style="color:darkblue;font-weight:bold;">Last Name:</span> {{ last_name }}</p>
+            <p><span style="color:darkblue;font-weight:bold;">Email:</span> {{ email }}</p>
+            <p><span style="color:darkblue;font-weight:bold;">User-name:</span> {{ username }}</p>
         </div>
     </section>
 
