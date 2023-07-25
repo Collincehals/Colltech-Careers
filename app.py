@@ -502,6 +502,6 @@ def job1():
 
 
 if __name__ == '__main__':
-  sched.add_job(id='job1', func=job1, trigger='cron', day_of_week='*', hour=5, minute=10)
+  sched.add_job(id='job1', func=job1, trigger='cron', day_of_week='*', hour=5, minute=37)
   sched.start()
   app.run(host='0.0.0.0', debug=True, use_reloader=False) 

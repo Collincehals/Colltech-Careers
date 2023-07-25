@@ -156,6 +156,10 @@ html {
   right:25px;
   top:40px;
 }
+#user-btn {
+  color:black;
+  background:darkorange;
+}
 /*---Styling for search popup ENDS here --->*/
 
 /*---Styling for Merged LOGIN starts here --->*/
