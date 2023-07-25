@@ -585,6 +585,51 @@ def delete_recruiter_account():
         return redirect(url_for('employer_login'))
 
 
+#API for job fetching
+def get_jobs():
+    """Makes a request to the Adzuna API and returns a list of jobs."""
+    api_id = os.environ.get('API_ID') 
+    api_key = os.environ.get('APP_KEY')
+
+    url = f"https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id={api_id}&app_key={api_key}&results_per_page=200"  
+    try:
+        response = requests.get(url)
+        if response.status_code == 200:
+            return response.json()["results"]
+        else:
+            return []
+    except requests.RequestException as e:
+        print(f"Error: {e}")
+        return []
+
+@app.route("/adzunajobs")
+def index():
+    jobs = get_jobs()
+    return render_template ("index.html", jobs=jobs)
+
+
+def extract_jobs():
+    """Makes a request to the KenyaJob.com API and returns a list of jobs."""
+    api_key = os.environ.get('API_KEY')
+
+    url = f"https://api.kenyajob.com/v1/jobs?api-key={api_key}&results_per_page=200"
+    try:
+        response = requests.get(url)
+        if response.status_code == 200:
+            return response.json()["jobs"]
+        else:
+            return []
+    except requests.RequestException as e:
+        print(f"Error: {e}")
+        return []
+      
+@app.route("/kenyanjobs")
+def kenyan_jobs():
+    jobs = extract_jobs()
+    return render_template ("kenyan_jobs.html", jobs=jobs)
+
+
+
 
 # Deleting unconfirmed subscribers from db
 from apscheduler.schedulers.background import BackgroundScheduler

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Adzuna Jobs</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;600&display=swap');
+
+* {
+  font-family: 'Nunito Sans', sans-serif;
+  margin:0px; padding:0px;
+  text-decoration:none;
+  border:none; outline:none;
+  box-sizing:border-box;
+  text-transform: capitalize;
+  transition: all .1s linear;
+}
+
+  
+html {
+  scroll-behavior:smooth;
+  scroll-padding-top: 10px;
+  font-size:62.5%;
+  overflow-x:hidden;
+}
+  
+body {
+  background-color:rgba(240,245,255,0.8);
+}
+    .job {
+      background:rgba(240,245,255,.9);
+      border-radius:1.5rem;
+      margin:0 3rem;
+      margin-bottom:3rem;
+      padding:3rem;
+      box-shadow:0 0 .5rem 0 rgba(0,0,0,.5);
+    }
+    h1{
+      text-align:center;
+      font-size:2.5rem;
+      padding:1rem 0;
+    }
+
+    h4 {
+      color:darkblue;
+      font-weight:bold;
+      font-size:2.2rem;
+      text-decoration:none;
+    }
+    h6 {
+      color:darkblue;
+      font-weight:bold;
+      font-size:2rem;
+      text-decoration:none;
+    }
+
+     span {
+      color:black;
+      font-weight:bold;
+      font-size:1.6rem;
+      text-decoration:none;
+    }
+   .job-details {
+     margin-bottom:2rem;
+   }
+    
+  </style>
+</head>
+<body>
+<h1>Adzuna Jobs</h1>
+
+{% for job in jobs %}
+  <div class="job">
+<div class="job-details"><h4>Job Title: </h4><span>{{ job.title }}</span></div>
+<div class="job-details"><h6>Company: </h6><span>{{ job.company['display_name'] }}</span></div>
+<div class="job-details"><h6>Job Description: </h6><span>{{ job.description }}</span></div>
+<div class="job-details"><h6>Contract Type: </h6><span>{{ job.contract_type }}</span></div>
+<div class="job-details"><h6>Contract Time: </h6><span>{{ job.contract_time }}</span></div>
+  </div>
+{% endfor %}
+
+</body>
+</html>
+
+
+       
