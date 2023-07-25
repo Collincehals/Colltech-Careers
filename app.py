@@ -535,7 +535,7 @@ def delete_account():
                     sql = "DELETE FROM users WHERE username = %s"
                     cursor.execute(sql, (username,))
                     connection.commit()
-                    return "Your Account has been deleted successfully!"
+                    flash("Your Account has been deleted successfully!")
             except Exception as e:
                 print("An error occurred:", str(e))
                 flash('An error occurred while deleting your account. Please try again later.')
@@ -570,7 +570,7 @@ def delete_recruiter_account():
                     sql = "DELETE FROM employers WHERE company_name = %s"
                     cursor.execute(sql, (company_name,))
                     connection.commit()
-                    return "Your Account has been deleted successfully!"
+                    flash("Your Account has been deleted successfully!")
             except Exception as e:
                 print("An error occurred:", str(e))
                 flash('An error occurred while deleting your account. Please try again later.')
