@@ -39,5 +39,3 @@ var swiper = new Swiper(".review-swiper", {
         },
       },
     });
-
-
