@@ -385,7 +385,8 @@ def dashboard():
         return render_template('dashboard.html', username=username, email=email, last_name=last_name, first_name =first_name )
     else:
         return render_template('merged_login.html')
-
+      
+#user-login
 @app.route('/user-login', methods=['GET', 'POST'])
 def user_login():
     if request.method == 'POST':
