@@ -47,7 +47,7 @@
       }
 
       .user:hover {
-        transform: scale(1.01);
+        transform: scaleY(1.05);
         box-shadow: 0 0 1px rgba(0, 0, 120, 0.9);
         border-color:darkblue;
         background-color:rgba(135, 206, 235,0.3);
@@ -71,13 +71,13 @@
       } 
 
       .float:hover {
-              background-color:#241e1e;
-              border-radius:100%;
-              padding:5px 10px;
+        background-color:#241e1e;
+        border-radius:100%;
+        padding:5px 10px;
         
-            } 
+      } 
 
-              .back-to-top {
+      .back-to-top {
         display: none;
         position: fixed;
         bottom: 20px;
@@ -96,11 +96,12 @@
       }
 
       .job:hover {
-        box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
       }
 
     .image:hover{
       transform:scale(1.08);
+      overflow: hidden;
     }
 
 .review .review-swiper {
