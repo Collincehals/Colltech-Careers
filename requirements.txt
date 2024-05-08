@@ -1,0 +1,8 @@
+Flask
+gunicorn
+sqlalchemy
+pymysql
+mailjet_rest
+passlib
+bcrypt
+apscheduler

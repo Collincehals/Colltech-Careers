@@ -1,0 +1,252 @@
+<!-- Fontawesome KIT Link -->
+    <script src="https://kit.fontawesome.com/fbd3b48644.js" crossorigin="anonymous"></script>
+<!---CSS Styles for navbar here --->
+<link rel="stylesheet" type="text/css" href="/static/navbar.css">
+
+<!---Navbar starts here --->
+<nav class="navbar navbar-expand-lg navbar-dark shadow-sm fixed-top pt-3 pb-3" aria-label="Fifth navbar example">
+   
+    <div class="container-fluid">
+      
+      <img class="me-3" src="/static/COLLTECH.png" alt="" width="45" height="45" style="border-radius:1000px">
+      
+      <a class="navbar-brand me-3" style="color:rgb(20,20,220);" href="/">Colltech Careers</a>
+      <a   class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars" id="navbar-toggler-icon"></i></span>
+      </a>
+
+      <div class="collapse navbar-collapse" id="navbarsExample05">
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a style="color:rgb(20,20,220)"class="nav-link" aria-current="page" href="/"><i class="fa-solid fa-house me-1"></i>Home </a>
+          </li>
+          <li class="nav-item me-2">
+            <a style="color:rgb(20,20,220)" class="nav-link" href="/about/">About Us</a>
+          </li>
+          <li class="nav-item me-2">
+            <a style="color:rgb(20,20,220)" class="nav-link" href="/jobs">All Jobs</a>
+          </li>
+          <li class="nav-item me-2">
+            <a style="color:rgb(20,20,220)" class="nav-link" href="/user-login">Application Status</a>
+          </li>
+          
+          <!--Dropdown starts here-->      
+<li class="dropdown">
+  <a style="color:rgb(20,20,220);cursor:pointer;" class="nav-link dropdown-toggle-plus" role="link" data-bs-toggle="dropdown" aria-expanded="false">Services & More<span class="plus-sign">+</span></a>
+      
+  <ul class="dropdown-menu bg-subtle fixed p-2" style="left: 10px;width:200px;height:260px;">
+    <li class="dropdown-item"><a class="link" href="/user-login">Candidate Dashboard</a></li>
+    <li class="dropdown-item"><a class="link" href="/employer-login">Employer Dashboard</a></li>
+    <li class="dropdown-item"><a class="link" href="/user-login">Application Status</a></li>
+    <li class="dropdown-item">
+      <a class="link" href="/resume-builder">Resume Builder</a>
+    </li>
+    <li class="dropdown-item"><a class="link" href="/faqs">FAQs</a></li>
+    <li class="dropdown-item"><a class="link" href="/all-feedbacks">Admin</a> </li>
+    <li class="dropdown-item"><a class="link" href="/adzunajobs">International Jobs </a> </li>
+    
+  </ul>
+</li>
+  <li class="nav-item me-2">
+    <a style="color:rgb(20,20,220)" class="nav-link" href="/contact">Contact Us</a>
+  </li>
+  
+{% if 'username' in session or 'company_name' in session %}
+  
+      {% if 'username' in session %}
+      <li class="me-2">
+      <a type="button" id="user-btn" class="btn" href="/user-dashboard">
+            <i class="fa-solid fa-user me-2"></i>{{ session['username'] }}</a>
+        </li>
+      
+      {% elif 'company_name' in session %}
+        <li class="me-2">
+        <a type="button" id="user-btn" class="btn" href="/employer-dashboard">
+            <i class="fa-solid fa-user me-2"></i>{{ session['company_name'] }}</a>
+      {% endif %}
+        </li>
+ 
+{% else %}
+    <li class="me-2">
+    <a type="button" style="cursor:pointer;" class="popup-button btn btn-primary active">
+        <i class="fa-solid fa-user me-1"></i>Login/Register
+    </a>
+</li>
+{% endif %}
+
+<li class="me-2">
+   <a id="search-button" style="color:rgb(20,20,220);cursor:pointer;" class="nav-link dropdown-toggle-plus"><i class="fas fa-search fa-lg"></i></a>
+</li> 
+
+<li>
+<a class="btn btn-primary active" id="postjob-btn" style="color:white;padding-left:20px;padding-right:20px" href="/post-job">Post Job</a>
+</li>  
+</ul>
+  </div>
+   </div>
+    </nav>
+      <div style="height:90px"></div> 
+
+<!---Search page popup here ---> 
+<form action="#" id="popup-overlay">
+  <i id="fa-xmark-search" class="fa-solid fa-xmark"></i>
+  <div class="form-items">
+    <input type="search" placeholder="Enter a Search...">
+    <label type="submit">
+      <i class="fas fa-search fa-lg"></i>
+    </label>
+  </div>    
+</form>
+<!---Search page popup ENDS here --->
+
+<!---MERGED LOGIN STARTS here --->
+<div class="popup-container">
+  <div class="popup-content">
+    <div style="display:flex;justify-content:space-between;">
+    <div><h4 style="font-weight:bold; margin-top:10px;color:darkblue;">Login to Colltech Account</h4>
+    </div>
+      <div><span class="close-button">
+      <i id="fa-xmark-login" class="fa-solid fa-xmark fa-lg mt-4"></i>
+    </span></div>
+    </div>
+    <div class="row mt-4 mb-3">
+      <div class="col-md-6">
+        <a class="btn btn-primary" id="user-btn" type="button" style="color:white; padding-left:40px; padding-right:40px;padding-top:10px;padding-bottom:10px;"onclick="showUserForm()"><i class="fa-solid fa-user me-2"></i>Candidate</a>
+      </div>
+      <div class="col-md-6">
+        <a class="btn btn-success" id="employerbtn" type="button" style="padding-left:40px; padding-right:40px;padding-top:10px;padding-bottom:10px;" onclick="showRecruiterForm()"><i class="fa-solid fa-briefcase me-2"></i>Employer</a>
+      </div>
+    </div>
+
+    <div id="flash-messages">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div style="text-align:center;color:maroon; background-color:lightpink;padding:15px;border:1px solid #ccc;width:100%;border-radius:15px;margin-bottom:15px;" class="flash-message">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <form action="/user-login" method="post" id="userForm">
+      <!-- Applicant login form fields -->
+      <div class="form-group">
+        <label style="color:darkblue;" for="username">Username:</label>
+        <input type="text" id="username" name="username" class="form-control" required>
+    
+         <label style="color:darkblue;" for="password">Password:</label>
+    <div class="password-container">
+        <input type="password" id="user-password" name="password" class="form-control" required>
+      <span class="user-password-toggle" onclick="toggleUserPasswordVisibility()"><i class="fas fa-eye"></i></span>
+    </div>
+
+        <input type="submit" value="Login" id="user-btn" class="btn">
+      </div>
+      <p class="mt-3 mb-4">Don't have an Account? <a style="text-decoration:none;"href="/merged_signup">Register</a> instead</p> 
+    </form>
+   <!-- Employer Login form fields -->  
+    <form action="/employer-login" method="post" id="recruiterForm" style="display: none;">
+      <div class="form-group">
+        <label style="color:darkgreen;" for="company_name">Company Name:</label>
+        <input type="text" id="company" name="company_name" class="form-control" required>
+    
+         <label style="color:darkgreen" for="password">Password:</label>
+    <div class="password-container">
+        <input type="password" id="recruiterPassword" name="password" class="form-control" required>
+      <span class="recruiter-password-toggle" onclick="toggleRecruiterPasswordVisibility()"><i class="fas fa-eye"></i></span>
+    </div>
+
+        <input type="submit" value="Login" class="employerbtn">
+      </div>
+      <p class="mt-3 mb-4">Don't have an Account? <a style="text-decoration:none;"href="/merged_signup">Register</a> instead</p> 
+    </form>
+  </div>
+  </div>
+<!---MERGED LOGIN ENDS here --->
+
+
+
+
+<!---Scripts for popups start here --->
+<script>
+  document.getElementById('search-button').addEventListener('click', function() {document.getElementById('popup-overlay').classList.toggle('active');
+ })
+
+  document.getElementById('fa-xmark-search').addEventListener('click', function() {document.getElementById('popup-overlay').classList.remove('active');
+ })
+</script>
+
+<script>
+  document.querySelector('.popup-button').addEventListener('click',function() {document.querySelector('.popup-container').style.display="flex";
+ })
+
+  document.querySelector('#fa-xmark-login').addEventListener('click',function() {document.querySelector('.popup-container').style.display="none";
+ })
+</script>
+<!---Scripts for popups END here --->
+
+<!---Scripts for switching forms start here --->
+<script>
+    function showRecruiterForm() {
+      var applicantForm = document.getElementById('userForm');
+      var employerForm = document.getElementById('recruiterForm');
+
+      applicantForm.style.display = 'none';
+      employerForm.style.display = 'block';
+    }
+  </script>
+  
+   <script>
+    function showUserForm() {
+      var employerForm = document.getElementById('recruiterForm');
+      var applicantForm = document.getElementById('userForm');
+
+      employerForm.style.display = 'none';
+      applicantForm.style.display = 'block';
+    }
+  </script>
+  <!---Scripts for switching forms end here --->
+
+  
+  <!---JS reveal password Event Listener --->
+<script>
+  function toggleUserPasswordVisibility() {
+  var passwordInput = document.getElementById('user-password');
+  var passwordToggle = document.querySelector('.user-password-toggle');
+  
+  if (passwordInput.type === 'password') {
+    passwordInput.type = 'text';
+    passwordToggle.innerHTML = '<i class="fas fa-eye-slash"></i>';
+  } else {
+    passwordInput.type = 'password';
+    passwordToggle.innerHTML = '<i class="fas fa-eye"></i>';
+  }
+}
+
+  function toggleRecruiterPasswordVisibility() {
+    var passwordInput = document.getElementById('recruiterPassword');
+    var passwordToggle = document.querySelector('.recruiter-password-toggle');
+
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      passwordToggle.innerHTML = '<i class="fas fa-eye-slash"></i>';
+    } else {
+      passwordInput.type = 'password';
+      passwordToggle.innerHTML = '<i class="fas fa-eye"></i>';
+    }
+  }
+</script>
+<!---JS reveal password Event Listener --->
+
+<!---toggle buttonn--->
+<script>
+  let navtogglerbtn = document.querySelector('#navbar-toggler-icon');
+  let navbar = document.querySelector('#navbarsExample05');
+
+  navtogglerbtn.onclick = () => {
+    navtogglerbtn.classList.toggle('fa-times');
+  }
+  window.onscroll = () => {
+    navbar.classList.remove('active');
+  }
+</script>

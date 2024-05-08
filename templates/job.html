@@ -1,0 +1,18 @@
+<div class="row border-bottom pt-2">
+  <div class="col-8">
+          <h5 class="mb-1 mt-2" style="color:rgb(10,80,220);padding-left:10px;">{{job['title']}} at {{job.company}}
+          </h5>
+          <div class="mb-1 mt-auto" style="padding-left:10px;"><b>Location: </b>{{job.location}}            </div>
+ 
+  
+{% if job['salary'] %}
+  <div class="mb-4 mt-auto" style="padding-left:10px;">
+    <b>Salary: </b>{{ job['currency'] }}{{ job['salary'] }}
+  </div>
+{% endif %}
+  </div>
+  
+  <div class=" col-4 mt-4">
+  <a href="/job/{{job['id']}}" type="button" class="btn btn-primary btn-sm" style="border-radius:12px;">Apply</a>
+  </div>    
+</div>
