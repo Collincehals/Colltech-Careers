@@ -17,8 +17,12 @@ from job_notification import send_job_notification
 from comment_notification import send_admin_comment_email
 import os
 
+from dotenv import load_dotenv
+load_dotenv()
+
 app = Flask(__name__)
-app.secret_key = os.environ['APP.SECRET_KEY']
+app.secret_key = os.getenv['APP.SECRET_KEY']
+
 
 from flask_sqlalchemy import SQLAlchemy
 
@@ -669,8 +673,8 @@ def delete_recruiter_account():
 #API for job fetching
 def get_jobs():
   """Makes a request to the Adzuna API and returns a list of jobs."""
-  api_id = os.environ.get('API_ID')
-  api_key = os.environ.get('APP_KEY')
+  api_id = os.getenv('API_ID')
+  api_key = os.getenv('APP_KEY')
 
   url = f"https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id={api_id}&app_key={api_key}&results_per_page=200"
   try:
@@ -692,7 +696,7 @@ def index():
 
 def extract_jobs():
   """Makes a request to the KenyaJob.com API and returns a list of jobs."""
-  api_key = os.environ.get('API_KEY')
+  api_key = os.getenv('API_KEY')
 
   url = f"https://api.kenyajob.com/v1/jobs?api-key={api_key}&results_per_page=200"
   try:

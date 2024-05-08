@@ -1,8 +1,8 @@
 from mailjet_rest import Client
 import os
 def send_job_notification(title, company, location, currency, salary, email):
-    api_key = os.environ['API_KEY']
-    api_secret =os.environ['API_SECRET']
+    api_key = os.getenv['API_KEY']
+    api_secret =os.getenv['API_SECRET']
 
     mailjet = Client(auth=(api_key, api_secret), version='v3.1')
 

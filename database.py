@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine, text
 import os
-db_connection_string= os.environ['DB_CONNECTION_STRING']
+db_connection_string= os.getenv['DB_CONNECTION_STRING']
 
 
 engine = create_engine(
@@ -178,10 +178,10 @@ def load_feedbacks_from_db():
 import pymysql
 def delete_unconfirmed_subscribers():
     connection = pymysql.connect(
-        host=os.environ['HOST'],
-        user=os.environ['USER_NAME'],
-        password=os.environ['PASSWORD'],
-        database=os.environ['DB_NAME'],
+        host=os.getenv['HOST'],
+        user=os.getenv['USER_NAME'],
+        password=os.getenv['PASSWORD'],
+        database=os.getenv['DB_NAME'],
         ssl= {
         "ssl_ca": "/etc/ssl/cert.pem"
         }
