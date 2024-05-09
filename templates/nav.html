@@ -21,7 +21,7 @@
             <a style="color:rgb(20,20,220)"class="nav-link" aria-current="page" href="/"><i class="fa-solid fa-house me-1"></i>Home </a>
           </li>
           <li class="nav-item me-2">
-            <a style="color:rgb(20,20,220)" class="nav-link" href="/about/">About Us</a>
+            <a style="color:rgb(20,20,220)" class="nav-link" href="{{url_for('about')}}">About Us</a>
           </li>
           <li class="nav-item me-2">
             <a style="color:rgb(20,20,220)" class="nav-link" href="/jobs">All Jobs</a>
@@ -41,14 +41,14 @@
     <li class="dropdown-item">
       <a class="link" href="/resume-builder">Resume Builder</a>
     </li>
-    <li class="dropdown-item"><a class="link" href="/faqs">FAQs</a></li>
+    <li class="dropdown-item"><a class="link" href="{{url_for('faqs')}}">FAQs</a></li>
     <li class="dropdown-item"><a class="link" href="/all-feedbacks">Admin</a> </li>
     <li class="dropdown-item"><a class="link" href="/adzunajobs">International Jobs </a> </li>
     
   </ul>
 </li>
   <li class="nav-item me-2">
-    <a style="color:rgb(20,20,220)" class="nav-link" href="/contact">Contact Us</a>
+    <a style="color:rgb(20,20,220)" class="nav-link" href="{{url_for('contact_details')}}">Contact Us</a>
   </li>
   
 {% if 'username' in session or 'company_name' in session %}

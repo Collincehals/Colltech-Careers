@@ -2,8 +2,6 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 
 from passlib.hash import bcrypt
 
-from database import load_jobs_from_db, load_job_from_db, add_application_to_db, add_user_to_db, add_employer_to_db, add_subscriber_to_db, add_job_to_db, load_subscribers_from_db, load_users_from_db, load_employers_from_db, add_feedback_to_db, load_feedbacks_from_db, update_subscriber_confirmation_status, generate_confirmation_token, delete_unconfirmed_subscribers
-
 from email_sender import send_confirmation_email
 
 from employer_reg_email import send_employerreg_email
@@ -21,14 +19,12 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = os.getenv['APP.SECRET_KEY']
-
+app.config['SECRET_KEY']=os.getenv('APP.SECRET_KEY') 
 
 from flask_sqlalchemy import SQLAlchemy
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///path/to/your/database.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
-
 
 class User(db.Model):
   id = db.Column(db.Integer, primary_key=True)
@@ -37,7 +33,6 @@ class User(db.Model):
 
   def __repr__(self):
     return '<User %r>' % self.username
-
 
 # Decorator function to check if the user or employer is logged in
 from functools import wraps
@@ -73,7 +68,7 @@ import math
 #Routes here#
 @app.route('/')
 def home():
-  page = int(request.args.get('page', 1))
+  """page = int(request.args.get('page', 1))
   items_per_page = 5  # Number of jobs per page
 
   all_jobs = load_jobs_from_db()
@@ -84,13 +79,13 @@ def home():
   start_index = (page - 1) * items_per_page
   end_index = start_index + items_per_page
 
-  jobs = all_jobs[start_index:end_index]
+  jobs = all_jobs[start_index:end_index]"""
 
-  return render_template('home.html',
-                         jobs=jobs,
-                         company_name='Colltech',
-                         page=page,
-                         total_pages=total_pages)
+  return render_template('home.html', company_name='Colltech')
+
+@app.route('/about')
+def about():
+  return render_template('about.html')
 
 
 @app.route('/jobs')
@@ -150,9 +145,6 @@ def show_job(id):
   return render_template('jobpage.html', job=job)
 
 
-@app.route('/about')
-def about():
-  return render_template('about.html')
 
 
 @app.route('/merged_signup')
@@ -727,11 +719,4 @@ def job1():
 
 
 if __name__ == '__main__':
-  sched.add_job(id='job1',
-                func=job1,
-                trigger='cron',
-                day_of_week='*',
-                hour=5,
-                minute=37)
-  sched.start()
   app.run(host='0.0.0.0', debug=True, use_reloader=False)

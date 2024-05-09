@@ -1,0 +1,62 @@
+//Installing libraries abnd modules required
+pip install Flask, pip install SQLAlchemy
+pip install Flask-SQLAlchemy
+
+
+
+/// include this.
+from flask_sqlalchemy import SQLAlchemy
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+db = SQLAlchemy(app)
+
+
+
+//Adding SQLite path to virtual env. Run the following command on the CLI with venv activated.
+set PATH=%PATH%;C:\Program Files\SQLite
+
+//activate sqlite3
+on the CLI, run: `sqlite3`
+
+//create a new database
+on the CLI, run: `sqlite3 [DATABASENAME].db`
+
+// open or access the new db via the CLI
+run the command: `.open database.db`
+
+// exit the new db
+run the command: `.exit`
+
+
+
+
+CRUD operations (Create, Read, Update, Delete)
+//Creating new database table;
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT,
+    email TEXT,
+    password1 TEXT,
+    password2 TEXT
+);
+
+
+//Adding/creating content
+INSERT INTO users (username, email, password1, password2) VALUES
+    ('hals', 'hals@gmail.com', '1234', '1234'),
+    ('Emily', 'emily@gmail.com', '1234', '1234'),
+    ('Harry', 'harry@gmail.com', '1234', '1234'),
+    ('Aphline', 'aphline@gmail.com', '1234', '1234');
+
+
+///Updating content
+UPDATE table_name SET column1 = value1, column2 = value2, WHERE condition;
+e.g.,
+UPDATE users SET email = 'newemail@example.com', password1 = 'newpassword' WHERE username = 'hals';
+
+
+//Deleting content
+DELETE FROM users WHERE id=1
+
+
+//check db storage levels
+pragma page_size;      
