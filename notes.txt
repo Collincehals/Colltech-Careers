@@ -59,4 +59,7 @@ DELETE FROM users WHERE id=1
 
 
 //check db storage levels
-pragma page_size;      
+pragma page_size;     
+
+//Query the tables in the db;
+SELECT name FROM sqlite_master WHERE type='table';

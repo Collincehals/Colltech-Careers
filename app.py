@@ -15,6 +15,7 @@ from job_notification import send_job_notification
 from comment_notification import send_admin_comment_email
 import os
 
+from db import add_application_to_db, add_employer_to_db, generate_confirmation_token, update_subscriber_confirmation_status, load_job_from_db,load_jobs_from_db, load_users_from_db,add_subscriber_to_db,add_user_to_db,load_employers_from_db,load_feedbacks_from_db,add_feedback_to_db,add_job_to_db, load_subscribers_from_db
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -33,6 +34,12 @@ class User(db.Model):
 
   def __repr__(self):
     return '<User %r>' % self.username
+ 
+print("Before creating tables")
+ # Create all database tables
+with app.app_context():
+    db.create_all() 
+print("Before creating tables")
 
 # Decorator function to check if the user or employer is logged in
 from functools import wraps
@@ -707,16 +714,7 @@ def kenyan_jobs():
   jobs = extract_jobs()
   return render_template("kenyan_jobs.html", jobs=jobs)
 
-
-# Deleting unconfirmed subscribers from db
-from apscheduler.schedulers.background import BackgroundScheduler
-
-sched = BackgroundScheduler()
-
-
-def job1():
-  delete_unconfirmed_subscribers()
-
-
 if __name__ == '__main__':
+  with app.app_context():
+    db.create_all() 
   app.run(host='0.0.0.0', debug=True, use_reloader=False)
