@@ -22,25 +22,33 @@ load_dotenv()
 app = Flask(__name__)
 app.config['SECRET_KEY']=os.getenv('APP.SECRET_KEY') 
 
+#SQLite Database config here
 from flask_sqlalchemy import SQLAlchemy
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+from sqlalchemy import exists
+root_dir = os.path.abspath(os.path.dirname(__file__))  
+db_path = os.path.join(root_dir, 'database.db') 
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_path
 db = SQLAlchemy(app)
 
 class User(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   username = db.Column(db.String(80), unique=True, nullable=False)
   email = db.Column(db.String(120), unique=True, nullable=False)
+  password1 = db.Column(db.String(80), nullable=False)
+  password2 = db.Column(db.String(80), nullable=False)
 
   def __repr__(self):
     return '<User %r>' % self.username
  
-print("Before creating tables")
- # Create all database tables
-with app.app_context():
-    db.create_all() 
-print("Before creating tables")
-
+class Job(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  username = db.Column(db.String(80), unique=True, nullable=False)
+  email = db.Column(db.String(120), unique=True, nullable=False)
+  password1 = db.Column(db.String(80), nullable=False)
+  password2 = db.Column(db.String(80), nullable=False)
+ 
+ 
+ 
 # Decorator function to check if the user or employer is logged in
 from functools import wraps
 
