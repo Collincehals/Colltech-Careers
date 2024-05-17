@@ -1,5 +1,17 @@
 from sqlalchemy import create_engine, text
+from sqlalchemy.orm import sessionmaker
 import os
+# Optionally, create a session maker if you plan to use the ORM
+
+
+root_dir = os.path.abspath(os.path.dirname(__file__))  
+db_path = os.path.join(root_dir, 'database.db') 
+# Define the path to your SQLite database file
+DATABASE_URL = 'sqlite:///' + db_path
+
+# Create the engine
+engine = create_engine(DATABASE_URL)
+Session = sessionmaker(bind=engine)
 
 def load_jobs_from_db():
   with engine.connect() as conn:
@@ -24,12 +36,11 @@ def load_job_from_db(id):
 
 def add_application_to_db(job_id, data):
     with engine.connect() as conn:
-        query = text("INSERT INTO applications(job_id, first_name, last_name, country, education, experience, resume_cv, certificate, email) VALUES (:job_id, :first_name, :last_name, :country, :education, :experience, :resume_cv, :certificate, :email)")
+        query = text("INSERT INTO application(job_id, first_name, last_name, country, education, experience, resume_cv, certificate, email) VALUES (:job_id, :first_name, :last_name, :country, :education, :experience, :resume_cv, :certificate, :email)")
         conn.execute(query,
                      {"job_id": job_id,         
                      "first_name":data['firstname'], 
                      "last_name": data['lastname'], 
-                     "country": data['country'],
                      "education": data['education'], 
                      "experience": data['experience'], 
                      "resume_cv": data['resume'], 
@@ -41,13 +52,13 @@ def add_application_to_db(job_id, data):
 
 def add_user_to_db(data):
     with engine.connect() as conn:
-        query = text("INSERT INTO users(first_name, last_name, email,username, password) VALUES (:first_name, :last_name, :email, :username, :password)")
+        query = text("INSERT INTO user(username, email,password1, password2) VALUES (:username,:email, :password1, :password2)")
         conn.execute(query,
-                     {"first_name":data['firstname'], 
-                     "last_name": data['lastname'],
-                     "email": data['email'],
-                     "username": data['username'],
-                     "password": data['password']
+                     {
+                         "username":data['username'], 
+                         "email": data['email'],
+                         "password1": data['password1'],
+                         "password2": data['password2']
                      })
 
 
@@ -93,7 +104,7 @@ def update_subscriber_confirmation_status(subscriber_id):
 
 def add_job_to_db(data):
     with engine.connect() as conn:
-        query = text("INSERT INTO jobs(title, company, location, currency, salary, responsibilities, requirements) VALUES (:title, :company, :location, :currency, :salary, :responsibilities, :requirements)")
+        query = text("INSERT INTO job(title, company, location, currency, salary, responsibilities, requirements) VALUES (:title, :company, :location, :currency, :salary, :responsibilities, :requirements)")
         conn.execute(query,
                      {"title": data["title"], 
                      "company": data['company'],
@@ -126,7 +137,7 @@ def load_subscribers_from_db():
 
 def load_users_from_db():
   with engine.connect() as conn:
-    result = conn.execute(text("SELECT * FROM users"))
+    result = conn.execute(text("SELECT * FROM user"))
     column_names = result.keys()
     result_all = result.fetchall()
     users = [dict(zip(column_names, row)) for row in   result_all]
@@ -143,16 +154,12 @@ def load_employers_from_db():
 
 def add_feedback_to_db(data):
     with engine.connect() as conn:
-        query = text("INSERT INTO feedback(firstname, email, experience, listings, suggestions, communication, usability, response_time) VALUES (:firstname, :email, :experience,:listings, :suggestions, :communication, :usability, :response_time)")
+        query = text("INSERT INTO feedback(firstname, email, occupation, comment)")
         conn.execute(query,
                      {"firstname": data["firstname"], 
                      "email": data['email'],
-                     "experience":data['experience'], 
-                     "listings": data['listings'], 
-                     "suggestions": data['suggestions'],
-                     "communication": data['communication'], 
-                     "usability": data['usability'],
-                     "response_time": data['response_time']
+                     "occupation":data['occupation'], 
+                     "comment": data['comment'], 
                      })
 #load feedback from db
 def load_feedbacks_from_db():

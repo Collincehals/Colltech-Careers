@@ -30,25 +30,59 @@ db_path = os.path.join(root_dir, 'database.db')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_path
 db = SQLAlchemy(app)
 
+#Database Models here
+class Employer(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  username = db.Column(db.String(80), unique=True, nullable=False)
+  lastname = db.Column(db.String(80), unique=True, nullable=False)
+  email = db.Column(db.String(120), unique=True, nullable=False)
+  company_name = db.Column(db.String(80), unique=True, nullable=False)
+  category = db.Column(db.String(80), unique=True, nullable=False)
+  password1 = db.Column(db.String(80), nullable=False)
+  password2 = db.Column(db.String(80), nullable=False)
+  def __repr__(self):
+    return '<User %r>' % self.username
+ 
+ 
 class User(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   username = db.Column(db.String(80), unique=True, nullable=False)
   email = db.Column(db.String(120), unique=True, nullable=False)
   password1 = db.Column(db.String(80), nullable=False)
   password2 = db.Column(db.String(80), nullable=False)
-
-  def __repr__(self):
-    return '<User %r>' % self.username
+ 
+class Subscriber(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  email = db.Column(db.String(120), unique=True, nullable=False)
+  token = db.Column(db.String(200), nullable=False)
+  confirmed = db.Column(db.Boolean, nullable=False)
+  
+class Application(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  firstname = db.Column(db.String(80), unique=True, nullable=False)
+  lastname = db.Column(db.String(80), unique=True, nullable=False)
+  email = db.Column(db.String(120), unique=True, nullable=False)
+  education = db.Column(db.String(500), unique=True, nullable=False)
+  experience = db.Column(db.String(1000), unique=True, nullable=False)
+  resume = db.Column(db.String(1000), unique=True, nullable=False)
+  certificate = db.Column(db.String(80), unique=True, nullable=False)
  
 class Job(db.Model):
+  job_id = db.Column(db.Integer, primary_key=True)
+  title = db.Column(db.String(120), unique=True, nullable=False)
+  location = db.Column(db.String(80), unique=True, nullable=False)
+  currency= db.Column(db.String(80), unique=True, nullable=False)
+  salary = db.Column(db.String(80), unique=True, nullable=False)
+  responsibilities = db.Column(db.String(10000), unique=True, nullable=False)
+  requirements = db.Column(db.String(10000), unique=True, nullable=False)
+ 
+class Feedback(db.Model):
   id = db.Column(db.Integer, primary_key=True)
-  username = db.Column(db.String(80), unique=True, nullable=False)
-  email = db.Column(db.String(120), unique=True, nullable=False)
-  password1 = db.Column(db.String(80), nullable=False)
-  password2 = db.Column(db.String(80), nullable=False)
- 
- 
- 
+  firstname = db.Column(db.String(80), unique=True, nullable=False)
+  occupation = db.Column(db.String(100), unique=True, nullable=False)
+  comment = db.Column(db.String(400), unique=True, nullable=False)
+
+
 # Decorator function to check if the user or employer is logged in
 from functools import wraps
 
@@ -254,58 +288,53 @@ def submit_form(id):
 @app.route('/user-signup', methods=['GET', 'POST'])
 def user_signup():
   if request.method == 'POST':
-    first_name = request.form['firstname']
-    last_name = request.form['lastname']
-    email = request.form['email']
     username = request.form['username']
-    password = request.form['password']
-    hashed_password = bcrypt.hash(password)
-    confirm_password = request.form['confirm_password']
+    email = request.form['email']
+    password1 = request.form['password1']
+    hashed_password = bcrypt.hash(password1)
+    password2 = request.form['password2']
 
     # Check if username or email already exists in the database
     users = load_users_from_db()
     for user in users:
       if user['username'] == username:
-        flash('Username already exists. Please choose a different username!!!',
-              'error')
+        flash('Username already exists. Please choose a different username!!!')
         return render_template('signup.html')
       if user['email'] == email:
-        flash('Email already exists. Please use a different email !!!',
-              'error')
+        flash('Email already exists. Please use a different email !!!')
         return render_template('signup.html')
 
     # Check if terms and conditions checkbox is checked
     if 'terms' not in request.form:
-      flash('You must accept the terms and conditions to sign up!', 'error')
+      flash('You must accept the terms and conditions to sign up!')
       return render_template('signup.html')
 
     # Password validation checks
-    if len(password) < 8:
-      flash('Password must be at least 8 characters long!', 'error')
+    if len(password1) < 8:
+      flash('Password must be at least 8 characters long!')
       return render_template('signup.html')
 
     import string
-    if not any(char in string.punctuation for char in password):
-      flash('Password must contain at least one special character!', 'error')
+    if not any(char in string.punctuation for char in password1):
+      flash('Password must contain at least one special character!')
       return render_template('signup.html')
 
-    if not any(char.isdigit() for char in password):
-      flash('Password must contain at least one numeric digit!', 'error')
+    if not any(char.isdigit() for char in password1):
+      flash('Password must contain at least one numeric digit!')
       return render_template('signup.html')
 
-    if password != confirm_password:
+    if password1 != password2:
       flash('Passwords do not match!', 'error')
       return render_template('signup.html')
     user_data = {
-      'firstname': first_name,
-      'lastname': last_name,
-      'email': email,
       'username': username,
-      'password': hashed_password,
+      'email': email,
+      'password1': username,
+      'password2': hashed_password,
     }
     add_user_to_db(user_data)
-    send_registration_email(first_name, last_name, email, username)
-    flash('Sign up successful! Please log in.', 'success')
+    send_registration_email(username, email)
+    flash(('success', 'Sign up successful! Please log in.', 'success'))
     return redirect(url_for('user_login'))
 
   return render_template('signup.html')
