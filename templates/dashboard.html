@@ -257,8 +257,6 @@ p {
       <hr style="padding-bottom:1.5rem;">
         <div class="profile-details">
             <h2>Profile Information</h2>
-            <p><span style="color:darkblue;font-weight:bold;">First Name:</span> {{ first_name }}</p>
-            <p><span style="color:darkblue;font-weight:bold;">Last Name:</span> {{ last_name }}</p>
             <p><span style="color:darkblue;font-weight:bold;">Email:</span> {{ email }}</p>
             <p><span style="color:darkblue;font-weight:bold;">User-name:</span> {{ username }}</p>
         </div>
@@ -269,6 +267,7 @@ p {
         <h2>Job Applications</h2>
       <p style="font-size:1.6rem;padding:3rem 5rem;background:rgb(240,245,255);border-radius:.8rem;">You have not applied for any jobs yet.</p>
         <ul>
+          {% if job_applications %}
             {% for application in job_applications %}
                 <li>
                     <h3>{{ application.job_title }}</h3>
@@ -277,6 +276,7 @@ p {
                     <!-- Include additional application details here -->
                 </li>
             {% endfor %}
+          {% endif %}
         </ul>
     </section>
 

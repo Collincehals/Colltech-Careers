@@ -488,17 +488,15 @@ def dashboard():
 def user_login():
   if request.method == 'POST':
     username = request.form['username']
-    password = request.form['password']
+    password1 = request.form['password1']
 
     users = load_users_from_db()
     for user in users:
-      hashed_password = user['password']
+      hashed_password = user['password1']
       if user['username'] == username and bcrypt.verify(
-          password, hashed_password):
+          password1, hashed_password):
         session['username'] = username
         session['email'] = user['email']
-        session['first_name'] = user['first_name']
-        session['last_name'] = user['last_name']
         print("Logged in successfully!")
         print(session)
         return redirect('user-dashboard')
