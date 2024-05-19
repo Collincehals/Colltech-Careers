@@ -411,16 +411,22 @@ def employer_signup():
 def subscription():
   if request.method == 'POST':
     email = request.form['email']
-    token = generate_confirmation_token()
-    confirmed = False
+    load_subscribers_from_db()
+    email_exists = Subscriber.query.filter_by(email).first()
+    if email_exists:
+      flash('You have already subscribed to our mail list!')
+    else:
+      token = generate_confirmation_token()
+      confirmed = False
 
-    subscriber_data = {'email': email, 'token': token, 'confirmed': confirmed}
-    add_subscriber_to_db(subscriber_data)
+      subscriber_data = {'email': email, 'token': token, 'confirmed': confirmed}
+      add_subscriber_to_db(subscriber_data)
 
-    confirmation_token = token
-    confirmation_link = f"https://colltech-careers--collincehals.repl.co/subscription-confirmation/confirm?token={confirmation_token}"
-    send_subscriber_email(email, confirmation_link)
-    return redirect(url_for('home'))
+      confirmation_token = token
+      confirmation_link = f"https://colltech-careers--collincehals.repl.co/subscription-confirmation/confirm?token={confirmation_token}"
+      send_subscriber_email(email, confirmation_link)
+      flash('You have subscribed successfully to our mail list!')
+      return redirect(url_for('home'))
 
   return render_template('home.html')
 
