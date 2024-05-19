@@ -85,7 +85,7 @@ def generate_confirmation_token():
 # Save subscriber details and token to the database
 def add_subscriber_to_db(data):
     with engine.connect() as conn:
-        query = text("INSERT INTO subscribers(email, token, confirmed) VALUES (:email, :token, :confirmed)")
+        query = text("INSERT INTO subscriber(email, token, confirmed) VALUES (:email, :token, :confirmed)")
         conn.execute(query, {
             "email": data['email'],
             "token": data['token'],
