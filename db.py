@@ -15,7 +15,7 @@ Session = sessionmaker(bind=engine)
 
 def load_jobs_from_db():
   with engine.connect() as conn:
-    result = conn.execute(text("SELECT * FROM jobs"))
+    result = conn.execute(text("SELECT * FROM job"))
     column_names = result.keys()
     result_all = result.fetchall()
     jobs = [dict(zip(column_names, row)) for row in   result_all]
@@ -24,7 +24,7 @@ def load_jobs_from_db():
 
 def load_job_from_db(id):
     with engine.connect() as conn:
-        query = text("SELECT * FROM jobs WHERE id = :val")
+        query = text("SELECT * FROM job WHERE id = :val")
         result = conn.execute(query.bindparams(val=id))
         row = result.fetchone()
         if row is None:
@@ -64,7 +64,7 @@ def add_user_to_db(data):
 
 def add_employer_to_db(data):
     with engine.connect() as conn:
-        query = text("INSERT INTO employers(first_name, last_name, email,company_name, company_category, password) VALUES (:first_name, :last_name, :email, :company_name, :company_category, :password)")
+        query = text("INSERT INTO employer(first_name, last_name, email,company_name, company_category, password) VALUES (:first_name, :last_name, :email, :company_name, :company_category, :password)")
         conn.execute(query,
                      {"first_name":data['firstname'], 
                      "last_name": data['lastname'],
@@ -95,7 +95,7 @@ def add_subscriber_to_db(data):
 # Update subscriber's confirmation status in the database
 def update_subscriber_confirmation_status(subscriber_id):
     with engine.connect() as conn:
-        query = text("UPDATE subscribers SET confirmed = :confirmed WHERE id = :subscriber_id")
+        query = text("UPDATE subscriber SET confirmed = :confirmed WHERE id = :subscriber_id")
         conn.execute(query, {"confirmed": True, "subscriber_id": subscriber_id})
 
 
@@ -119,7 +119,7 @@ from datetime import datetime
 
 def load_subscribers_from_db():
     with engine.connect() as conn:
-        result = conn.execute(text("SELECT * FROM subscribers"))
+        result = conn.execute(text("SELECT * FROM subscriber"))
         column_names = result.keys()
         result_all = result.fetchall()
         
@@ -146,7 +146,7 @@ def load_users_from_db():
 
 def load_employers_from_db():
   with engine.connect() as conn:
-    result = conn.execute(text("SELECT * FROM employers"))
+    result = conn.execute(text("SELECT * FROM employer"))
     column_names = result.keys()
     result_all = result.fetchall()
     employers = [dict(zip(column_names, row)) for row in   result_all]
@@ -187,7 +187,7 @@ def delete_unconfirmed_subscribers():
     try:
         with connection.cursor() as cursor:
             # Execute the SQL query to delete unconfirmed subscribers
-            sql = "DELETE FROM subscribers WHERE confirmed = 0"
+            sql = "DELETE FROM subscriber WHERE confirmed = 0"
             cursor.execute(sql)
             connection.commit()
             print("Deleted unconfirmed subscribers from the database.")
