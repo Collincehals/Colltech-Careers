@@ -448,7 +448,7 @@ def subscription_confirmation():
 
 #Job Posting route here
 @app.route('/post-job', methods=['POST', 'GET'])
-@employer_login_required
+##@employer_login_required
 def post_job():
   if request.method == 'POST':
     title = request.form['title']
@@ -463,8 +463,7 @@ def post_job():
       email = subscriber['email']
       send_job_notification(title, company, location, currency, salary, email)
     return redirect(url_for('post_job'))
-  return render_template('job_posting.html',
-                         company_name=session['company_name'])
+  return render_template('job_posting.html')
 
 
 @app.route('/merged-login')
