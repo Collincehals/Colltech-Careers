@@ -1,8 +1,8 @@
 from mailjet_rest import Client
 import os
 def send_employerreg_email(first_name, last_name, email,company_name, company_category):
-    api_key = os.getenv['API_KEY']
-    api_secret =os.getenv['API_SECRET']
+    api_key = os.getenv('API_KEY')
+    api_secret =os.getenv('API_SECRET')
 
     mailjet = Client(auth=(api_key, api_secret), version='v3.1')
 
