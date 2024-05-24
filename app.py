@@ -579,23 +579,17 @@ def feedback_submitted():
   if request.method == "POST":
     firstname = request.form['firstname']
     email = request.form['email']
-    experience = request.form['experience']
-    listings = request.form['listings']
-    suggestions = request.form['suggestions']
-    communication = request.form['communication']
-    usability = request.form['usability']
-    response_time = request.form['response_time']
-    add_feedback_to_db(request.form)
+    occupation = request.form['occupation']
+    comment = request.form['comment']
+    data=request.form
+    add_feedback_to_db(data)
     flash('Feedback sent successfully.Thank you!', 'success')
     return render_template('feedback_page.html',
                            firstname=firstname,
                            email=email,
-                           experience=experience,
-                           listings=listings,
-                           suggestions=suggestions,
-                           communication=communication,
-                           usability=usability,
-                           response_time=response_time)
+                           occupation=occupation,
+                           comment=comment
+                          )
   return redirect(url_for('user_feedback'))
 
 
