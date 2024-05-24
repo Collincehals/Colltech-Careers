@@ -102,114 +102,41 @@ you've come to the right place.
 </a>
 
 <!---Reviews Section starts here --->
+{% if feedbacks %}
   <section class="review">
     <h3>Client's Reviews </h3>
       <h1>WHAT PEOPLE SAY ABOUT US</h1>
     <div class="swiper mySwiper review-swiper">
      <div class="swiper-wrapper">
-    <div class="swiper-slide review-content">
-      <i class="fas fa-quote-right"></i>
-      <div class="reviewer">
-        <img src="/static/jobseeker.png" alt="">
-        <div class="reviewer-info">
-        <h5 style="color:darkblue;font-weight:bolder;">Celine Simon </h5>
-        <div class="stars">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
+      {% for feedback in feedbacks %}
+        <div class="swiper-slide review-content">
+          <i class="fas fa-quote-right"></i>
+          <div class="reviewer">
+            <img src="/static/jobseeker.png" alt="">
+            <div class="reviewer-info">
+            <h5 style="color:darkblue;font-weight:bolder;">{{feedback.firstname}} </h5>
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+          </div>
+          <div class="content">
+            <p style="color:black;">{{feedback.occupation}} </p>
+          </div>
+          <div class="content">
+            <p style="color:black;">{{feedback.comment}} </p>
+          </div>
         </div>
-      </div>
-      </div>
-      <div class="content">
-        <p style="color:black;">I had a great experience using Colltech's careers website. The streamlined application process and prompt response from their team impressed me, and I landed my dream job through their platform.</p>
-      </div>
-    </div>
-
-    <div class="swiper-slide review-content">
-      <i class="fas fa-quote-right"></i>
-      <div class="reviewer">
-        <img src="/static/employer.png" alt="">
-        <div class="reviewer-info">
-        <h5 style="color:darkblue;font-weight:bolder;">John Terry </h5>
-        <div class="stars">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star-half-alt"></i>
-          <i class="far fa-star"></i>
-        </div>
-      </div>
-      </div>
-      <div class="content">
-        <p style="color:black;">As a recent graduate, I found Colltech's careers website extremely helpful in kickstarting my career. The informative blog posts and career advice section provided valuable insights, guiding me towards making the right career choices.</p>
-      </div>
-    </div>
-
-    <div class="swiper-slide review-content">
-      <i class="fas fa-quote-right"></i>
-      <div class="reviewer">
-        <img src="/static/jobseeker.png" alt="">
-        <div class="reviewer-info">
-        <h5 style="color:darkblue;font-weight:bolder;">Snyder James </h5>
-        <div class="stars">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star-half-alt"></i>
-        </div>
-      </div>
-      </div>
-      <div class="content">
-        <p style="color:black;">The Colltech careers website is a fantastic resource for job seekers. The user-friendly interface and detailed job listings made it easy for me to find relevant opportunities in my field.</p>
-      </div>
-    </div>
-
-    <div class="swiper-slide review-content">
-      <i class="fas fa-quote-right"></i>
-      <div class="reviewer">
-        <img src="/static/employer.png" alt="">
-        <div class="reviewer-info">
-        <h5 style="color:darkblue;font-weight:bolder;">Collince Hals </h5>
-        <div class="stars">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star-half-alt"></i>
-        </div>
-      </div>
-      </div>
-      <div class="content">
-        <p style="color:black;">Using Colltech's careers website was a game-changer for me. The comprehensive company profiles and employee reviews gave me a clear picture of potential employers, helping me make informed decisions about my career path.</p>
-      </div>
-    </div>
-
-    <div class="swiper-slide review-content">
-      <i class="fas fa-quote-right"></i>
-      <div class="reviewer">
-        <img src="/static/jobseeker.png" alt="">
-        <div class="reviewer-info">
-        <h5 style="color:darkblue;font-weight:bolder;"> Mary Wambu </h5>
-        <div class="stars">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="far fa-star"></i>
-          <i class="far fa-star"></i>
-        </div>
-      </div>
-      </div>
-      <div class="content">
-        <p style="color:black;">Colltech's careers website stands out from the rest! The personalized job alerts and tailored recommendations based on my skills and preferences made the job search less overwhelming and more efficient.</p>
-      </div>
-    </div>
+        {% endfor %}
     </div>
   <div class="swiper-pagination"></div>
     </div>
   </section>
+  {% endif %}
  <!---Reviews Section ENDS here --->
 
       <div class="text-center mt-5 mb-5 p-2">

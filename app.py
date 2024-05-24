@@ -25,6 +25,7 @@ app.config['SECRET_KEY']=os.getenv('APP.SECRET_KEY')
 #SQLite Database config here
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import exists
+from sqlalchemy.exc import SQLAlchemyError
 root_dir = os.path.abspath(os.path.dirname(__file__))  
 db_path = os.path.join(root_dir, 'database.db') 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_path
@@ -117,6 +118,13 @@ import math
 #Routes here#
 @app.route('/')
 def home():
+  try:
+    feedbacks = Feedback.query.all()
+    return render_template('home.html', feedbacks=feedbacks)
+  except SQLAlchemyError as e:
+    print(f"Error occurred: {e}")
+    # Handle or log the error as needed
+    return "An error occurred while fetching feedbacks", 500
   """page = int(request.args.get('page', 1))
   items_per_page = 5  # Number of jobs per page
 
@@ -130,7 +138,7 @@ def home():
 
   jobs = all_jobs[start_index:end_index]"""
 
-  return render_template('home.html', company_name='Colltech')
+   
 
 @app.route('/about')
 def about():
@@ -578,7 +586,6 @@ def user_feedback():
 def feedback_submitted():
   if request.method == "POST":
     firstname = request.form['firstname']
-    email = request.form['email']
     occupation = request.form['occupation']
     comment = request.form['comment']
     data=request.form
@@ -586,7 +593,6 @@ def feedback_submitted():
     flash('Feedback sent successfully.Thank you!', 'success')
     return render_template('feedback_page.html',
                            firstname=firstname,
-                           email=email,
                            occupation=occupation,
                            comment=comment
                           )

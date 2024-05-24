@@ -154,10 +154,9 @@ def load_employers_from_db():
 
 def add_feedback_to_db(data):
     with engine.connect() as conn:
-        query = text("INSERT INTO feedback(firstname, email, occupation, comment)")
+        query = text("INSERT INTO feedback(firstname,occupation, comment) VALUES(:firstname, :occupation, :comment)")
         conn.execute(query,
                      {"firstname": data["firstname"], 
-                     "email": data['email'],
                      "occupation":data['occupation'], 
                      "comment": data['comment'], 
                      })
